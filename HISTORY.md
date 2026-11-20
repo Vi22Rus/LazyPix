@@ -365,3 +365,73 @@ Removed hard dependency on Sonah; Sonah is now an optional load-order dependency
 Standalone traffic light and health widget remain unchanged.
 Sonah preview mode requires Sonah to be enabled.
 MaxDps integration is NOT implemented yet; requires testing with exact Forever build files.
+
+### LazyPix_Addon/README_0.8.3.txt
+
+LazyG 0.8.3 TEST - MaxDPS mode
+
+- Sonah remains optional. LazyG traffic light and health potion widget work independently.
+- /lazyg maxdps selects MaxDPS native MaxDpsSpellFrame as the rotation indicator.
+- /lazyg on uses Sonah preview if available; when Sonah is absent and MaxDPS is loaded, it selects MaxDPS.
+- /lazyg off leaves MaxDPS running; restores its spellFrame.enabled setting if LazyG changed it.
+- No changes to MaxDps or MaxDps_Hunter are required.
+- MaxDPS owns its frame visibility and its actual recommended spell; it will not display an icon if MaxDPS rotation is inactive.
+- No in-game test performed. Test outside combat; then confirm abilities update in combat.
+
+
+### LazyPix_Addon/README_0.8.4.txt
+
+LazyG 0.8.4 TEST (unverified in game)
+Automatic selection: Sonah if ready, otherwise MaxDPS. When both are ready, Sonah priority.
+/lazyg source auto | sonah | maxdps ; /lazyg on/off.
+Editor overlay exactly matches the native source icon (Sonah/MaxDPS). Left previous, right next.
+MaxDPS preview pool comes from its currently registered action-bar spells, not its exact priority list.
+No addon files modified outside LazyG. Healbot and traffic light unchanged.
+In combat preview closes automatically. No spell casting.
+
+
+### LazyPix_Addon/README_0.8.5.txt
+
+LazyG 0.8.5 TEST
+
+Single 52x52 LazyG rotation display. Sonah RECOMMENDATION, Hekili Primary passive subscription, MaxDPS 0.2s cached spell read. Preview cycles same frame, out of combat only. No changes to HealthWidget.lua or rotation addons.
+
+Minimap LazyG: left start calibration; right stop. Preview: left previous, right next. Drag live LazyG frame by left mouse to move (out of combat).
+Commands: /lazyg source auto|sonah|maxdps|hekili, /lazyg on, /lazyg off.
+If multiple rotation addons are active, auto order: Sonah, MaxDPS, Hekili. Select manually with /lazyg source ... and reload/save preference.
+
+Test with a single rotation addon enabled first, verify preview and real combat recommendations. Secret Values / protected combat rendering must be tested in WoW Forever. Restore prior 0.8.4 archive for rollback.
+
+
+### LazyPix_Addon/README_0.8.6.txt
+
+LazyG 0.8.6 TEST
+
+Changes from 0.8.5:
+- One startup notice (about 2 seconds after PLAYER_LOGIN) lists detected ready rotation engines and identifies which engine LazyG uses.
+- If multiple engines are detected, shows a source command example and options.
+- /lazyg help (and /lazyg without arguments) shows all existing commands.
+- Existing source precedence and manual source preference remain unchanged.
+
+No changes to HealthWidget.lua, MaxDPS, Sonah or Hekili. Other display logic unchanged.
+
+Test with Sonah and MaxDPS together, with Sonah+Hekili, individually, and no rotation addons. Test /lazyg help and /lazyg source maxdps. In-game confirmation required. Roll back to 0.8.5 if necessary.
+
+
+### LazyPix_Addon/README_0.8.7.txt
+
+LazyG 0.8.7 TEST
+Единый фрейм: Shift+ЛКМ — перетаскивание, Shift+ПКМ — настройки ширины/высоты (32–160 UI-единиц). Значения сохраняются для персонажа. В бою изменение положения и размера запрещено. Светофор, хилпот и адаптеры ротаций не изменены.
+
+
+### LazyPix_Addon/README_0.8.8.txt
+
+LazyG 0.8.8 TEST — idle-frame visibility fix
+
+- Outside preview mode, the rotation frame is hidden when the selected engine has no recommended icon.
+- The frame appears when a recommendation arrives.
+- In preview/setup mode, the same frame is always shown with the selected spell.
+- Exiting setup restores the live recommendation or hides the frame if none exists.
+- Sonah, MaxDPS, Hekili adapters and HealthWidget.lua are unchanged.
+
+TEST build: verify in WoW Forever, including combat and secret texture values.
