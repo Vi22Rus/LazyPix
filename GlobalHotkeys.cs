@@ -38,7 +38,7 @@ public sealed class GlobalHotkeys : IDisposable
     public GlobalHotkeys(Window window, Action<int> handler)
     {
         hwnd = new WindowInteropHelper(window).Handle;
-        source = HwndSource.FromHwnd(hwnd) ?? throw new InvalidOperationException("Не найдено окно LazyG");
+        source = HwndSource.FromHwnd(hwnd) ?? throw new InvalidOperationException("Не найдено окно LazyPix");
         this.handler = handler; source.AddHook(Hook);
         mouseCallback=MouseHook;
         mouseHook=SetWindowsHookEx(WH_MOUSE_LL,mouseCallback,GetModuleHandle(null),0);

@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
-    <AssemblyName>LazyG</AssemblyName>
+    <AssemblyName>LazyPix</AssemblyName>
     <Version>1.0.0</Version>
     <FileVersion>1.0.0.0</FileVersion>
     <TargetFramework>net10.0-windows</TargetFramework>
@@ -10,12 +10,12 @@
     <EnableWindowsTargeting>true</EnableWindowsTargeting>
     <Nullable>enable</Nullable>
     <ImplicitUsings>disable</ImplicitUsings>
-    <ApplicationIcon>Assets\LazyG.ico</ApplicationIcon>
+    <ApplicationIcon>Assets\LazyPix.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
     <EmbeddedResource Include="Localization\*.json" LogicalName="WoWForeverAssistant.Localization.%(Filename)%(Extension)" />
-    <Resource Include="Assets\LazyG.png" />
-    <Resource Include="Assets\LazyG.ico" />
+    <Resource Include="Assets\LazyPix.png" />
+    <Resource Include="Assets\LazyPix.ico" />
     <Resource Include="Assets\*.jpg" />
     <Resource Include="Assets\flag_*.png" />
     <Resource Include="Assets\SpecIcons\*.png" />

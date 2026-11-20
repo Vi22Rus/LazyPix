@@ -380,7 +380,7 @@ public partial class MainWindow : Window
     {
         busy=true;UpdateState();
         try { var message=await Task.Run(driver.Connect); }
-        catch(Exception ex){Write("Подключение: " + ex.Message);EditorDialogs.Notice(this, "LazyG", L.T("Не удалось подключить систему ввода. Проверь установку компонента и журнал диагностики."));}
+        catch(Exception ex){Write("Подключение: " + ex.Message);EditorDialogs.Notice(this, "LazyPix", L.T("Не удалось подключить систему ввода. Проверь установку компонента и журнал диагностики."));}
         finally{busy=false;UpdateState();}
     }
     private async void Start_Click(object sender,RoutedEventArgs e) => await StartAsync();

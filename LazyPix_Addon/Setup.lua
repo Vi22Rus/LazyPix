@@ -1,5 +1,5 @@
--- LazyG 0.8.30 TEST - separate GCD dimming from cosmetic perimeter animation.
--- The recommendation is produced only by the source addon. LazyG never casts spells.
+-- LazyPix 0.8.30 TEST - separate GCD dimming from cosmetic perimeter animation.
+-- The recommendation is produced only by the source addon. LazyPix never casts spells.
 local controller = CreateFrame("Frame")
 local adapters = {}
 local preference = "auto"
@@ -90,7 +90,7 @@ local PlaceMinimapButton
 
 local function Msg(message)
     if DEFAULT_CHAT_FRAME then
-        DEFAULT_CHAT_FRAME:AddMessage("|cff7db9ffLazyG:|r " .. message)
+        DEFAULT_CHAT_FRAME:AddMessage("|cff7db9ffLazyPix:|r " .. message)
     end
 end
 local function InCombat()
@@ -357,27 +357,27 @@ local function AnnounceSources()
     if #found > 1 then
         Msg("Обнаружено несколько ротационных аддонов: " .. table.concat(names, ", ") .. ".")
         if selected then
-            Msg("LazyG использует: " .. sourceNames[selected] .. ". Для переключения: /lazyg source <sonah|maxdps|hekili|justac|rotationmaster>.")
+            Msg("LazyPix использует: " .. sourceNames[selected] .. ". Для переключения: /lazypix source <sonah|maxdps|hekili|justac|rotationmaster>.")
         else
-            Msg("Выбранный источник недоступен. /lazyg source auto или /lazyg source <sonah|maxdps|hekili|justac|rotationmaster>.")
+            Msg("Выбранный источник недоступен. /lazypix source auto или /lazypix source <sonah|maxdps|hekili|justac|rotationmaster>.")
         end
     else
         if selected then
-            Msg("Обнаружен " .. names[1] .. ". LazyG использует: " .. sourceNames[selected] .. ".")
+            Msg("Обнаружен " .. names[1] .. ". LazyPix использует: " .. sourceNames[selected] .. ".")
         else
-            Msg("Обнаружен " .. names[1] .. ", но выбранный источник недоступен. /lazyg source auto")
+            Msg("Обнаружен " .. names[1] .. ", но выбранный источник недоступен. /lazypix source auto")
         end
     end
 end
 local function ShowHelp()
-    Msg("Команды LazyG:")
-    Msg("/lazyg help — показать эту справку")
-    Msg("/lazyg on — включить настройку иконок; /lazyg off — выйти")
-    Msg("/lazyg source auto — автоматический выбор источника")
-    Msg("/lazyg source sonah|maxdps|hekili|justac|rotationmaster — выбрать источник вручную")
-    Msg("/lazyg status — состояние светофора и хилпота")
-    Msg("/lazyg settings — настройки; /lazyg item next — следующий предмет")
-    Msg("/lazyg green | orange — переключить цвет светофора")
+    Msg("Команды LazyPix:")
+    Msg("/lazypix help — показать эту справку")
+    Msg("/lazypix on — включить настройку иконок; /lazypix off — выйти")
+    Msg("/lazypix source auto — автоматический выбор источника")
+    Msg("/lazypix source sonah|maxdps|hekili|justac|rotationmaster — выбрать источник вручную")
+    Msg("/lazypix status — состояние светофора и хилпота")
+    Msg("/lazypix settings — настройки; /lazypix item next — следующий предмет")
+    Msg("/lazypix green | orange — переключить цвет светофора")
     Msg("Фрейм ротации: Shift+ЛКМ — переместить; Shift+ПКМ — ширина и высота (32–160)")
 end
 
@@ -481,7 +481,7 @@ end
 
 local function CreateSizePanel()
     if sizePanel then return sizePanel end
-    local panel = CreateFrame("Frame", "LazyGRotationSizeSettings", UIParent)
+    local panel = CreateFrame("Frame", "LazyPixRotationSizeSettings", UIParent)
     panel:SetSize(270, 170)
     panel:SetFrameStrata("DIALOG")
     panel:SetClampedToScreen(true)
@@ -492,7 +492,7 @@ local function CreateSizePanel()
     bg:SetColorTexture(0.06, 0.07, 0.09, 0.96)
     local title = panel:CreateFontString(nil, "OVERLAY", "GameFontNormal")
     title:SetPoint("TOPLEFT", panel, "TOPLEFT", 14, -14)
-    title:SetText("LazyG — размер фрейма")
+    title:SetText("LazyPix — размер фрейма")
     local close = CreateFrame("Button", nil, panel, "UIPanelButtonTemplate")
     close:SetSize(28, 24)
     close:SetPoint("TOPRIGHT", panel, "TOPRIGHT", -8, -8)
@@ -549,7 +549,7 @@ local function CreateIndicator()
     if indicator then return end
     addonDB.frameWidth = ClampSize(addonDB.frameWidth)
     addonDB.frameHeight = ClampSize(addonDB.frameHeight)
-    indicator = CreateFrame("Button", "LazyGRotationFrame", UIParent)
+    indicator = CreateFrame("Button", "LazyPixRotationFrame", UIParent)
     indicator:SetSize(addonDB.frameWidth, addonDB.frameHeight)
     indicator:SetFrameStrata("MEDIUM")
     indicator:SetClampedToScreen(true)
@@ -648,7 +648,7 @@ local function CreateIndicator()
     end)
     indicator:SetScript("OnEnter", function(self)
         GameTooltip:SetOwner(self, "ANCHOR_RIGHT")
-        GameTooltip:AddLine("LazyG: " .. (selected or "no source"))
+        GameTooltip:AddLine("LazyPix: " .. (selected or "no source"))
         GameTooltip:AddLine("Shift + ЛКМ — переместить", 0.8, 0.8, 0.8)
         GameTooltip:AddLine("Shift + ПКМ — размер фрейма", 0.8, 0.8, 0.8)
         GameTooltip:Show()
@@ -672,7 +672,7 @@ local function StopEditor(silent)
     entries = {}
     if indicator then indicator.previewBorder:Hide() end
     SetDimmed(false)
-    if LazyGHealthWidget then LazyGHealthWidget.SetPreview(false) end
+    if LazyPixHealthWidget then LazyPixHealthWidget.SetPreview(false) end
     ReadCurrent()
     UpdateCosmeticRim()
     if not silent then Msg("Режим настройки выключен.") end
@@ -694,7 +694,7 @@ local function StartEditor()
     SetDimmed(false)
     icon:SetTexture(entries[index].icon)
     UpdateCosmeticRim()
-    if LazyGHealthWidget then LazyGHealthWidget.SetPreview(true) end
+    if LazyPixHealthWidget then LazyPixHealthWidget.SetPreview(true) end
     Msg("Настройка по книге заклинаний: ПКМ следующая, ЛКМ предыдущая.")
 end
 
@@ -721,7 +721,7 @@ controller:SetScript("OnEvent", function(_, event, ...)
         CreateIndicator()
         Connect()
         SetSource(ChooseSource())
-        Msg("Фрейм готов. /lazyg help — список команд.")
+        Msg("Фрейм готов. /lazypix help — список команд.")
     elseif event == "UNIT_SPELLCAST_SUCCEEDED" then
         local unit, _, spellID = ...
         if unit == "player" and not editor
@@ -798,8 +798,8 @@ controller:SetScript("OnUpdate", function(_, dt)
     end
 end)
 
-SLASH_LAZYG1 = "/lazyg"
-SlashCmdList.LAZYG = function(msg)
+SLASH_LAZYPIX1 = "/lazypix"
+SlashCmdList.LAZYPIX = function(msg)
     msg = (msg or ""):lower():match("^%s*(.-)%s*$")
     if msg == "help" or msg == "" then ShowHelp()
     elseif msg == "on" then StartEditor()
@@ -811,14 +811,14 @@ SlashCmdList.LAZYG = function(msg)
         SetSource(ChooseSource())
         Msg("Источник: " .. (selected or "не доступен") .. " (режим " .. preference .. ")")
     elseif msg == "settings" or msg == "item next" or msg == "green" or msg == "orange" or msg == "status" then
-        if LazyGHealthWidget and LazyGHealthWidget.Command then LazyGHealthWidget.Command(msg) end
+        if LazyPixHealthWidget and LazyPixHealthWidget.Command then LazyPixHealthWidget.Command(msg) end
     else
-        Msg("Неизвестная команда. /lazyg help — список команд.")
+        Msg("Неизвестная команда. /lazypix help — список команд.")
     end
 end
 
 -- The minimap icon follows the minimap rim, independently of rotation/health positions.
-local minimapButton = CreateFrame("Button", "LazyGMinimapButton", Minimap)
+local minimapButton = CreateFrame("Button", "LazyPixMinimapButton", Minimap)
 minimapButton:SetSize(30, 30)
 minimapButton:SetFrameStrata("MEDIUM")
 minimapButton:SetFrameLevel(Minimap:GetFrameLevel() + 8)
@@ -882,7 +882,7 @@ minimapButton:SetScript("OnClick", function(_, button)
 end)
 minimapButton:SetScript("OnEnter", function(self)
     GameTooltip:SetOwner(self, "ANCHOR_LEFT")
-    GameTooltip:AddLine("LazyG", 1, 1, 1)
+    GameTooltip:AddLine("LazyPix", 1, 1, 1)
     GameTooltip:AddLine("ЛКМ: настройка в едином фрейме", .85, .85, .85)
     GameTooltip:AddLine("ПКМ: закрыть настройку", .85, .85, .85)
     GameTooltip:AddLine("Удерживать ЛКМ: перемещение по ободу миникарты", .85, .85, .85)

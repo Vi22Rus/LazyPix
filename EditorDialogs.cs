@@ -83,7 +83,7 @@ public sealed class EditorDialogs
     public static bool Hotkeys(Window owner, HotkeySettings settings)
     {
         var panel = new StackPanel();
-        panel.Children.Add(new TextBlock { Text = L.T("Горячие клавиши работают, даже когда открыта игра. Если комбинация занята другой программой, LazyG сообщит об этом."), TextWrapping = TextWrapping.Wrap, Foreground = Brushes.LightSteelBlue, Margin = new Thickness(0,0,0,12) });
+        panel.Children.Add(new TextBlock { Text = L.T("Горячие клавиши работают, даже когда открыта игра. Если комбинация занята другой программой, LazyPix сообщит об этом."), TextWrapping = TextWrapping.Wrap, Foreground = Brushes.LightSteelBlue, Margin = new Thickness(0,0,0,12) });
         TextBox Field(string label,string value) { panel.Children.Add(Label(label)); var box=Input(value);panel.Children.Add(box);return box; }
         var start=Field(L.T("Запуск"),settings.Start);var pause=Field(L.T("Пауза"),settings.Pause);var stop=Field(L.T("Стоп"),settings.Stop);var add=Field(L.T("Добавить способность"),settings.AddAbility);
         foreach (var field in new[]{start,pause,stop,add})

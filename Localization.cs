@@ -29,7 +29,7 @@ public static class L
     }
     private static string LoadLanguage()
     {
-        try { var file = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData),"LazyG","language.txt");
+        try { var file = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData),"LazyPix","language.txt");
               var lang = File.Exists(file) ? File.ReadAllText(file).Trim() : "ru-RU";
               return AvailableLanguages.Contains(lang,StringComparer.OrdinalIgnoreCase) ? lang : "ru-RU"; }
         catch { return "ru-RU"; }
@@ -38,7 +38,7 @@ public static class L
     {
         if (!AvailableLanguages.Contains(language,StringComparer.OrdinalIgnoreCase)) return;
         Language = language;
-        try { var dir = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData),"LazyG");
+        try { var dir = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData),"LazyPix");
               Directory.CreateDirectory(dir); File.WriteAllText(Path.Combine(dir,"language.txt"),language); } catch { }
         Changed?.Invoke();
     }

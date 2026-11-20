@@ -1,4 +1,4 @@
--- LazyG health consumable indicator + movement/target traffic light.
+-- LazyPix health consumable indicator + movement/target traffic light.
 -- Visual-only addon: never uses items or casts spells.
 local addon = CreateFrame("Frame")
 local db, root, itemButton, itemIcon, shade, circle, circleTexture, settings, healthShadeBar, colorIcon, healthThresholdCurve, curveThreshold
@@ -254,11 +254,11 @@ local function update()
     lastSignal = color
     -- Swap real pre-colored textures instead of relying on vertex tint.
     -- This also ensures the visible image changes on clients with unusual texture handling.
-    local texturePath = "Interface\\AddOns\\LazyG\\CircleGreen.tga"
+    local texturePath = "Interface\\AddOns\\LazyPix_Addon\\CircleGreen.tga"
     if color == "red" then
-        texturePath = "Interface\\AddOns\\LazyG\\CircleRed.tga"
+        texturePath = "Interface\\AddOns\\LazyPix_Addon\\CircleRed.tga"
     elseif color == "orange" then
-        texturePath = "Interface\\AddOns\\LazyG\\CircleOrange.tga"
+        texturePath = "Interface\\AddOns\\LazyPix_Addon\\CircleOrange.tga"
     end
     circleTexture:SetTexture(texturePath)
     circleTexture:SetVertexColor(1, 1, 1, 1)
@@ -312,7 +312,7 @@ local function slider(parent, label, lo, hi, y, key, suffix)
     refresh(db[key])
 end
 local function buildSettings()
-    settings = CreateFrame("Frame", "LazyGHealthSettings", UIParent, "BackdropTemplate")
+    settings = CreateFrame("Frame", "LazyPixHealthSettings", UIParent, "BackdropTemplate")
     settings:SetSize(340, 355)
     settings:SetPoint("CENTER")
     settings:SetFrameStrata("DIALOG")
@@ -326,7 +326,7 @@ local function buildSettings()
     end
     local header = settings:CreateFontString(nil, "OVERLAY", "GameFontNormal")
     header:SetPoint("TOP", 0, -18)
-    header:SetText("LazyG - Settings / Настройки")
+    header:SetText("LazyPix - Settings / Настройки")
     local close = CreateFrame("Button", nil, settings, "UIPanelCloseButton")
     close:SetPoint("TOPRIGHT", -4, -4)
     slider(settings, "1. Use when health is below / Использовать при здоровье ниже", 5, 15, -48, "hpThreshold", "%")
@@ -336,7 +336,7 @@ local function buildSettings()
     settings:Hide()
 end
 local function build()
-    root = CreateFrame("Frame", "LazyGHealthRoot", UIParent)
+    root = CreateFrame("Frame", "LazyPixHealthRoot", UIParent)
     root:SetFrameStrata("HIGH")
     root:SetMovable(true)
     root:SetClampedToScreen(true)
@@ -347,7 +347,7 @@ local function build()
     else
         root:SetPoint("CENTER", UIParent, "CENTER", 160, -30)
     end
-    itemButton = CreateFrame("Button", "LazyGHealthItem", root, "SecureActionButtonTemplate")
+    itemButton = CreateFrame("Button", "LazyPixHealthItem", root, "SecureActionButtonTemplate")
     itemButton:EnableMouse(true)
     -- Down click is reliable for secure item actions on Classic clients.
     itemButton:RegisterForClicks("LeftButtonDown")
@@ -386,7 +386,7 @@ local function build()
     end)
     -- Non-secure preview overlay: only visible while Sonah setup is active.
     -- Never attach preview click handlers to the secure consumable button.
-    previewButton = CreateFrame("Button", "LazyGHealthPreview", root)
+    previewButton = CreateFrame("Button", "LazyPixHealthPreview", root)
     previewButton:SetAllPoints(itemButton)
     previewButton:SetFrameLevel(itemButton:GetFrameLevel() + 10)
     previewButton:EnableMouse(true)
@@ -421,22 +421,22 @@ local function build()
     previewButton:Hide()
     -- Do not install PreClick/PostClick on the protected action button.
     -- A right-click handler on it could taint secure item use in combat.
-    -- Change the preview from /lazyg item next (outside combat) instead.
-    circle = CreateFrame("Button", "LazyGTrafficLight", root)
+    -- Change the preview from /lazypix item next (outside combat) instead.
+    circle = CreateFrame("Button", "LazyPixTrafficLight", root)
     circle:EnableMouse(true)
     circle:SetFrameStrata("DIALOG")
     circle:SetFrameLevel(itemButton:GetFrameLevel() + 15)
     circle:RegisterForClicks("LeftButtonUp", "RightButtonUp", "LeftButtonDown", "RightButtonDown")
     circleTexture = circle:CreateTexture(nil, "ARTWORK")
     circleTexture:SetAllPoints()
-    circleTexture:SetTexture("Interface\\AddOns\\LazyG\\CircleGreen.tga")
+    circleTexture:SetTexture("Interface\\AddOns\\LazyPix_Addon\\CircleGreen.tga")
     -- Masked circular color: WoW's circular portrait mask is an alpha texture.
     circleTexture:SetTexCoord(0, 1, 0, 1)
     circle:SetScript("OnClick", function(_, button)
         -- Shift + right click opens settings; do not change traffic mode.
         if button == "RightButton" and IsShiftKeyDown() then
             if InCombatLockdown() then
-                if DEFAULT_CHAT_FRAME then DEFAULT_CHAT_FRAME:AddMessage("|cff7db9ffLazyG:|r Settings cannot be opened in combat.") end
+                if DEFAULT_CHAT_FRAME then DEFAULT_CHAT_FRAME:AddMessage("|cff7db9ffLazyPix:|r Settings cannot be opened in combat.") end
                 return
             end
             if settings then
@@ -449,7 +449,7 @@ local function build()
         else return end
         forceManualUntil = GetTime() + 2
         if DEFAULT_CHAT_FRAME then
-            DEFAULT_CHAT_FRAME:AddMessage("|cff7db9ffLazyG 0.8.2:|r circle click -> " .. db.trafficMode)
+            DEFAULT_CHAT_FRAME:AddMessage("|cff7db9ffLazyPix 0.8.2:|r circle click -> " .. db.trafficMode)
         end
         update()
     end)
@@ -481,11 +481,11 @@ local function command(msg)
         update()
     elseif msg == "status" then
         local speed = GetUnitSpeed and safeNumber(GetUnitSpeed("player"))
-        local s = "LazyG 0.8.2: mode=" .. tostring(db.trafficMode) .. ", displayed=" .. tostring(lastSignal) .. ", hostile=" .. tostring(not not targetValid()) .. ", standing=" .. tostring(lastStanding) .. ", movementEvents=" .. movementEvents .. ", speed=" .. tostring(speed) .. ", hp=" .. lastHpState .. ", circle=" .. tostring(circle and circle:IsShown())
+        local s = "LazyPix 0.8.2: mode=" .. tostring(db.trafficMode) .. ", displayed=" .. tostring(lastSignal) .. ", hostile=" .. tostring(not not targetValid()) .. ", standing=" .. tostring(lastStanding) .. ", movementEvents=" .. movementEvents .. ", speed=" .. tostring(speed) .. ", hp=" .. lastHpState .. ", circle=" .. tostring(circle and circle:IsShown())
         if DEFAULT_CHAT_FRAME then DEFAULT_CHAT_FRAME:AddMessage(s) end
     end
 end
-LazyGHealthWidget = { SetPreview = setPreview, Command = command }
+LazyPixHealthWidget = { SetPreview = setPreview, Command = command }
 addon:RegisterEvent("PLAYER_LOGIN")
 addon:RegisterEvent("PLAYER_STARTED_MOVING")
 addon:RegisterEvent("PLAYER_STOPPED_MOVING")

@@ -1,6 +1,6 @@
 ## Interface: 16001
-## Title: LazyG
-## Notes: LazyG - universal rotation frame (Sonah / MaxDPS / Hekili)
+## Title: LazyPix
+## Notes: LazyPix - universal rotation frame (Sonah / MaxDPS / Hekili)
 ## Version: 0.8.30
 ## OptionalDeps: Sonah, MaxDps, Hekili, JustAssistedCombat, RotationMaster
 ## SavedVariablesPerCharacter: SonahRotationSetupDB
