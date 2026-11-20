@@ -435,3 +435,76 @@ LazyG 0.8.8 TEST — idle-frame visibility fix
 - Sonah, MaxDPS, Hekili adapters and HealthWidget.lua are unchanged.
 
 TEST build: verify in WoW Forever, including combat and secret texture values.
+
+### LazyPix_Addon/README_0.8.9.txt
+
+LazyG 0.8.9 TEST — Hekili display synchronization fix
+
+- Read the currently shown Hekili Primary/AOE first icon from its original UI, including overrides.
+- Fallback to already published output when no visible Hekili icon is available.
+- Listen for both Primary and AOE output changes.
+- Refresh Hekili every 0.2 s from existing UI/output, without asking Hekili to calculate a rotation.
+- Sonah, MaxDPS, Healbot and traffic light logic remain unchanged.
+
+TEST in WoW Forever: verify displayed icons change in combat and when switching between Primary/AOE.
+
+
+### LazyPix_Addon/README_0.8.10.txt
+
+LazyG 0.8.10 TEST - independent saved positions
+
+Fixed Setup.lua rotation frame using the same SavedVariables position key as HealthWidget.lua.
+Rotation frame now uses SonahRotationSetupDB.rotationPosition. Health widget and traffic light keep existing SonahRotationSetupDB.position unchanged.
+The rotation frame may return to its default position once after upgrading; move it with Shift + left drag to save a separate location.
+Rotation sources, traffic light behavior, potion indicator and settings are unchanged.
+Test in WoW Forever required; not a stable release.
+
+
+### LazyPix_Addon/README_0.8.11.txt
+
+LazyG 0.8.11 TEST — preview overlay fix
+
+В режиме настройки больше не показывается декоративная золотистая рамка UI-ActionButton-Border поверх иконки ротации.
+Иконка отображается без этой перекрывающей текстуры, чтобы выбирать RGB-пиксели.
+Остальная функциональность сохранена из 0.8.10.
+
+Проверить в WoW Forever: войти в режим настройки, перебрать иконки, убедиться в отсутствии наложения, выйти и проверить обычную ротацию.
+
+
+### LazyPix_Addon/README_0.8.12.txt
+
+LazyG 0.8.12 TEST — visual cooldown and range indicators
+
+Based on LazyG 0.8.11 TEST.
+
+- Recommended spell icon greys out for a readable global cooldown, independent spell cooldown, or out-of-range result.
+- A bright short segment travels around the frame perimeter during a readable global cooldown.
+- For secret GCD timings, the standard WoW cooldown edge is used where possible, without manipulating protected numbers in Lua.
+- No effect is applied in icon-preview/editing mode; existing saved positions, sizes, source adapters, health widget and traffic light are retained.
+- When the source does not supply a public numeric SpellID or combat API values are secret, spell-specific CD/range state may be unavailable. Unavailable range (nil) does not mean out of range.
+
+IMPORTANT: Desaturation changes the actual onscreen RGB colors. Existing Windows LazyG ability-pixel samples may no longer match during GCD, cooldown, or out-of-range. Verify pixel detection before normal use.
+
+Tests: Lua syntax verified with texlua. Gameplay behavior and Secret Values handling require testing in WoW Forever.
+
+
+### LazyPix_Addon/README_0.8.13.txt
+
+LazyG 0.8.13 TEST — minimap button positioning
+
+- Minimap icon is anchored to the minimap rim (not a fixed top-left offset).
+- Hold left mouse button and drag around the minimap rim to reposition.
+- Short left/right clicks retain their original editor actions.
+- Saved position: SonahRotationSetupDB.minimapAngle (separate from rotationPosition and position).
+- Rotation frame, adapters, traffic light and health potion code unchanged.
+
+Testing: drag icon, /reload, relog; check left/right click, and minimap position.
+Game testing is required before marking the release stable.
+
+
+### LazyPix_Addon/README_0.8.14.txt
+
+LazyG 0.8.14 TEST
+Fix: forward declare minimapAngle and PlaceMinimapButton so PLAYER_LOGIN correctly restores minimap placement and continues creating the rotation frame.
+No changes to rotation adapters, HealthWidget, or GCD visuals.
+Test in WoW Forever: frame in preview, live recommendations, minimap dragging, /reload persistence.
