@@ -508,3 +508,99 @@ LazyG 0.8.14 TEST
 Fix: forward declare minimapAngle and PlaceMinimapButton so PLAYER_LOGIN correctly restores minimap placement and continues creating the rotation frame.
 No changes to rotation adapters, HealthWidget, or GCD visuals.
 Test in WoW Forever: frame in preview, live recommendations, minimap dragging, /reload persistence.
+
+### LazyPix_Addon/README_0.8.15.txt
+
+LazyG 0.8.15 TEST — ordinary cooldown detection
+
+Fixed: if C_Spell.GetSpellCooldown returns protected startTime/duration, use its non-secret isActive flag to dim the recommended spell while cooldown is active. Existing public-time GCD/normal-CD distinction stays unchanged.
+
+When times are protected, isActive can also represent GCD; the frame is dimmed but the source of cooldown cannot be distinguished by this fallback.
+
+No changes to adapters, minimap, frame settings, HealthWidget, or existing GCD border indicator.
+
+Test in WoW Forever: ordinary cooldown (especially while in combat), GCD, editor icon brightness, hiding frame without recommendation, and Lua errors.
+
+
+### LazyPix_Addon/README_0.8.16.txt
+
+LazyG 0.8.16 TEST — GCD border and Blizzard duration support
+
+Based on 0.8.15. Changes confined to Setup.lua and TOC.
+- Persistent gold hollow border and subtle outer glow around the rotation frame.
+- For public GCD timing: gold moving segment along the exterior perimeter.
+- For secret GCD timing: native Blizzard Cooldown with DurationObject.
+  This native fallback is a radial cooldown, NOT a square perimeter snake.
+- When editor is active no GCD graphics are drawn; icon is color-correct.
+- Existing CD/range dimming, Sonah, MaxDPS, Hekili, HP and traffic light untouched.
+
+Test in WoW Forever especially combat/Secret Values and RGB recognition.
+
+
+### LazyPix_Addon/README_0.8.17.txt
+
+LazyG 0.8.17 TEST — GCD display correction
+
+Based on 0.8.16, modifies only Setup.lua and TOC.
+- Blizzard Cooldown from GetSpellCooldownDuration(61304) is the primary GCD animation.
+- Listens to SPELL_UPDATE_COOLDOWN; avoids resetting the animation every 0.1 seconds.
+- Perimeter segment remains available only if GCD timing is not secret.
+- No GCD animation in icon setup mode.
+- Original border and all rotation adapters, traffic light and healbot unchanged.
+
+In WoW Forever test GCD during combat, out of combat, after /reload,
+then check that no Blizzard Lua error appears and RGB sampling remains usable.
+
+
+### LazyPix_Addon/README_0.8.18.txt
+
+LazyG 0.8.18 TEST — GCD border progress
+
+Changes in Setup.lua only:
+- Rotation icon rim is green when GCD is not active.
+- When GCD has readable timestamps, the rim becomes dark and red fills its
+  perimeter clockwise: top, right, bottom, left. Completion returns it to green.
+- If WoW Forever protects GCD timing, a solid red border indicates active GCD;
+  the existing native Blizzard cooldown frame remains responsible for exact timing.
+  No fake progress or arithmetic on secret values is attempted.
+- Red progress is outside the icon, avoiding extra overlays on RGB sampling area.
+- In icon calibration mode, the rim is green and progress disabled.
+
+Not changed: Sonah / MaxDPS / Hekili adapters, traffic light, healpot, minimap,
+keyboard controls, frame sizing and position.
+
+Testing in WoW Forever required. Lua parse check only; no live game test.
+Previous archive 0.8.17 can be used for rollback.
+
+
+### LazyPix_Addon/README_0.8.19.txt
+
+LazyG 0.8.19 TEST — GCD red rim progress detection fix
+
+Исправлено: красное заполнение рамки теперь запускается по реальным
+доступным startTime/duration GCD 61304 независимо от isActive.
+При защищённом времени используется только индикатор активности
+и штатный Cooldown Blizzard (если доступны).
+
+Остальные функции, адаптеры, светофор и хилпот не изменены.
+
+Проверка в игре: при активной рекомендации применить способность
+с GCD; увидеть заполнение рамки красным и возврат к зелёному.
+Тестировать вне боя и в бою, с /reload.
+
+
+### LazyPix_Addon/README_0.8.20.txt
+
+LazyG 0.8.20 TEST — Healbot cooldown detection
+
+Исправлена проверка готовности Health Potion/Healthstone в HealthWidget.lua:
+сначала C_Spell.GetItemCooldown(id).isActive (NeverSecret), затем резервная
+проверка числовых времён C_Container.GetItemCooldown.
+Если оба способа недоступны, предмет остаётся серым во избежание
+ложной индикации доступности.
+
+/lazyg status показывает ID предмета, видимость HP, готовность и API-источник
+проверки кулдауна. Светофор, аддоны ротаций и GCD не изменены.
+
+Проверить в WoW Forever при здоровье выше и ниже порога, когда предмет
+готов и когда находится на кулдауне; затем /lazyg status.
