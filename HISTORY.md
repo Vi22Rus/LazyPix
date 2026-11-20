@@ -306,3 +306,62 @@ Build: `dotnet run -c Release` from the project directory (Windows, .NET 10 SDK)
 **Ошибки и предотвращение повторения:** не создавать параллельные журналы, не переписывать историю задним числом и не выдавать отсутствие тестов за успешный результат. Следующие работы должны фиксировать конкретную причину, затронутые файлы, диагностику, тесты и ссылки.
 
 **Следующий шаг:** применять этот формат ко **всем** последующим изменениям LazyPix.
+
+---
+
+# Архив истории Lua-аддона LazyPix — версии 0.7.7–0.8.30
+
+> Источник: оригинальные `LazyPix_Addon/README_*.txt` из GitHub. Перенос выполнен 2026-11-20; **тексты сохранены дословно**, включая историческое название LazyG, различия методов работы и предупреждения о непроверенных функциях. Даты создания каждой старой версии не известны, поэтому время задним числом не выдумывается. Для поиска конкретного изменения используйте номер версии ниже; начиная с 2026-11-20 15:42 +07:00 для новых работ обязателен журнал с точным временем в этом же файле.
+
+## Реальное состояние аддона в репозитории на момент переноса
+
+- Код расположен в `LazyPix_Addon/Setup.lua` и `LazyPix_Addon/HealthWidget.lua`; TOC: `LazyPix_Addon/LazyG.toc`; графические ресурсы: `Circle.tga`, `CircleGreen.tga`, `CircleOrange.tga`, `CircleRed.tga`.
+- `LazyG.toc`: `Interface: 16001`, `Version: 0.8.30`, `OptionalDeps: Sonah, MaxDps, Hekili, JustAssistedCombat, RotationMaster`, `SavedVariablesPerCharacter: SonahRotationSetupDB`.
+- В текущих исходниках ещё употребляются прежние технические имена `LazyG`, `/lazyg`, `SonahRotationSetupDB`. **Не переименовывать их автоматически**: это может повлиять на загрузку аддона, привычные команды и сохранённые настройки.
+- Текущая версия **0.8.30 TEST**; её README отдельно заявляет отсутствие тестирования в WoW Forever. Ни одно описание ниже не является доказательством успешной проверки в клиенте.
+- История демонстрирует эволюцию от Sonah-режима к пяти источникам, отдельному предпросмотру книги заклинаний, индикаторам здоровья/предметов, GCD, cooldown/range/cast и косметической рамке. Не смешивать эти алгоритмы с Windows-распознаванием RGB.
+
+## Оригинальные записи аддона по версиям
+
+
+### LazyPix_Addon/README_0.7.7.txt
+
+LazyG 0.7.7
+Shift + right-click the circular traffic light to toggle settings (outside combat).
+Regular left click: green; regular right click: orange.
+No other behavior changed from 0.7.6.
+
+
+### LazyPix_Addon/README_0.7.8.txt
+
+LazyG 0.7.8
+- Combat movement: PLAYER_STARTED_MOVING / PLAYER_STOPPED_MOVING events, no secret GetUnitSpeed comparison.
+- Secret health: native StatusBar dark overlay, proportional to health; NOT an exact 10% binary cutoff in combat.
+- Outside combat with readable health: exact configured HP cutoff.
+- Existing click, traffic modes and Shift+Right Click retained.
+- If status bar cannot accept secret values, fallback remains grey.
+
+
+### LazyPix_Addon/README_0.7.9.txt
+
+LazyG 0.7.9: status now reports actual standing state used by the circle, event counter, safe speed and HP availability. Ensures health overlay is above icon. No guarantee of exact 10% cutoff with secret HP.
+
+
+### LazyPix_Addon/README_0.8.0.txt
+
+LazyG 0.8.0: HP threshold uses native Step ColorCurve and two icon layers. Gray base above threshold, bright color at/below threshold; secret HP is never compared in Lua. Traffic light unchanged from 0.7.9. If client lacks Step curves, icon stays gray and /lazyg status reports curve=unsupported.
+
+
+### LazyPix_Addon/README_0.8.1.txt
+
+LazyG 0.8.1: Health frame preview in Sonah setup mode.
+When setup mode starts via minimap launcher, the health frame shows a bright red border and full-color selected consumable. Right click on the health frame cycles forward through healthstones and health potions in bags; left click cycles backward. The number in the bottom shows the selected entry. Preview ends with setup mode or on combat start. Normal HP threshold, traffic light and secure item clicks remain unchanged.
+
+
+### LazyPix_Addon/README_0.8.2.txt
+
+LazyG 0.8.2 TEST
+Removed hard dependency on Sonah; Sonah is now an optional load-order dependency.
+Standalone traffic light and health widget remain unchanged.
+Sonah preview mode requires Sonah to be enabled.
+MaxDps integration is NOT implemented yet; requires testing with exact Forever build files.
