@@ -1,1 +1,0 @@
-LazyG 0.8.0: HP threshold uses native Step ColorCurve and two icon layers. Gray base above threshold, bright color at/below threshold; secret HP is never compared in Lua. Traffic light unchanged from 0.7.9. If client lacks Step curves, icon stays gray and /lazyg status reports curve=unsupported.

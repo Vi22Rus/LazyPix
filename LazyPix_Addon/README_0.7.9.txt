@@ -1,1 +1,0 @@
-LazyG 0.7.9: status now reports actual standing state used by the circle, event counter, safe speed and HP availability. Ensures health overlay is above icon. No guarantee of exact 10% cutoff with secret HP.
