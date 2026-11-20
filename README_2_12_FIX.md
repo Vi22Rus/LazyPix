@@ -1,0 +1,1 @@
+LazyG 2.12: исправлено включение 27 иконок специализаций в WPF Resource при сборке. Иконки привязаны к классу и Specialization, а не к пользовательскому имени. Сборка: dotnet publish -c Release -r win-x64 --self-contained true /p:PublishSingleFile=true. На Windows сборка не проверена.

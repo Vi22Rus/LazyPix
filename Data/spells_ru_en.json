@@ -1,0 +1,4092 @@
+{
+  "spells": [
+    {
+      "class": "Воин",
+      "name_ru": "Атака",
+      "name_en": "Attack",
+      "spell_id": 6603,
+      "icon_file": "135274.png"
+    },
+    {
+      "class": "Воин",
+      "name_ru": "Безрассудные удары",
+      "name_en": "Reckless Swings",
+      "spell_id": 1329555,
+      "icon_file": "132334.png"
+    },
+    {
+      "class": "Воин",
+      "name_ru": "Безрассудство",
+      "name_en": "Recklessness",
+      "spell_id": 1719,
+      "icon_file": "132109.png"
+    },
+    {
+      "class": "Воин",
+      "name_ru": "Блок щитом",
+      "name_en": "Shield Block",
+      "spell_id": 2565,
+      "icon_file": "132110.png"
+    },
+    {
+      "class": "Воин",
+      "name_ru": "Боевая стойка",
+      "name_en": "Battle Stance",
+      "spell_id": 2457,
+      "icon_file": "132349.png"
+    },
+    {
+      "class": "Воин",
+      "name_ru": "Боевое исступление",
+      "name_en": "Berserking",
+      "spell_id": 20554,
+      "icon_file": "135727.png"
+    },
+    {
+      "class": "Воин",
+      "name_ru": "Боевой крик",
+      "name_en": "Battle Shout",
+      "spell_id": 5242,
+      "icon_file": "132333.png"
+    },
+    {
+      "class": "Воин",
+      "name_ru": "Бросок",
+      "name_en": "Throw",
+      "spell_id": 2764,
+      "icon_file": "132324.png"
+    },
+    {
+      "class": "Воин",
+      "name_ru": "Быстрая регенерация",
+      "name_en": "Rapid Regeneration",
+      "spell_id": 1260270,
+      "icon_file": "1850550.png"
+    },
+    {
+      "class": "Воин",
+      "name_ru": "Вихрь",
+      "name_en": "Whirlwind",
+      "spell_id": 1680,
+      "icon_file": "132369.png"
+    },
+    {
+      "class": "Воин",
+      "name_ru": "Возмездие",
+      "name_en": "Retaliation",
+      "spell_id": 20230,
+      "icon_file": "132336.png"
+    },
+    {
+      "class": "Воин",
+      "name_ru": "Вызывающий крик",
+      "name_en": "Challenging Shout",
+      "spell_id": 1161,
+      "icon_file": "132091.png"
+    },
+    {
+      "class": "Воин",
+      "name_ru": "Выстрел из арбалета",
+      "name_en": "Shoot Crossbow",
+      "spell_id": 7919,
+      "icon_file": "132222.png"
+    },
+    {
+      "class": "Воин",
+      "name_ru": "Глухая оборона",
+      "name_en": "Shield Wall",
+      "spell_id": 871,
+      "icon_file": "132362.png"
+    },
+    {
+      "class": "Воин",
+      "name_ru": "Деморализующий крик",
+      "name_en": "Demoralizing Shout",
+      "spell_id": 1160,
+      "icon_file": "132366.png"
+    },
+    {
+      "class": "Воин",
+      "name_ru": "Дразнящий удар",
+      "name_en": "Mocking Blow",
+      "spell_id": 694,
+      "icon_file": "132350.png"
+    },
+    {
+      "class": "Воин",
+      "name_ru": "Зуботычина",
+      "name_en": "Pummel",
+      "spell_id": 6552,
+      "icon_file": "132938.png"
+    },
+    {
+      "class": "Воин",
+      "name_ru": "Инстинкт смерти",
+      "name_en": "Death Wish",
+      "spell_id": 12328,
+      "icon_file": "136146.png"
+    },
+    {
+      "class": "Воин",
+      "name_ru": "Казнь",
+      "name_en": "Execute",
+      "spell_id": 5308,
+      "icon_file": "135358.png"
+    },
+    {
+      "class": "Воин",
+      "name_ru": "Кровавая ярость",
+      "name_en": "Bloodrage",
+      "spell_id": 2687,
+      "icon_file": "132277.png"
+    },
+    {
+      "class": "Воин",
+      "name_ru": "Кровожадность",
+      "name_en": "Bloodthirst",
+      "spell_id": 23881,
+      "icon_file": "136012.png"
+    },
+    {
+      "class": "Воин",
+      "name_ru": "Кровопускание",
+      "name_en": "Rend",
+      "spell_id": 6546,
+      "icon_file": "132155.png"
+    },
+    {
+      "class": "Воин",
+      "name_ru": "Мощный удар",
+      "name_en": "Slam",
+      "spell_id": 1240193,
+      "icon_file": "132340.png"
+    },
+    {
+      "class": "Воин",
+      "name_ru": "Ни шагу назад",
+      "name_en": "Last Stand",
+      "spell_id": 12975,
+      "icon_file": "135871.png"
+    },
+    {
+      "class": "Воин",
+      "name_ru": "Оборонительная стойка",
+      "name_en": "Defensive Stance",
+      "spell_id": 71,
+      "icon_file": "132341.png"
+    },
+    {
+      "class": "Воин",
+      "name_ru": "Оглушающий удар",
+      "name_en": "Concussion Blow",
+      "spell_id": 12809,
+      "icon_file": "132325.png"
+    },
+    {
+      "class": "Воин",
+      "name_ru": "Перехват",
+      "name_en": "Intercept",
+      "spell_id": 20252,
+      "icon_file": "132307.png"
+    },
+    {
+      "class": "Воин",
+      "name_ru": "Победный раж",
+      "name_en": "Victory Rush",
+      "spell_id": 402927,
+      "icon_file": "132342.png"
+    },
+    {
+      "class": "Воин",
+      "name_ru": "Подрезать сухожилия",
+      "name_en": "Hamstring",
+      "spell_id": 1715,
+      "icon_file": "132316.png"
+    },
+    {
+      "class": "Воин",
+      "name_ru": "Превосходство",
+      "name_en": "Overpower",
+      "spell_id": 7384,
+      "icon_file": "132223.png"
+    },
+    {
+      "class": "Воин",
+      "name_ru": "Пробивающий удар",
+      "name_en": "Spearing Strike",
+      "spell_id": 1310222,
+      "icon_file": "135124.png"
+    },
+    {
+      "class": "Воин",
+      "name_ru": "Провокация",
+      "name_en": "Taunt",
+      "spell_id": 355,
+      "icon_file": "136080.png"
+    },
+    {
+      "class": "Воин",
+      "name_ru": "Пронзительный вой",
+      "name_en": "Piercing Howl",
+      "spell_id": 12323,
+      "icon_file": "136147.png"
+    },
+    {
+      "class": "Воин",
+      "name_ru": "Размашистые удары",
+      "name_en": "Sweeping Strikes",
+      "spell_id": 12292,
+      "icon_file": "132306.png"
+    },
+    {
+      "class": "Воин",
+      "name_ru": "Разоружение",
+      "name_en": "Disarm",
+      "spell_id": 676,
+      "icon_file": "132343.png"
+    },
+    {
+      "class": "Воин",
+      "name_ru": "Раскол брони",
+      "name_en": "Sunder Armor",
+      "spell_id": 7386,
+      "icon_file": "132363.png"
+    },
+    {
+      "class": "Воин",
+      "name_ru": "Рассекающий удар",
+      "name_en": "Cleave",
+      "spell_id": 845,
+      "icon_file": "132338.png"
+    },
+    {
+      "class": "Воин",
+      "name_ru": "Реванш",
+      "name_en": "Revenge",
+      "spell_id": 6572,
+      "icon_file": "132353.png"
+    },
+    {
+      "class": "Воин",
+      "name_ru": "Рывок",
+      "name_en": "Charge",
+      "spell_id": 100,
+      "icon_file": "132337.png"
+    },
+    {
+      "class": "Воин",
+      "name_ru": "Смертельный удар",
+      "name_en": "Mortal Strike",
+      "spell_id": 12294,
+      "icon_file": "132355.png"
+    },
+    {
+      "class": "Воин",
+      "name_ru": "Сокрушение",
+      "name_en": "Slam",
+      "spell_id": 1464,
+      "icon_file": "132340.png"
+    },
+    {
+      "class": "Воин",
+      "name_ru": "Сокрушение щитом",
+      "name_en": "Shield Slam",
+      "spell_id": 23922,
+      "icon_file": "134951.png"
+    },
+    {
+      "class": "Воин",
+      "name_ru": "Стойка берсерка",
+      "name_en": "Berserker Stance",
+      "spell_id": 2458,
+      "icon_file": "132275.png"
+    },
+    {
+      "class": "Воин",
+      "name_ru": "Удар героя",
+      "name_en": "Heroic Strike",
+      "spell_id": 284,
+      "icon_file": "132282.png"
+    },
+    {
+      "class": "Воин",
+      "name_ru": "Удар грома",
+      "name_en": "Thunder Clap",
+      "spell_id": 6343,
+      "icon_file": "136105.png"
+    },
+    {
+      "class": "Воин",
+      "name_ru": "Удар щитом",
+      "name_en": "Shield Bash",
+      "spell_id": 72,
+      "icon_file": "132357.png"
+    },
+    {
+      "class": "Воин",
+      "name_ru": "Устрашающий крик",
+      "name_en": "Intimidating Shout",
+      "spell_id": 5246,
+      "icon_file": "132154.png"
+    },
+    {
+      "class": "Воин",
+      "name_ru": "Ярость берсерка",
+      "name_en": "Berserker Rage",
+      "spell_id": 18499,
+      "icon_file": "136009.png"
+    },
+    {
+      "class": "Воин",
+      "name_ru": "Воля Отрекшихся",
+      "name_en": "Will of the Forsaken",
+      "spell_id": 7744,
+      "icon_file": "136187.png"
+    },
+    {
+      "class": "Воин",
+      "name_ru": "Каннибализм",
+      "name_en": "Cannibalize",
+      "spell_id": 20577,
+      "icon_file": "132278.png"
+    },
+    {
+      "class": "Воин",
+      "name_ru": "Громовая поступь",
+      "name_en": "War Stomp",
+      "spell_id": 20549,
+      "icon_file": "132368.png"
+    },
+    {
+      "class": "Воин",
+      "name_ru": "Проращивание",
+      "name_en": "Cultivation",
+      "spell_id": 20552,
+      "icon_file": "133938.png"
+    },
+    {
+      "class": "Воин",
+      "name_ru": "Внимательность",
+      "name_en": "Perception",
+      "spell_id": 20600,
+      "icon_file": "136090.png"
+    },
+    {
+      "class": "Воин",
+      "name_ru": "Воля к жизни",
+      "name_en": "Will to Survive",
+      "spell_id": 1259718,
+      "icon_file": "136129.png"
+    },
+    {
+      "class": "Воин",
+      "name_ru": "Кровавое неистовство",
+      "name_en": "Blood Fury",
+      "spell_id": 20572,
+      "icon_file": "135726.png"
+    },
+    {
+      "class": "Воин",
+      "name_ru": "Разбивание проклятий",
+      "name_en": "Shatter Curse",
+      "spell_id": 1299026,
+      "icon_file": "136082.png"
+    },
+    {
+      "class": "Друид",
+      "name_ru": "Боевое исступление",
+      "name_en": "Berserking",
+      "spell_id": 20554,
+      "icon_file": "135727.png"
+    },
+    {
+      "class": "Друид",
+      "name_ru": "Быстрая регенерация",
+      "name_en": "Rapid Regeneration",
+      "spell_id": 1260270,
+      "icon_file": "1850550.png"
+    },
+    {
+      "class": "Друид",
+      "name_ru": "Воля Отрекшихся",
+      "name_en": "Will of the Forsaken",
+      "spell_id": 7744,
+      "icon_file": "136187.png"
+    },
+    {
+      "class": "Друид",
+      "name_ru": "Каннибализм",
+      "name_en": "Cannibalize",
+      "spell_id": 20577,
+      "icon_file": "132278.png"
+    },
+    {
+      "class": "Друид",
+      "name_ru": "Громовая поступь",
+      "name_en": "War Stomp",
+      "spell_id": 20549,
+      "icon_file": "132368.png"
+    },
+    {
+      "class": "Друид",
+      "name_ru": "Проращивание",
+      "name_en": "Cultivation",
+      "spell_id": 20552,
+      "icon_file": "133938.png"
+    },
+    {
+      "class": "Друид",
+      "name_ru": "Внимательность",
+      "name_en": "Perception",
+      "spell_id": 20600,
+      "icon_file": "136090.png"
+    },
+    {
+      "class": "Друид",
+      "name_ru": "Воля к жизни",
+      "name_en": "Will to Survive",
+      "spell_id": 1259718,
+      "icon_file": "136129.png"
+    },
+    {
+      "class": "Друид",
+      "name_ru": "Кровавое неистовство",
+      "name_en": "Blood Fury",
+      "spell_id": 20572,
+      "icon_file": "135726.png"
+    },
+    {
+      "class": "Друид",
+      "name_ru": "Разбивание проклятий",
+      "name_en": "Shatter Curse",
+      "spell_id": 1299026,
+      "icon_file": "136082.png"
+    },
+    {
+      "class": "Друид",
+      "name_ru": "Атака",
+      "name_en": "Attack",
+      "spell_id": 6603,
+      "icon_file": "135274.png"
+    },
+    {
+      "class": "Друид",
+      "name_ru": "Буйный рост",
+      "name_en": "Wild Growth",
+      "spell_id": 408120,
+      "icon_file": "236153.png"
+    },
+    {
+      "class": "Друид",
+      "name_ru": "Быстрое восстановление",
+      "name_en": "Swiftmend",
+      "spell_id": 18562,
+      "icon_file": "134914.png"
+    },
+    {
+      "class": "Друид",
+      "name_ru": "Водный облик",
+      "name_en": "Aquatic Form",
+      "spell_id": 1066,
+      "icon_file": "132112.png"
+    },
+    {
+      "class": "Друид",
+      "name_ru": "Возрождение",
+      "name_en": "Rebirth",
+      "spell_id": 20484,
+      "icon_file": "136080.png"
+    },
+    {
+      "class": "Друид",
+      "name_ru": "Волшебный огонь",
+      "name_en": "Faerie Fire",
+      "spell_id": 770,
+      "icon_file": "136033.png"
+    },
+    {
+      "class": "Друид",
+      "name_ru": "Восстановление",
+      "name_en": "Regrowth",
+      "spell_id": 8936,
+      "icon_file": "136085.png"
+    },
+    {
+      "class": "Друид",
+      "name_ru": "Выведение яда",
+      "name_en": "Cure Poison",
+      "spell_id": 8946,
+      "icon_file": "136067.png"
+    },
+    {
+      "class": "Друид",
+      "name_ru": "Вызывающий рев",
+      "name_en": "Challenging Roar",
+      "spell_id": 5209,
+      "icon_file": "132117.png"
+    },
+    {
+      "class": "Друид",
+      "name_ru": "Выслеживание гуманоидов",
+      "name_en": "Track Humanoids",
+      "spell_id": 5225,
+      "icon_file": "132328.png"
+    },
+    {
+      "class": "Друид",
+      "name_ru": "Глубокая рана",
+      "name_en": "Rake",
+      "spell_id": 1822,
+      "icon_file": "132122.png"
+    },
+    {
+      "class": "Друид",
+      "name_ru": "Гнев",
+      "name_en": "Wrath",
+      "spell_id": 5176,
+      "icon_file": "136006.png"
+    },
+    {
+      "class": "Друид",
+      "name_ru": "Гнев деревьев",
+      "name_en": "Entangling Roots",
+      "spell_id": 339,
+      "icon_file": "136100.png"
+    },
+    {
+      "class": "Друид",
+      "name_ru": "Гроза",
+      "name_en": "Hurricane",
+      "spell_id": 16914,
+      "icon_file": "136018.png"
+    },
+    {
+      "class": "Друид",
+      "name_ru": "Дубовая кожа",
+      "name_en": "Barkskin",
+      "spell_id": 22812,
+      "icon_file": "136097.png"
+    },
+    {
+      "class": "Друид",
+      "name_ru": "Звездный огонь",
+      "name_en": "Starfire",
+      "spell_id": 2912,
+      "icon_file": "135753.png"
+    },
+    {
+      "class": "Друид",
+      "name_ru": "Звериный рывок",
+      "name_en": "Feral Charge",
+      "spell_id": 1238122,
+      "icon_file": "132183.png"
+    },
+    {
+      "class": "Друид",
+      "name_ru": "Знак дикой природы",
+      "name_en": "Mark of the Wild",
+      "spell_id": 1126,
+      "icon_file": "136078.png"
+    },
+    {
+      "class": "Друид",
+      "name_ru": "Исступление",
+      "name_en": "Enrage",
+      "spell_id": 5229,
+      "icon_file": "132126.png"
+    },
+    {
+      "class": "Друид",
+      "name_ru": "Когти",
+      "name_en": "Claw",
+      "spell_id": 3029,
+      "icon_file": "132140.png"
+    },
+    {
+      "class": "Друид",
+      "name_ru": "Крадущийся зверь",
+      "name_en": "Prowl",
+      "spell_id": 6783,
+      "icon_file": "132089.png"
+    },
+    {
+      "class": "Друид",
+      "name_ru": "Лунный огонь",
+      "name_en": "Moonfire",
+      "spell_id": 8921,
+      "icon_file": "136096.png"
+    },
+    {
+      "class": "Друид",
+      "name_ru": "Накинуться",
+      "name_en": "Ravage",
+      "spell_id": 6785,
+      "icon_file": "132141.png"
+    },
+    {
+      "class": "Друид",
+      "name_ru": "Наскок",
+      "name_en": "Pounce",
+      "spell_id": 9005,
+      "icon_file": "132142.png"
+    },
+    {
+      "class": "Друид",
+      "name_ru": "Неистовое восстановление",
+      "name_en": "Frenzied Regeneration",
+      "spell_id": 22842,
+      "icon_file": "132091.png"
+    },
+    {
+      "class": "Друид",
+      "name_ru": "Неудержимый укус",
+      "name_en": "Primal Bite",
+      "spell_id": 407995,
+      "icon_file": "132278.png"
+    },
+    {
+      "class": "Друид",
+      "name_ru": "Облик кошки",
+      "name_en": "Cat Form",
+      "spell_id": 768,
+      "icon_file": "132115.png"
+    },
+    {
+      "class": "Друид",
+      "name_ru": "Облик лунного совуха",
+      "name_en": "Moonkin Form",
+      "spell_id": 24858,
+      "icon_file": "136036.png"
+    },
+    {
+      "class": "Друид",
+      "name_ru": "Облик лютого медведя",
+      "name_en": "Dire Bear Form",
+      "spell_id": 9634,
+      "icon_file": "132276.png"
+    },
+    {
+      "class": "Друид",
+      "name_ru": "Облик медведя",
+      "name_en": "Bear Form",
+      "spell_id": 5487,
+      "icon_file": "132276.png"
+    },
+    {
+      "class": "Друид",
+      "name_ru": "Оглушить",
+      "name_en": "Bash",
+      "spell_id": 5211,
+      "icon_file": "132114.png"
+    },
+    {
+      "class": "Друид",
+      "name_ru": "Оживление",
+      "name_en": "Revive",
+      "spell_id": 437138,
+      "icon_file": "132132.png"
+    },
+    {
+      "class": "Друид",
+      "name_ru": "Озарение",
+      "name_en": "Innervate",
+      "spell_id": 29166,
+      "icon_file": "136048.png"
+    },
+    {
+      "class": "Друид",
+      "name_ru": "Омоложение",
+      "name_en": "Rejuvenation",
+      "spell_id": 774,
+      "icon_file": "136081.png"
+    },
+    {
+      "class": "Друид",
+      "name_ru": "Переходящая сила",
+      "name_en": "Shifting Power",
+      "spell_id": 1322605,
+      "icon_file": "538514.png"
+    },
+    {
+      "class": "Друид",
+      "name_ru": "Полоснуть",
+      "name_en": "Shred",
+      "spell_id": 5221,
+      "icon_file": "136231.png"
+    },
+    {
+      "class": "Друид",
+      "name_ru": "Попятиться",
+      "name_en": "Cower",
+      "spell_id": 8998,
+      "icon_file": "132118.png"
+    },
+    {
+      "class": "Друид",
+      "name_ru": "Порыв",
+      "name_en": "Dash",
+      "spell_id": 1850,
+      "icon_file": "132120.png"
+    },
+    {
+      "class": "Друид",
+      "name_ru": "Походный облик",
+      "name_en": "Travel Form",
+      "spell_id": 783,
+      "icon_file": "132144.png"
+    },
+    {
+      "class": "Друид",
+      "name_ru": "Природная стремительность",
+      "name_en": "Nature's Swiftness",
+      "spell_id": 17116,
+      "icon_file": "136076.png"
+    },
+    {
+      "class": "Друид",
+      "name_ru": "Природный захват",
+      "name_en": "Nature's Grasp",
+      "spell_id": 16689,
+      "icon_file": "136063.png"
+    },
+    {
+      "class": "Друид",
+      "name_ru": "Размах",
+      "name_en": "Swipe",
+      "spell_id": 769,
+      "icon_file": "134296.png"
+    },
+    {
+      "class": "Друид",
+      "name_ru": "Разорвать",
+      "name_en": "Rip",
+      "spell_id": 9492,
+      "icon_file": "132152.png"
+    },
+    {
+      "class": "Друид",
+      "name_ru": "Растерзать",
+      "name_en": "Lacerate",
+      "spell_id": 1328617,
+      "icon_file": "132131.png"
+    },
+    {
+      "class": "Друид",
+      "name_ru": "Рой насекомых",
+      "name_en": "Insect Swarm",
+      "spell_id": 5570,
+      "icon_file": "136045.png"
+    },
+    {
+      "class": "Друид",
+      "name_ru": "Свирепый укус",
+      "name_en": "Ferocious Bite",
+      "spell_id": 22568,
+      "icon_file": "132127.png"
+    },
+    {
+      "class": "Друид",
+      "name_ru": "Снятие проклятья",
+      "name_en": "Remove Curse",
+      "spell_id": 2782,
+      "icon_file": "135952.png"
+    },
+    {
+      "class": "Друид",
+      "name_ru": "Спокойствие",
+      "name_en": "Tranquility",
+      "spell_id": 740,
+      "icon_file": "136107.png"
+    },
+    {
+      "class": "Друид",
+      "name_ru": "Спячка",
+      "name_en": "Hibernate",
+      "spell_id": 2637,
+      "icon_file": "136090.png"
+    },
+    {
+      "class": "Друид",
+      "name_ru": "Телепортация: Лунная поляна",
+      "name_en": "Teleport: Moonglade",
+      "spell_id": 18960,
+      "icon_file": "135758.png"
+    },
+    {
+      "class": "Друид",
+      "name_ru": "Трепка",
+      "name_en": "Maul",
+      "spell_id": 6808,
+      "icon_file": "132136.png"
+    },
+    {
+      "class": "Друид",
+      "name_ru": "Умиротворение зверя",
+      "name_en": "Soothe Animal",
+      "spell_id": 2908,
+      "icon_file": "132163.png"
+    },
+    {
+      "class": "Друид",
+      "name_ru": "Устранение яда",
+      "name_en": "Abolish Poison",
+      "spell_id": 2893,
+      "icon_file": "136068.png"
+    },
+    {
+      "class": "Друид",
+      "name_ru": "Устрашающий рев",
+      "name_en": "Demoralizing Roar",
+      "spell_id": 99,
+      "icon_file": "132121.png"
+    },
+    {
+      "class": "Друид",
+      "name_ru": "Целительное прикосновение",
+      "name_en": "Healing Touch",
+      "spell_id": 5185,
+      "icon_file": "136041.png"
+    },
+    {
+      "class": "Друид",
+      "name_ru": "Шипы",
+      "name_en": "Thorns",
+      "spell_id": 467,
+      "icon_file": "136104.png"
+    },
+    {
+      "class": "Жрец",
+      "name_ru": "Боевое исступление",
+      "name_en": "Berserking",
+      "spell_id": 20554,
+      "icon_file": "135727.png"
+    },
+    {
+      "class": "Жрец",
+      "name_ru": "Быстрая регенерация",
+      "name_en": "Rapid Regeneration",
+      "spell_id": 1260270,
+      "icon_file": "1850550.png"
+    },
+    {
+      "class": "Жрец",
+      "name_ru": "Воля Отрекшихся",
+      "name_en": "Will of the Forsaken",
+      "spell_id": 7744,
+      "icon_file": "136187.png"
+    },
+    {
+      "class": "Жрец",
+      "name_ru": "Каннибализм",
+      "name_en": "Cannibalize",
+      "spell_id": 20577,
+      "icon_file": "132278.png"
+    },
+    {
+      "class": "Жрец",
+      "name_ru": "Громовая поступь",
+      "name_en": "War Stomp",
+      "spell_id": 20549,
+      "icon_file": "132368.png"
+    },
+    {
+      "class": "Жрец",
+      "name_ru": "Проращивание",
+      "name_en": "Cultivation",
+      "spell_id": 20552,
+      "icon_file": "133938.png"
+    },
+    {
+      "class": "Жрец",
+      "name_ru": "Внимательность",
+      "name_en": "Perception",
+      "spell_id": 20600,
+      "icon_file": "136090.png"
+    },
+    {
+      "class": "Жрец",
+      "name_ru": "Воля к жизни",
+      "name_en": "Will to Survive",
+      "spell_id": 1259718,
+      "icon_file": "136129.png"
+    },
+    {
+      "class": "Жрец",
+      "name_ru": "Атака",
+      "name_en": "Attack",
+      "spell_id": 6603,
+      "icon_file": "135274.png"
+    },
+    {
+      "class": "Жрец",
+      "name_ru": "Благодать Элуны",
+      "name_en": "Elune's Grace",
+      "spell_id": 2651,
+      "icon_file": "135900.png"
+    },
+    {
+      "class": "Жрец",
+      "name_ru": "Божественное покровительство",
+      "name_en": "Divine Grace",
+      "spell_id": 1277370,
+      "icon_file": "1022949.png"
+    },
+    {
+      "class": "Жрец",
+      "name_ru": "Божественный дух",
+      "name_en": "Divine Spirit",
+      "spell_id": 14752,
+      "icon_file": "135898.png"
+    },
+    {
+      "class": "Жрец",
+      "name_ru": "Быстрое исцеление",
+      "name_en": "Flash Heal",
+      "spell_id": 2061,
+      "icon_file": "135907.png"
+    },
+    {
+      "class": "Жрец",
+      "name_ru": "Великое исцеление",
+      "name_en": "Greater Heal",
+      "spell_id": 2060,
+      "icon_file": "135913.png"
+    },
+    {
+      "class": "Жрец",
+      "name_ru": "Взрыв разума",
+      "name_en": "Mind Blast",
+      "spell_id": 8092,
+      "icon_file": "136224.png"
+    },
+    {
+      "class": "Жрец",
+      "name_ru": "Внутреннее зрение",
+      "name_en": "Mind Vision",
+      "spell_id": 2096,
+      "icon_file": "135934.png"
+    },
+    {
+      "class": "Жрец",
+      "name_ru": "Внутреннее сосредоточение",
+      "name_en": "Inner Focus",
+      "spell_id": 14751,
+      "icon_file": "135863.png"
+    },
+    {
+      "class": "Жрец",
+      "name_ru": "Внутренний огонь",
+      "name_en": "Inner Fire",
+      "spell_id": 588,
+      "icon_file": "135926.png"
+    },
+    {
+      "class": "Жрец",
+      "name_ru": "Воздаяние",
+      "name_en": "Chastise",
+      "spell_id": 1277331,
+      "icon_file": "135886.png"
+    },
+    {
+      "class": "Жрец",
+      "name_ru": "Воскрешение",
+      "name_en": "Resurrection",
+      "spell_id": 2006,
+      "icon_file": "135955.png"
+    },
+    {
+      "class": "Жрец",
+      "name_ru": "Всепожирающая чума",
+      "name_en": "Devouring Plague",
+      "spell_id": 2944,
+      "icon_file": "252997.png"
+    },
+    {
+      "class": "Жрец",
+      "name_ru": "Выстрел",
+      "name_en": "Shoot",
+      "spell_id": 5019,
+      "icon_file": "132317.png"
+    },
+    {
+      "class": "Жрец",
+      "name_ru": "Запасной план",
+      "name_en": "Contingency Plan",
+      "spell_id": 1277462,
+      "icon_file": "458722.png"
+    },
+    {
+      "class": "Жрец",
+      "name_ru": "Защита от страха",
+      "name_en": "Fear Ward",
+      "spell_id": 6346,
+      "icon_file": "135902.png"
+    },
+    {
+      "class": "Жрец",
+      "name_ru": "Защита от темной магии",
+      "name_en": "Shadow Protection",
+      "spell_id": 976,
+      "icon_file": "136121.png"
+    },
+    {
+      "class": "Жрец",
+      "name_ru": "Звездные осколки",
+      "name_en": "Starshards",
+      "spell_id": 10797,
+      "icon_file": "135753.png"
+    },
+    {
+      "class": "Жрец",
+      "name_ru": "Излечение болезни",
+      "name_en": "Cure Disease",
+      "spell_id": 528,
+      "icon_file": "135935.png"
+    },
+    {
+      "class": "Жрец",
+      "name_ru": "Исповедь",
+      "name_en": "Penance",
+      "spell_id": 402174,
+      "icon_file": "237545.png"
+    },
+    {
+      "class": "Жрец",
+      "name_ru": "Исцеление",
+      "name_en": "Heal",
+      "spell_id": 2054,
+      "icon_file": "135915.png"
+    },
+    {
+      "class": "Жрец",
+      "name_ru": "Кара",
+      "name_en": "Smite",
+      "spell_id": 585,
+      "icon_file": "135924.png"
+    },
+    {
+      "class": "Жрец",
+      "name_ru": "Кольцо Света",
+      "name_en": "Holy Nova",
+      "spell_id": 15237,
+      "icon_file": "135922.png"
+    },
+    {
+      "class": "Жрец",
+      "name_ru": "Контроль над разумом",
+      "name_en": "Mind Control",
+      "spell_id": 605,
+      "icon_file": "136206.png"
+    },
+    {
+      "class": "Жрец",
+      "name_ru": "Левитация",
+      "name_en": "Levitate",
+      "spell_id": 1706,
+      "icon_file": "135928.png"
+    },
+    {
+      "class": "Жрец",
+      "name_ru": "Малое исцеление",
+      "name_en": "Lesser Heal",
+      "spell_id": 2050,
+      "icon_file": "135929.png"
+    },
+    {
+      "class": "Жрец",
+      "name_ru": "Ментальный крик",
+      "name_en": "Psychic Scream",
+      "spell_id": 8122,
+      "icon_file": "136184.png"
+    },
+    {
+      "class": "Жрец",
+      "name_ru": "Молитва восстановления",
+      "name_en": "Prayer of Mending",
+      "spell_id": 401859,
+      "icon_file": "135944.png"
+    },
+    {
+      "class": "Жрец",
+      "name_ru": "Молитва духа",
+      "name_en": "Prayer of Spirit",
+      "spell_id": 27681,
+      "icon_file": "135946.png"
+    },
+    {
+      "class": "Жрец",
+      "name_ru": "Молитва исцеления",
+      "name_en": "Prayer of Healing",
+      "spell_id": 596,
+      "icon_file": "135943.png"
+    },
+    {
+      "class": "Жрец",
+      "name_ru": "Молитва отчаяния",
+      "name_en": "Desperate Prayer",
+      "spell_id": 13908,
+      "icon_file": "135954.png"
+    },
+    {
+      "class": "Жрец",
+      "name_ru": "Молчание",
+      "name_en": "Silence",
+      "spell_id": 15487,
+      "icon_file": "136164.png"
+    },
+    {
+      "class": "Жрец",
+      "name_ru": "Обессиливающий сглаз",
+      "name_en": "Hex of Weakness",
+      "spell_id": 9035,
+      "icon_file": "136157.png"
+    },
+    {
+      "class": "Жрец",
+      "name_ru": "Облик Тьмы",
+      "name_en": "Shadowform",
+      "spell_id": 15473,
+      "icon_file": "136200.png"
+    },
+    {
+      "class": "Жрец",
+      "name_ru": "Обновление",
+      "name_en": "Renew",
+      "spell_id": 139,
+      "icon_file": "135953.png"
+    },
+    {
+      "class": "Жрец",
+      "name_ru": "Объятия вампира",
+      "name_en": "Vampiric Embrace",
+      "spell_id": 15286,
+      "icon_file": "136230.png"
+    },
+    {
+      "class": "Жрец",
+      "name_ru": "Ответная реакция",
+      "name_en": "Feedback",
+      "spell_id": 13896,
+      "icon_file": "136189.png"
+    },
+    {
+      "class": "Жрец",
+      "name_ru": "Ошарашивающая вспышка",
+      "name_en": "Confounding Flash",
+      "spell_id": 1277455,
+      "icon_file": "571554.png"
+    },
+    {
+      "class": "Жрец",
+      "name_ru": "Придание сил",
+      "name_en": "Power Infusion",
+      "spell_id": 10060,
+      "icon_file": "135939.png"
+    },
+    {
+      "class": "Жрец",
+      "name_ru": "Прикосновение слабости",
+      "name_en": "Touch of Weakness",
+      "spell_id": 2652,
+      "icon_file": "136143.png"
+    },
+    {
+      "class": "Жрец",
+      "name_ru": "Пытка разума",
+      "name_en": "Mind Flay",
+      "spell_id": 15407,
+      "icon_file": "136208.png"
+    },
+    {
+      "class": "Жрец",
+      "name_ru": "Рассеивание заклинаний",
+      "name_en": "Dispel Magic",
+      "spell_id": 527,
+      "icon_file": "135894.png"
+    },
+    {
+      "class": "Жрец",
+      "name_ru": "Священный огонь",
+      "name_en": "Holy Fire",
+      "spell_id": 14914,
+      "icon_file": "135972.png"
+    },
+    {
+      "class": "Жрец",
+      "name_ru": "Сковывание нежити",
+      "name_en": "Shackle Undead",
+      "spell_id": 9484,
+      "icon_file": "136091.png"
+    },
+    {
+      "class": "Жрец",
+      "name_ru": "Слово силы: Стойкость",
+      "name_en": "Power Word: Fortitude",
+      "spell_id": 1243,
+      "icon_file": "135987.png"
+    },
+    {
+      "class": "Жрец",
+      "name_ru": "Слово силы: Щит",
+      "name_en": "Power Word: Shield",
+      "spell_id": 17,
+      "icon_file": "135940.png"
+    },
+    {
+      "class": "Жрец",
+      "name_ru": "Слово Тьмы: Боль",
+      "name_en": "Shadow Word: Pain",
+      "spell_id": 589,
+      "icon_file": "136207.png"
+    },
+    {
+      "class": "Жрец",
+      "name_ru": "Слово Тьмы: Смерть",
+      "name_en": "Shadow Word: Death",
+      "spell_id": 1309595,
+      "icon_file": "136149.png"
+    },
+    {
+      "class": "Жрец",
+      "name_ru": "Снятие болезни",
+      "name_en": "Abolish Disease",
+      "spell_id": 552,
+      "icon_file": "136066.png"
+    },
+    {
+      "class": "Жрец",
+      "name_ru": "Сожжение маны",
+      "name_en": "Mana Burn",
+      "spell_id": 8129,
+      "icon_file": "136170.png"
+    },
+    {
+      "class": "Жрец",
+      "name_ru": "Страж Тьмы",
+      "name_en": "Shadowguard",
+      "spell_id": 18137,
+      "icon_file": "136051.png"
+    },
+    {
+      "class": "Жрец",
+      "name_ru": "Темная жертва",
+      "name_en": "Dark Sacrifice",
+      "spell_id": 1277324,
+      "icon_file": "5852175.png"
+    },
+    {
+      "class": "Жрец",
+      "name_ru": "Усмирение",
+      "name_en": "Mind Soothe",
+      "spell_id": 453,
+      "icon_file": "135933.png"
+    },
+    {
+      "class": "Жрец",
+      "name_ru": "Уход в тень",
+      "name_en": "Fade",
+      "spell_id": 586,
+      "icon_file": "135994.png"
+    },
+    {
+      "class": "Жрец",
+      "name_ru": "Кровавое неистовство",
+      "name_en": "Blood Fury",
+      "spell_id": 20572,
+      "icon_file": "135726.png"
+    },
+    {
+      "class": "Жрец",
+      "name_ru": "Разбивание проклятий",
+      "name_en": "Shatter Curse",
+      "spell_id": 1299026,
+      "icon_file": "136082.png"
+    },
+    {
+      "class": "Маг",
+      "name_ru": "Боевое исступление",
+      "name_en": "Berserking",
+      "spell_id": 20554,
+      "icon_file": "135727.png"
+    },
+    {
+      "class": "Маг",
+      "name_ru": "Быстрая регенерация",
+      "name_en": "Rapid Regeneration",
+      "spell_id": 1260270,
+      "icon_file": "1850550.png"
+    },
+    {
+      "class": "Маг",
+      "name_ru": "Воля Отрекшихся",
+      "name_en": "Will of the Forsaken",
+      "spell_id": 7744,
+      "icon_file": "136187.png"
+    },
+    {
+      "class": "Маг",
+      "name_ru": "Каннибализм",
+      "name_en": "Cannibalize",
+      "spell_id": 20577,
+      "icon_file": "132278.png"
+    },
+    {
+      "class": "Маг",
+      "name_ru": "Громовая поступь",
+      "name_en": "War Stomp",
+      "spell_id": 20549,
+      "icon_file": "132368.png"
+    },
+    {
+      "class": "Маг",
+      "name_ru": "Проращивание",
+      "name_en": "Cultivation",
+      "spell_id": 20552,
+      "icon_file": "133938.png"
+    },
+    {
+      "class": "Маг",
+      "name_ru": "Внимательность",
+      "name_en": "Perception",
+      "spell_id": 20600,
+      "icon_file": "136090.png"
+    },
+    {
+      "class": "Маг",
+      "name_ru": "Воля к жизни",
+      "name_en": "Will to Survive",
+      "spell_id": 1259718,
+      "icon_file": "136129.png"
+    },
+    {
+      "class": "Маг",
+      "name_ru": "Антимагия",
+      "name_en": "Counterspell",
+      "spell_id": 2139,
+      "icon_file": "135856.png"
+    },
+    {
+      "class": "Маг",
+      "name_ru": "Атака",
+      "name_en": "Attack",
+      "spell_id": 6603,
+      "icon_file": "135274.png"
+    },
+    {
+      "class": "Маг",
+      "name_ru": "Взрывная волна",
+      "name_en": "Blast Wave",
+      "spell_id": 11113,
+      "icon_file": "135903.png"
+    },
+    {
+      "class": "Маг",
+      "name_ru": "Возгорание",
+      "name_en": "Combustion",
+      "spell_id": 11129,
+      "icon_file": "135824.png"
+    },
+    {
+      "class": "Маг",
+      "name_ru": "Выстрел",
+      "name_en": "Shoot",
+      "spell_id": 5019,
+      "icon_file": "135124.png"
+    },
+    {
+      "class": "Маг",
+      "name_ru": "Замедленное падение",
+      "name_en": "Slow Fall",
+      "spell_id": 130,
+      "icon_file": "135992.png"
+    },
+    {
+      "class": "Маг",
+      "name_ru": "Защита от магии льда",
+      "name_en": "Frost Ward",
+      "spell_id": 6143,
+      "icon_file": "135850.png"
+    },
+    {
+      "class": "Маг",
+      "name_ru": "Защита от огня",
+      "name_en": "Fire Ward",
+      "spell_id": 543,
+      "icon_file": "135806.png"
+    },
+    {
+      "class": "Маг",
+      "name_ru": "Кольцо льда",
+      "name_en": "Frost Nova",
+      "spell_id": 122,
+      "icon_file": "135848.png"
+    },
+    {
+      "class": "Маг",
+      "name_ru": "Конус холода",
+      "name_en": "Cone of Cold",
+      "spell_id": 120,
+      "icon_file": "135852.png"
+    },
+    {
+      "class": "Маг",
+      "name_ru": "Ледяная глыба",
+      "name_en": "Ice Block",
+      "spell_id": 11958,
+      "icon_file": "135841.png"
+    },
+    {
+      "class": "Маг",
+      "name_ru": "Ледяная преграда",
+      "name_en": "Ice Barrier",
+      "spell_id": 11426,
+      "icon_file": "135988.png"
+    },
+    {
+      "class": "Маг",
+      "name_ru": "Ледяная стрела",
+      "name_en": "Frostbolt",
+      "spell_id": 116,
+      "icon_file": "135846.png"
+    },
+    {
+      "class": "Маг",
+      "name_ru": "Ледяное копье",
+      "name_en": "Ice Lance",
+      "spell_id": 1312002,
+      "icon_file": "135844.png"
+    },
+    {
+      "class": "Маг",
+      "name_ru": "Ледяной доспех",
+      "name_en": "Ice Armor",
+      "spell_id": 7302,
+      "icon_file": "135843.png"
+    },
+    {
+      "class": "Маг",
+      "name_ru": "Магический доспех",
+      "name_en": "Mage Armor",
+      "spell_id": 6117,
+      "icon_file": "135991.png"
+    },
+    {
+      "class": "Маг",
+      "name_ru": "Морозный доспех",
+      "name_en": "Frost Armor",
+      "spell_id": 168,
+      "icon_file": "135843.png"
+    },
+    {
+      "class": "Маг",
+      "name_ru": "Мощь тайной магии",
+      "name_en": "Arcane Power",
+      "spell_id": 12042,
+      "icon_file": "136048.png"
+    },
+    {
+      "class": "Маг",
+      "name_ru": "Огненная глыба",
+      "name_en": "Pyroblast",
+      "spell_id": 11366,
+      "icon_file": "135808.png"
+    },
+    {
+      "class": "Маг",
+      "name_ru": "Огненный взрыв",
+      "name_en": "Fire Blast",
+      "spell_id": 2136,
+      "icon_file": "135807.png"
+    },
+    {
+      "class": "Маг",
+      "name_ru": "Огненный столб",
+      "name_en": "Flamestrike",
+      "spell_id": 2120,
+      "icon_file": "135826.png"
+    },
+    {
+      "class": "Маг",
+      "name_ru": "Огненный шар",
+      "name_en": "Fireball",
+      "spell_id": 133,
+      "icon_file": "135812.png"
+    },
+    {
+      "class": "Маг",
+      "name_ru": "Ожог",
+      "name_en": "Scorch",
+      "spell_id": 2948,
+      "icon_file": "135827.png"
+    },
+    {
+      "class": "Маг",
+      "name_ru": "Ослабление магии",
+      "name_en": "Dampen Magic",
+      "spell_id": 604,
+      "icon_file": "136006.png"
+    },
+    {
+      "class": "Маг",
+      "name_ru": "Перевести свиток",
+      "name_en": "Comprehend Scroll",
+      "spell_id": 1296017,
+      "icon_file": "8188276.png"
+    },
+    {
+      "class": "Маг",
+      "name_ru": "Портал в Громовой Утес",
+      "name_en": "Portal: Thunder Bluff",
+      "spell_id": 11420,
+      "icon_file": "135750.png"
+    },
+    {
+      "class": "Маг",
+      "name_ru": "Портал в Дарнас",
+      "name_en": "Portal: Darnassus",
+      "spell_id": 11419,
+      "icon_file": "135741.png"
+    },
+    {
+      "class": "Маг",
+      "name_ru": "Портал в Оргриммар",
+      "name_en": "Portal: Orgrimmar",
+      "spell_id": 11417,
+      "icon_file": "135744.png"
+    },
+    {
+      "class": "Маг",
+      "name_ru": "Портал в Подгород",
+      "name_en": "Portal: Undercity",
+      "spell_id": 11418,
+      "icon_file": "135751.png"
+    },
+    {
+      "class": "Маг",
+      "name_ru": "Портал в Стальгорн",
+      "name_en": "Portal: Ironforge",
+      "spell_id": 11416,
+      "icon_file": "135743.png"
+    },
+    {
+      "class": "Маг",
+      "name_ru": "Портал в Штормград",
+      "name_en": "Portal: Stormwind",
+      "spell_id": 10059,
+      "icon_file": "135748.png"
+    },
+    {
+      "class": "Маг",
+      "name_ru": "Превращение",
+      "name_en": "Polymorph",
+      "spell_id": 118,
+      "icon_file": "136071.png"
+    },
+    {
+      "class": "Маг",
+      "name_ru": "Прилив сил",
+      "name_en": "Evocation",
+      "spell_id": 12051,
+      "icon_file": "136075.png"
+    },
+    {
+      "class": "Маг",
+      "name_ru": "Присутствие разума",
+      "name_en": "Presence of Mind",
+      "spell_id": 12043,
+      "icon_file": "136031.png"
+    },
+    {
+      "class": "Маг",
+      "name_ru": "Скачок",
+      "name_en": "Blink",
+      "spell_id": 1953,
+      "icon_file": "135736.png"
+    },
+    {
+      "class": "Маг",
+      "name_ru": "Снежная буря",
+      "name_en": "Blizzard",
+      "spell_id": 10,
+      "icon_file": "135857.png"
+    },
+    {
+      "class": "Маг",
+      "name_ru": "Снятие малого проклятия",
+      "name_en": "Remove Lesser Curse",
+      "spell_id": 475,
+      "icon_file": "136082.png"
+    },
+    {
+      "class": "Маг",
+      "name_ru": "Сотворение агата маны",
+      "name_en": "Conjure Mana Agate",
+      "spell_id": 759,
+      "icon_file": "134104.png"
+    },
+    {
+      "class": "Маг",
+      "name_ru": "Сотворение воды",
+      "name_en": "Conjure Water",
+      "spell_id": 5504,
+      "icon_file": "132793.png"
+    },
+    {
+      "class": "Маг",
+      "name_ru": "Сотворение нефрита маны",
+      "name_en": "Conjure Mana Jade",
+      "spell_id": 3552,
+      "icon_file": "134105.png"
+    },
+    {
+      "class": "Маг",
+      "name_ru": "Сотворение пищи",
+      "name_en": "Conjure Food",
+      "spell_id": 587,
+      "icon_file": "133952.png"
+    },
+    {
+      "class": "Маг",
+      "name_ru": "Сотворение рубина маны",
+      "name_en": "Conjure Mana Ruby",
+      "spell_id": 10054,
+      "icon_file": "134128.png"
+    },
+    {
+      "class": "Маг",
+      "name_ru": "Сотворение цитрина маны",
+      "name_en": "Conjure Mana Citrine",
+      "spell_id": 10053,
+      "icon_file": "134116.png"
+    },
+    {
+      "class": "Маг",
+      "name_ru": "Стрела ледяного огня",
+      "name_en": "Frostfire Bolt",
+      "spell_id": 401502,
+      "icon_file": "236217.png"
+    },
+    {
+      "class": "Маг",
+      "name_ru": "Телепортация в Дарнасс",
+      "name_en": "Teleport: Darnassus",
+      "spell_id": 3565,
+      "icon_file": "135755.png"
+    },
+    {
+      "class": "Маг",
+      "name_ru": "Телепортация: Громовой Утес",
+      "name_en": "Teleport: Thunder Bluff",
+      "spell_id": 3566,
+      "icon_file": "135765.png"
+    },
+    {
+      "class": "Маг",
+      "name_ru": "Телепортация: Даларан",
+      "name_en": "Teleport: Dalaran",
+      "spell_id": 1297659,
+      "icon_file": "1536440.png"
+    },
+    {
+      "class": "Маг",
+      "name_ru": "Телепортация: Оргриммар",
+      "name_en": "Teleport: Orgrimmar",
+      "spell_id": 3567,
+      "icon_file": "135759.png"
+    },
+    {
+      "class": "Маг",
+      "name_ru": "Телепортация: Стальгорн",
+      "name_en": "Teleport: Ironforge",
+      "spell_id": 3562,
+      "icon_file": "135757.png"
+    },
+    {
+      "class": "Маг",
+      "name_ru": "Телепортация: Штормград",
+      "name_en": "Teleport: Stormwind",
+      "spell_id": 3561,
+      "icon_file": "135763.png"
+    },
+    {
+      "class": "Маг",
+      "name_ru": "Телепортация:Подгород",
+      "name_en": "Teleport: Undercity",
+      "spell_id": 3563,
+      "icon_file": "135766.png"
+    },
+    {
+      "class": "Маг",
+      "name_ru": "Усиление магии",
+      "name_en": "Amplify Magic",
+      "spell_id": 1008,
+      "icon_file": "135907.png"
+    },
+    {
+      "class": "Маг",
+      "name_ru": "Холодная хватка",
+      "name_en": "Cold Snap",
+      "spell_id": 12472,
+      "icon_file": "135865.png"
+    },
+    {
+      "class": "Маг",
+      "name_ru": "Чародейская вспышка",
+      "name_en": "Arcane Blast",
+      "spell_id": 400574,
+      "icon_file": "135735.png"
+    },
+    {
+      "class": "Маг",
+      "name_ru": "Чародейские снаряды",
+      "name_en": "Arcane Missiles",
+      "spell_id": 5143,
+      "icon_file": "136096.png"
+    },
+    {
+      "class": "Маг",
+      "name_ru": "Чародейский взрыв",
+      "name_en": "Arcane Explosion",
+      "spell_id": 1449,
+      "icon_file": "136116.png"
+    },
+    {
+      "class": "Маг",
+      "name_ru": "Чародейский гнев",
+      "name_en": "Arcane Wrath",
+      "spell_id": 1326079,
+      "icon_file": "236222.png"
+    },
+    {
+      "class": "Маг",
+      "name_ru": "Чародейский интеллект",
+      "name_en": "Arcane Intellect",
+      "spell_id": 1459,
+      "icon_file": "135932.png"
+    },
+    {
+      "class": "Маг",
+      "name_ru": "Щит маны",
+      "name_en": "Mana Shield",
+      "spell_id": 1463,
+      "icon_file": "136153.png"
+    },
+    {
+      "class": "Маг",
+      "name_ru": "Кровавое неистовство",
+      "name_en": "Blood Fury",
+      "spell_id": 20572,
+      "icon_file": "135726.png"
+    },
+    {
+      "class": "Маг",
+      "name_ru": "Разбивание проклятий",
+      "name_en": "Shatter Curse",
+      "spell_id": 1299026,
+      "icon_file": "136082.png"
+    },
+    {
+      "class": "Охотник",
+      "name_ru": "Боевое исступление",
+      "name_en": "Berserking",
+      "spell_id": 20554,
+      "icon_file": "135727.png"
+    },
+    {
+      "class": "Охотник",
+      "name_ru": "Быстрая регенерация",
+      "name_en": "Rapid Regeneration",
+      "spell_id": 1260270,
+      "icon_file": "1850550.png"
+    },
+    {
+      "class": "Охотник",
+      "name_ru": "Воля Отрекшихся",
+      "name_en": "Will of the Forsaken",
+      "spell_id": 7744,
+      "icon_file": "136187.png"
+    },
+    {
+      "class": "Охотник",
+      "name_ru": "Каннибализм",
+      "name_en": "Cannibalize",
+      "spell_id": 20577,
+      "icon_file": "132278.png"
+    },
+    {
+      "class": "Охотник",
+      "name_ru": "Автоматическая стрельба",
+      "name_en": "Auto Shot",
+      "spell_id": 75,
+      "icon_file": "135499.png"
+    },
+    {
+      "class": "Охотник",
+      "name_ru": "Атака",
+      "name_en": "Attack",
+      "spell_id": 6603,
+      "icon_file": "135274.png"
+    },
+    {
+      "class": "Охотник",
+      "name_ru": "Аура меткого выстрела",
+      "name_en": "Trueshot Aura",
+      "spell_id": 1299346,
+      "icon_file": "132329.png"
+    },
+    {
+      "class": "Охотник",
+      "name_ru": "Быстрая стрельба",
+      "name_en": "Rapid Fire",
+      "spell_id": 3045,
+      "icon_file": "132208.png"
+    },
+    {
+      "class": "Охотник",
+      "name_ru": "Взрывная ловушка",
+      "name_en": "Explosive Trap",
+      "spell_id": 13813,
+      "icon_file": "135826.png"
+    },
+    {
+      "class": "Охотник",
+      "name_ru": "Воскрешение питомца",
+      "name_en": "Revive Pet",
+      "spell_id": 982,
+      "icon_file": "132163.png"
+    },
+    {
+      "class": "Охотник",
+      "name_ru": "Выслеживание великанов",
+      "name_en": "Track Giants",
+      "spell_id": 19882,
+      "icon_file": "132275.png"
+    },
+    {
+      "class": "Охотник",
+      "name_ru": "Выслеживание гуманоидов",
+      "name_en": "Track Humanoids",
+      "spell_id": 19883,
+      "icon_file": "135942.png"
+    },
+    {
+      "class": "Охотник",
+      "name_ru": "Выслеживание демонов",
+      "name_en": "Track Demons",
+      "spell_id": 19878,
+      "icon_file": "136217.png"
+    },
+    {
+      "class": "Охотник",
+      "name_ru": "Выслеживание драконов",
+      "name_en": "Track Dragonkin",
+      "spell_id": 19879,
+      "icon_file": "134153.png"
+    },
+    {
+      "class": "Охотник",
+      "name_ru": "Выслеживание животных",
+      "name_en": "Track Beasts",
+      "spell_id": 1494,
+      "icon_file": "132328.png"
+    },
+    {
+      "class": "Охотник",
+      "name_ru": "Выслеживание нежити",
+      "name_en": "Track Undead",
+      "spell_id": 19884,
+      "icon_file": "136142.png"
+    },
+    {
+      "class": "Охотник",
+      "name_ru": "Выслеживание скрытого",
+      "name_en": "Track Hidden",
+      "spell_id": 19885,
+      "icon_file": "132320.png"
+    },
+    {
+      "class": "Охотник",
+      "name_ru": "Выслеживание элементалей",
+      "name_en": "Track Elementals",
+      "spell_id": 19880,
+      "icon_file": "135861.png"
+    },
+    {
+      "class": "Охотник",
+      "name_ru": "Град стрел",
+      "name_en": "Volley",
+      "spell_id": 1510,
+      "icon_file": "132222.png"
+    },
+    {
+      "class": "Охотник",
+      "name_ru": "Громовая поступь",
+      "name_en": "War Stomp",
+      "spell_id": 20549,
+      "icon_file": "132368.png"
+    },
+    {
+      "class": "Охотник",
+      "name_ru": "Дезориентирующий выстрел",
+      "name_en": "Scatter Shot",
+      "spell_id": 19503,
+      "icon_file": "132153.png"
+    },
+    {
+      "class": "Охотник",
+      "name_ru": "Дрессировка",
+      "name_en": "Beast Training",
+      "spell_id": 5149,
+      "icon_file": "132162.png"
+    },
+    {
+      "class": "Охотник",
+      "name_ru": "Дух гепарда",
+      "name_en": "Aspect of the Cheetah",
+      "spell_id": 5118,
+      "icon_file": "132242.png"
+    },
+    {
+      "class": "Охотник",
+      "name_ru": "Дух дикой природы",
+      "name_en": "Aspect of the Wild",
+      "spell_id": 20043,
+      "icon_file": "136074.png"
+    },
+    {
+      "class": "Охотник",
+      "name_ru": "Дух зверя",
+      "name_en": "Aspect of the Beast",
+      "spell_id": 13161,
+      "icon_file": "132252.png"
+    },
+    {
+      "class": "Охотник",
+      "name_ru": "Дух обезьяны",
+      "name_en": "Aspect of the Monkey",
+      "spell_id": 13163,
+      "icon_file": "132159.png"
+    },
+    {
+      "class": "Охотник",
+      "name_ru": "Дух стаи",
+      "name_en": "Aspect of the Pack",
+      "spell_id": 13159,
+      "icon_file": "132267.png"
+    },
+    {
+      "class": "Охотник",
+      "name_ru": "Дух ястреба",
+      "name_en": "Aspect of the Hawk",
+      "spell_id": 13165,
+      "icon_file": "136076.png"
+    },
+    {
+      "class": "Охотник",
+      "name_ru": "Жало гадюки",
+      "name_en": "Viper Sting",
+      "spell_id": 3034,
+      "icon_file": "132157.png"
+    },
+    {
+      "class": "Охотник",
+      "name_ru": "Жало скорпида",
+      "name_en": "Scorpid Sting",
+      "spell_id": 3043,
+      "icon_file": "132169.png"
+    },
+    {
+      "class": "Охотник",
+      "name_ru": "Залп",
+      "name_en": "Multi-Shot",
+      "spell_id": 2643,
+      "icon_file": "132330.png"
+    },
+    {
+      "class": "Охотник",
+      "name_ru": "Замораживающая ловушка",
+      "name_en": "Freezing Trap",
+      "spell_id": 1499,
+      "icon_file": "135834.png"
+    },
+    {
+      "class": "Охотник",
+      "name_ru": "Звериный глаз",
+      "name_en": "Eyes of the Beast",
+      "spell_id": 1002,
+      "icon_file": "132150.png"
+    },
+    {
+      "class": "Охотник",
+      "name_ru": "Звериный гнев",
+      "name_en": "Bestial Wrath",
+      "spell_id": 19574,
+      "icon_file": "132127.png"
+    },
+    {
+      "class": "Охотник",
+      "name_ru": "Знание зверя",
+      "name_en": "Beast Lore",
+      "spell_id": 1462,
+      "icon_file": "132270.png"
+    },
+    {
+      "class": "Охотник",
+      "name_ru": "Контратака",
+      "name_en": "Counterattack",
+      "spell_id": 19306,
+      "icon_file": "132336.png"
+    },
+    {
+      "class": "Охотник",
+      "name_ru": "Кормление питомца",
+      "name_en": "Feed Pet",
+      "spell_id": 6991,
+      "icon_file": "132165.png"
+    },
+    {
+      "class": "Охотник",
+      "name_ru": "Ледяная ловушка",
+      "name_en": "Frost Trap",
+      "spell_id": 13809,
+      "icon_file": "135840.png"
+    },
+    {
+      "class": "Охотник",
+      "name_ru": "Лечение питомца",
+      "name_en": "Mend Pet",
+      "spell_id": 136,
+      "icon_file": "132179.png"
+    },
+    {
+      "class": "Охотник",
+      "name_ru": "Метка охотника",
+      "name_en": "Hunter's Mark",
+      "spell_id": 1130,
+      "icon_file": "132212.png"
+    },
+    {
+      "class": "Охотник",
+      "name_ru": "Обжигающая ловушка",
+      "name_en": "Immolation Trap",
+      "spell_id": 13795,
+      "icon_file": "135813.png"
+    },
+    {
+      "class": "Охотник",
+      "name_ru": "Орлиный глаз",
+      "name_en": "Eagle Eye",
+      "spell_id": 6197,
+      "icon_file": "132172.png"
+    },
+    {
+      "class": "Охотник",
+      "name_ru": "Осветительная ракета",
+      "name_en": "Flare",
+      "spell_id": 1543,
+      "icon_file": "135815.png"
+    },
+    {
+      "class": "Охотник",
+      "name_ru": "Отвлекающий выстрел",
+      "name_en": "Distracting Shot",
+      "spell_id": 14274,
+      "icon_file": "135736.png"
+    },
+    {
+      "class": "Охотник",
+      "name_ru": "Отпугивание зверя",
+      "name_en": "Scare Beast",
+      "spell_id": 1513,
+      "icon_file": "132118.png"
+    },
+    {
+      "class": "Охотник",
+      "name_ru": "Отрыв",
+      "name_en": "Disengage",
+      "spell_id": 781,
+      "icon_file": "132294.png"
+    },
+    {
+      "class": "Охотник",
+      "name_ru": "Подрезать крылья",
+      "name_en": "Wing Clip",
+      "spell_id": 2974,
+      "icon_file": "132309.png"
+    },
+    {
+      "class": "Охотник",
+      "name_ru": "Призыв питомца",
+      "name_en": "Call Pet",
+      "spell_id": 883,
+      "icon_file": "132203.png"
+    },
+    {
+      "class": "Охотник",
+      "name_ru": "Призыв ястреба",
+      "name_en": "Summon Hawk",
+      "spell_id": 1293241,
+      "icon_file": "132158.png"
+    },
+    {
+      "class": "Охотник",
+      "name_ru": "Приручение зверя",
+      "name_en": "Tame Beast",
+      "spell_id": 1515,
+      "icon_file": "132164.png"
+    },
+    {
+      "class": "Охотник",
+      "name_ru": "Притвориться мертвым",
+      "name_en": "Feign Death",
+      "spell_id": 5384,
+      "icon_file": "132293.png"
+    },
+    {
+      "class": "Охотник",
+      "name_ru": "Прицельный выстрел",
+      "name_en": "Aimed Shot",
+      "spell_id": 19434,
+      "icon_file": "135130.png"
+    },
+    {
+      "class": "Охотник",
+      "name_ru": "Прогнать питомца",
+      "name_en": "Dismiss Pet",
+      "spell_id": 2641,
+      "icon_file": "136095.png"
+    },
+    {
+      "class": "Охотник",
+      "name_ru": "Проращивание",
+      "name_en": "Cultivation",
+      "spell_id": 20552,
+      "icon_file": "133938.png"
+    },
+    {
+      "class": "Охотник",
+      "name_ru": "Сдерживание",
+      "name_en": "Deterrence",
+      "spell_id": 19263,
+      "icon_file": "132369.png"
+    },
+    {
+      "class": "Охотник",
+      "name_ru": "Снайперский выстрел",
+      "name_en": "Sniper Shot",
+      "spell_id": 1310687,
+      "icon_file": "1412205.png"
+    },
+    {
+      "class": "Охотник",
+      "name_ru": "Удар долгонога",
+      "name_en": "Strider Kick",
+      "spell_id": 1317257,
+      "icon_file": "132198.png"
+    },
+    {
+      "class": "Охотник",
+      "name_ru": "Удар ящера",
+      "name_en": "Raptor Strike",
+      "spell_id": 2973,
+      "icon_file": "132223.png"
+    },
+    {
+      "class": "Охотник",
+      "name_ru": "Укус змеи",
+      "name_en": "Serpent Sting",
+      "spell_id": 1978,
+      "icon_file": "132204.png"
+    },
+    {
+      "class": "Охотник",
+      "name_ru": "Укус мангуста",
+      "name_en": "Mongoose Bite",
+      "spell_id": 1495,
+      "icon_file": "132215.png"
+    },
+    {
+      "class": "Охотник",
+      "name_ru": "Устрашение",
+      "name_en": "Intimidation",
+      "spell_id": 19577,
+      "icon_file": "132111.png"
+    },
+    {
+      "class": "Охотник",
+      "name_ru": "Чародейский выстрел",
+      "name_en": "Arcane Shot",
+      "spell_id": 3044,
+      "icon_file": "132218.png"
+    },
+    {
+      "class": "Охотник",
+      "name_ru": "Шокирующий выстрел",
+      "name_en": "Concussive Shot",
+      "spell_id": 5116,
+      "icon_file": "135860.png"
+    },
+    {
+      "class": "Охотник",
+      "name_ru": "Внимательность",
+      "name_en": "Perception",
+      "spell_id": 20600,
+      "icon_file": "136090.png"
+    },
+    {
+      "class": "Охотник",
+      "name_ru": "Воля к жизни",
+      "name_en": "Will to Survive",
+      "spell_id": 1259718,
+      "icon_file": "136129.png"
+    },
+    {
+      "class": "Охотник",
+      "name_ru": "Кровавое неистовство",
+      "name_en": "Blood Fury",
+      "spell_id": 20572,
+      "icon_file": "135726.png"
+    },
+    {
+      "class": "Охотник",
+      "name_ru": "Разбивание проклятий",
+      "name_en": "Shatter Curse",
+      "spell_id": 1299026,
+      "icon_file": "136082.png"
+    },
+    {
+      "class": "Паладин",
+      "name_ru": "Боевое исступление",
+      "name_en": "Berserking",
+      "spell_id": 20554,
+      "icon_file": "135727.png"
+    },
+    {
+      "class": "Паладин",
+      "name_ru": "Быстрая регенерация",
+      "name_en": "Rapid Regeneration",
+      "spell_id": 1260270,
+      "icon_file": "1850550.png"
+    },
+    {
+      "class": "Паладин",
+      "name_ru": "Атака",
+      "name_en": "Attack",
+      "spell_id": 6603,
+      "icon_file": "135274.png"
+    },
+    {
+      "class": "Паладин",
+      "name_ru": "Аура благочестия",
+      "name_en": "Devotion Aura",
+      "spell_id": 10290,
+      "icon_file": "135893.png"
+    },
+    {
+      "class": "Паладин",
+      "name_ru": "Аура воздаяния",
+      "name_en": "Retribution Aura",
+      "spell_id": 7294,
+      "icon_file": "135873.png"
+    },
+    {
+      "class": "Паладин",
+      "name_ru": "Аура святости",
+      "name_en": "Sanctity Aura",
+      "spell_id": 20218,
+      "icon_file": "135934.png"
+    },
+    {
+      "class": "Паладин",
+      "name_ru": "Аура сопротивления магии льда",
+      "name_en": "Frost Resistance Aura",
+      "spell_id": 19888,
+      "icon_file": "135865.png"
+    },
+    {
+      "class": "Паладин",
+      "name_ru": "Аура сопротивления огню",
+      "name_en": "Fire Resistance Aura",
+      "spell_id": 19891,
+      "icon_file": "135824.png"
+    },
+    {
+      "class": "Паладин",
+      "name_ru": "Аура сопротивления темной магии",
+      "name_en": "Shadow Resistance Aura",
+      "spell_id": 19876,
+      "icon_file": "136192.png"
+    },
+    {
+      "class": "Паладин",
+      "name_ru": "Аура сосредоточенности",
+      "name_en": "Concentration Aura",
+      "spell_id": 19746,
+      "icon_file": "135933.png"
+    },
+    {
+      "class": "Паладин",
+      "name_ru": "Благословение жертвенности",
+      "name_en": "Blessing of Sacrifice",
+      "spell_id": 6940,
+      "icon_file": "135966.png"
+    },
+    {
+      "class": "Паладин",
+      "name_ru": "Благословение защиты",
+      "name_en": "Blessing of Protection",
+      "spell_id": 1022,
+      "icon_file": "135964.png"
+    },
+    {
+      "class": "Паладин",
+      "name_ru": "Благословение королей",
+      "name_en": "Blessing of Kings",
+      "spell_id": 20217,
+      "icon_file": "135995.png"
+    },
+    {
+      "class": "Паладин",
+      "name_ru": "Благословение могущества",
+      "name_en": "Blessing of Might",
+      "spell_id": 19740,
+      "icon_file": "135906.png"
+    },
+    {
+      "class": "Паладин",
+      "name_ru": "Благословение мудрости",
+      "name_en": "Blessing of Wisdom",
+      "spell_id": 19742,
+      "icon_file": "135970.png"
+    },
+    {
+      "class": "Паладин",
+      "name_ru": "Благословение свободы",
+      "name_en": "Blessing of Freedom",
+      "spell_id": 1044,
+      "icon_file": "135968.png"
+    },
+    {
+      "class": "Паладин",
+      "name_ru": "Божественная защита",
+      "name_en": "Divine Protection",
+      "spell_id": 498,
+      "icon_file": "135954.png"
+    },
+    {
+      "class": "Паладин",
+      "name_ru": "Божественное вмешательство",
+      "name_en": "Divine Intervention",
+      "spell_id": 19752,
+      "icon_file": "136106.png"
+    },
+    {
+      "class": "Паладин",
+      "name_ru": "Божественное одобрение",
+      "name_en": "Divine Favor",
+      "spell_id": 20216,
+      "icon_file": "135915.png"
+    },
+    {
+      "class": "Паладин",
+      "name_ru": "Божественный щит",
+      "name_en": "Divine Shield",
+      "spell_id": 642,
+      "icon_file": "135896.png"
+    },
+    {
+      "class": "Паладин",
+      "name_ru": "Великое благословение королей",
+      "name_en": "Greater Blessing of Kings",
+      "spell_id": 25898,
+      "icon_file": "135993.png"
+    },
+    {
+      "class": "Паладин",
+      "name_ru": "Великое благословение могущества",
+      "name_en": "Greater Blessing of Might",
+      "spell_id": 25782,
+      "icon_file": "135908.png"
+    },
+    {
+      "class": "Паладин",
+      "name_ru": "Великое благословение мудрости",
+      "name_en": "Greater Blessing of Wisdom",
+      "spell_id": 25894,
+      "icon_file": "135912.png"
+    },
+    {
+      "class": "Паладин",
+      "name_ru": "Возложение рук",
+      "name_en": "Lay on Hands",
+      "spell_id": 633,
+      "icon_file": "135928.png"
+    },
+    {
+      "class": "Паладин",
+      "name_ru": "Воля Отрекшихся",
+      "name_en": "Will of the Forsaken",
+      "spell_id": 7744,
+      "icon_file": "136187.png"
+    },
+    {
+      "class": "Паладин",
+      "name_ru": "Вспышка Света",
+      "name_en": "Flash of Light",
+      "spell_id": 19750,
+      "icon_file": "135907.png"
+    },
+    {
+      "class": "Паладин",
+      "name_ru": "Вызов боевого коня",
+      "name_en": "Summon Warhorse",
+      "spell_id": 13819,
+      "icon_file": "136103.png"
+    },
+    {
+      "class": "Паладин",
+      "name_ru": "Гнев небес",
+      "name_en": "Holy Wrath",
+      "spell_id": 2812,
+      "icon_file": "135902.png"
+    },
+    {
+      "class": "Паладин",
+      "name_ru": "Дозор Света",
+      "name_en": "Light's Vigil",
+      "spell_id": 1310911,
+      "icon_file": "236256.png"
+    },
+    {
+      "class": "Паладин",
+      "name_ru": "Изгнание нежити",
+      "name_en": "Turn Undead",
+      "spell_id": 2878,
+      "icon_file": "135983.png"
+    },
+    {
+      "class": "Паладин",
+      "name_ru": "Искупление",
+      "name_en": "Redemption",
+      "spell_id": 7328,
+      "icon_file": "135955.png"
+    },
+    {
+      "class": "Паладин",
+      "name_ru": "Каннибализм",
+      "name_en": "Cannibalize",
+      "spell_id": 20577,
+      "icon_file": "132278.png"
+    },
+    {
+      "class": "Паладин",
+      "name_ru": "Клятва Света",
+      "name_en": "Oath of Light",
+      "spell_id": 1328548,
+      "icon_file": "135909.png"
+    },
+    {
+      "class": "Паладин",
+      "name_ru": "Молот гнева",
+      "name_en": "Hammer of Wrath",
+      "spell_id": 24239,
+      "icon_file": "132326.png"
+    },
+    {
+      "class": "Паладин",
+      "name_ru": "Молот правосудия",
+      "name_en": "Hammer of Justice",
+      "spell_id": 853,
+      "icon_file": "135963.png"
+    },
+    {
+      "class": "Паладин",
+      "name_ru": "Омовение",
+      "name_en": "Purify",
+      "spell_id": 1152,
+      "icon_file": "135949.png"
+    },
+    {
+      "class": "Паладин",
+      "name_ru": "Освящение",
+      "name_en": "Consecration",
+      "spell_id": 20116,
+      "icon_file": "135926.png"
+    },
+    {
+      "class": "Паладин",
+      "name_ru": "Очищение",
+      "name_en": "Cleanse",
+      "spell_id": 4987,
+      "icon_file": "135953.png"
+    },
+    {
+      "class": "Паладин",
+      "name_ru": "Печать воина Cвета",
+      "name_en": "Seal of the Crusader",
+      "spell_id": 20162,
+      "icon_file": "135924.png"
+    },
+    {
+      "class": "Паладин",
+      "name_ru": "Печать мудрости",
+      "name_en": "Seal of Wisdom",
+      "spell_id": 20166,
+      "icon_file": "135960.png"
+    },
+    {
+      "class": "Паладин",
+      "name_ru": "Печать повиновения",
+      "name_en": "Seal of Command",
+      "spell_id": 20375,
+      "icon_file": "132347.png"
+    },
+    {
+      "class": "Паладин",
+      "name_ru": "Печать праведности",
+      "name_en": "Seal of Righteousness",
+      "spell_id": 20287,
+      "icon_file": "132325.png"
+    },
+    {
+      "class": "Паладин",
+      "name_ru": "Печать Света",
+      "name_en": "Seal of Light",
+      "spell_id": 20165,
+      "icon_file": "135917.png"
+    },
+    {
+      "class": "Паладин",
+      "name_ru": "Печать справедливости",
+      "name_en": "Seal of Justice",
+      "spell_id": 20164,
+      "icon_file": "135971.png"
+    },
+    {
+      "class": "Паладин",
+      "name_ru": "Печать ярости",
+      "name_en": "Seal of Fury",
+      "spell_id": 1311649,
+      "icon_file": "135957.png"
+    },
+    {
+      "class": "Паладин",
+      "name_ru": "Покаяние",
+      "name_en": "Repentance",
+      "spell_id": 20066,
+      "icon_file": "135942.png"
+    },
+    {
+      "class": "Паладин",
+      "name_ru": "Праведное неистовство",
+      "name_en": "Righteous Fury",
+      "spell_id": 25780,
+      "icon_file": "135962.png"
+    },
+    {
+      "class": "Паладин",
+      "name_ru": "Правосудие",
+      "name_en": "Judgement",
+      "spell_id": 20271,
+      "icon_file": "135959.png"
+    },
+    {
+      "class": "Паладин",
+      "name_ru": "Призыв скакуна",
+      "name_en": "Summon Charger",
+      "spell_id": 23214,
+      "icon_file": "132226.png"
+    },
+    {
+      "class": "Паладин",
+      "name_ru": "Свет небес",
+      "name_en": "Holy Light",
+      "spell_id": 635,
+      "icon_file": "135920.png"
+    },
+    {
+      "class": "Паладин",
+      "name_ru": "Священный удар",
+      "name_en": "Holy Strike",
+      "spell_id": 678,
+      "icon_file": "626003.png"
+    },
+    {
+      "class": "Паладин",
+      "name_ru": "Стремительное правосудие",
+      "name_en": "Swift Judgement",
+      "spell_id": 1310994,
+      "icon_file": "236258.png"
+    },
+    {
+      "class": "Паладин",
+      "name_ru": "Чутье на нежить",
+      "name_en": "Sense Undead",
+      "spell_id": 5502,
+      "icon_file": "135974.png"
+    },
+    {
+      "class": "Паладин",
+      "name_ru": "Шок небес",
+      "name_en": "Holy Shock",
+      "spell_id": 1311606,
+      "icon_file": "135972.png"
+    },
+    {
+      "class": "Паладин",
+      "name_ru": "Щит небес",
+      "name_en": "Holy Shield",
+      "spell_id": 20925,
+      "icon_file": "135880.png"
+    },
+    {
+      "class": "Паладин",
+      "name_ru": "Щит храмовника",
+      "name_en": "Templar's Bulwark",
+      "spell_id": 1311015,
+      "icon_file": "236264.png"
+    },
+    {
+      "class": "Паладин",
+      "name_ru": "Экзорцизм",
+      "name_en": "Exorcism",
+      "spell_id": 879,
+      "icon_file": "135903.png"
+    },
+    {
+      "class": "Паладин",
+      "name_ru": "Громовая поступь",
+      "name_en": "War Stomp",
+      "spell_id": 20549,
+      "icon_file": "132368.png"
+    },
+    {
+      "class": "Паладин",
+      "name_ru": "Проращивание",
+      "name_en": "Cultivation",
+      "spell_id": 20552,
+      "icon_file": "133938.png"
+    },
+    {
+      "class": "Паладин",
+      "name_ru": "Внимательность",
+      "name_en": "Perception",
+      "spell_id": 20600,
+      "icon_file": "136090.png"
+    },
+    {
+      "class": "Паладин",
+      "name_ru": "Воля к жизни",
+      "name_en": "Will to Survive",
+      "spell_id": 1259718,
+      "icon_file": "136129.png"
+    },
+    {
+      "class": "Паладин",
+      "name_ru": "Кровавое неистовство",
+      "name_en": "Blood Fury",
+      "spell_id": 20572,
+      "icon_file": "135726.png"
+    },
+    {
+      "class": "Паладин",
+      "name_ru": "Разбивание проклятий",
+      "name_en": "Shatter Curse",
+      "spell_id": 1299026,
+      "icon_file": "136082.png"
+    },
+    {
+      "class": "Разбойник",
+      "name_ru": "Боевое исступление",
+      "name_en": "Berserking",
+      "spell_id": 20554,
+      "icon_file": "135727.png"
+    },
+    {
+      "class": "Разбойник",
+      "name_ru": "Быстрая регенерация",
+      "name_en": "Rapid Regeneration",
+      "spell_id": 1260270,
+      "icon_file": "1850550.png"
+    },
+    {
+      "class": "Разбойник",
+      "name_ru": "Воля Отрекшихся",
+      "name_en": "Will of the Forsaken",
+      "spell_id": 7744,
+      "icon_file": "136187.png"
+    },
+    {
+      "class": "Разбойник",
+      "name_ru": "Каннибализм",
+      "name_en": "Cannibalize",
+      "spell_id": 20577,
+      "icon_file": "132278.png"
+    },
+    {
+      "class": "Разбойник",
+      "name_ru": "Громовая поступь",
+      "name_en": "War Stomp",
+      "spell_id": 20549,
+      "icon_file": "132368.png"
+    },
+    {
+      "class": "Разбойник",
+      "name_ru": "Проращивание",
+      "name_en": "Cultivation",
+      "spell_id": 20552,
+      "icon_file": "133938.png"
+    },
+    {
+      "class": "Разбойник",
+      "name_ru": "Атака",
+      "name_en": "Attack",
+      "spell_id": 6603,
+      "icon_file": "135274.png"
+    },
+    {
+      "class": "Разбойник",
+      "name_ru": "Бросок",
+      "name_en": "Throw",
+      "spell_id": 2764,
+      "icon_file": "132324.png"
+    },
+    {
+      "class": "Разбойник",
+      "name_ru": "Быстродействующий яд II",
+      "name_en": "Instant Poison II",
+      "spell_id": 8687,
+      "icon_file": "132273.png"
+    },
+    {
+      "class": "Разбойник",
+      "name_ru": "Быстродействующий яд III",
+      "name_en": "Instant Poison III",
+      "spell_id": 8691,
+      "icon_file": "132273.png"
+    },
+    {
+      "class": "Разбойник",
+      "name_ru": "Быстродействующий яд IV",
+      "name_en": "Instant Poison IV",
+      "spell_id": 11341,
+      "icon_file": "132273.png"
+    },
+    {
+      "class": "Разбойник",
+      "name_ru": "Быстродействующий яд V",
+      "name_en": "Instant Poison V",
+      "spell_id": 11342,
+      "icon_file": "132273.png"
+    },
+    {
+      "class": "Разбойник",
+      "name_ru": "Быстродействующий яд VI",
+      "name_en": "Instant Poison VI",
+      "spell_id": 11343,
+      "icon_file": "132273.png"
+    },
+    {
+      "class": "Разбойник",
+      "name_ru": "Взлом замка",
+      "name_en": "Pick Lock",
+      "spell_id": 1804,
+      "icon_file": "136058.png"
+    },
+    {
+      "class": "Разбойник",
+      "name_ru": "Внезапный удар",
+      "name_en": "Ambush",
+      "spell_id": 8676,
+      "icon_file": "132282.png"
+    },
+    {
+      "class": "Разбойник",
+      "name_ru": "Внимательность",
+      "name_en": "Perception",
+      "spell_id": 20600,
+      "icon_file": "136090.png"
+    },
+    {
+      "class": "Разбойник",
+      "name_ru": "Воля к жизни",
+      "name_en": "Will to Survive",
+      "spell_id": 1259718,
+      "icon_file": "136129.png"
+    },
+    {
+      "class": "Разбойник",
+      "name_ru": "Выброс адреналина",
+      "name_en": "Adrenaline Rush",
+      "spell_id": 13750,
+      "icon_file": "136206.png"
+    },
+    {
+      "class": "Разбойник",
+      "name_ru": "Гаррота",
+      "name_en": "Garrote",
+      "spell_id": 703,
+      "icon_file": "132297.png"
+    },
+    {
+      "class": "Разбойник",
+      "name_ru": "Дурманящий яд",
+      "name_en": "Mind-numbing Poison",
+      "spell_id": 5763,
+      "icon_file": "136066.png"
+    },
+    {
+      "class": "Разбойник",
+      "name_ru": "Дурманящий яд II",
+      "name_en": "Mind-numbing Poison II",
+      "spell_id": 8694,
+      "icon_file": "136066.png"
+    },
+    {
+      "class": "Разбойник",
+      "name_ru": "Дурманящий яд III",
+      "name_en": "Mind-numbing Poison III",
+      "spell_id": 11400,
+      "icon_file": "136066.png"
+    },
+    {
+      "class": "Разбойник",
+      "name_ru": "Исчезновение",
+      "name_en": "Vanish",
+      "spell_id": 1856,
+      "icon_file": "132331.png"
+    },
+    {
+      "class": "Разбойник",
+      "name_ru": "Калечащий яд",
+      "name_en": "Crippling Poison",
+      "spell_id": 3420,
+      "icon_file": "132274.png"
+    },
+    {
+      "class": "Разбойник",
+      "name_ru": "Калечащий яд II",
+      "name_en": "Crippling Poison II",
+      "spell_id": 3421,
+      "icon_file": "132274.png"
+    },
+    {
+      "class": "Разбойник",
+      "name_ru": "Коварный удар",
+      "name_en": "Sinister Strike",
+      "spell_id": 1752,
+      "icon_file": "136189.png"
+    },
+    {
+      "class": "Разбойник",
+      "name_ru": "Кровоизлияние",
+      "name_en": "Hemorrhage",
+      "spell_id": 16511,
+      "icon_file": "136168.png"
+    },
+    {
+      "class": "Разбойник",
+      "name_ru": "Ложный выпад",
+      "name_en": "Feint",
+      "spell_id": 1966,
+      "icon_file": "132294.png"
+    },
+    {
+      "class": "Разбойник",
+      "name_ru": "Метка смерти",
+      "name_en": "Death Mark",
+      "spell_id": 1316709,
+      "icon_file": "132094.png"
+    },
+    {
+      "class": "Разбойник",
+      "name_ru": "Мясорубка",
+      "name_en": "Slice and Dice",
+      "spell_id": 5171,
+      "icon_file": "132306.png"
+    },
+    {
+      "class": "Разбойник",
+      "name_ru": "Незаметность",
+      "name_en": "Stealth",
+      "spell_id": 1784,
+      "icon_file": "132320.png"
+    },
+    {
+      "class": "Разбойник",
+      "name_ru": "Нейтрализующий яд",
+      "name_en": "Wound Poison",
+      "spell_id": 13220,
+      "icon_file": "134197.png"
+    },
+    {
+      "class": "Разбойник",
+      "name_ru": "Нейтрализующий яд II",
+      "name_en": "Wound Poison II",
+      "spell_id": 13228,
+      "icon_file": "134197.png"
+    },
+    {
+      "class": "Разбойник",
+      "name_ru": "Нейтрализующий яд III",
+      "name_en": "Wound Poison III",
+      "spell_id": 13229,
+      "icon_file": "134197.png"
+    },
+    {
+      "class": "Разбойник",
+      "name_ru": "Нейтрализующий яд IV",
+      "name_en": "Wound Poison IV",
+      "spell_id": 13230,
+      "icon_file": "134197.png"
+    },
+    {
+      "class": "Разбойник",
+      "name_ru": "Обезвреживание ловушки",
+      "name_en": "Disarm Trap",
+      "spell_id": 1842,
+      "icon_file": "136162.png"
+    },
+    {
+      "class": "Разбойник",
+      "name_ru": "Обшаривание карманов",
+      "name_en": "Pick Pocket",
+      "spell_id": 921,
+      "icon_file": "133644.png"
+    },
+    {
+      "class": "Разбойник",
+      "name_ru": "Ослабление доспеха",
+      "name_en": "Expose Armor",
+      "spell_id": 8647,
+      "icon_file": "132354.png"
+    },
+    {
+      "class": "Разбойник",
+      "name_ru": "Ослепление",
+      "name_en": "Blind",
+      "spell_id": 2094,
+      "icon_file": "136175.png"
+    },
+    {
+      "class": "Разбойник",
+      "name_ru": "Ослепляющий порошок",
+      "name_en": "Blinding Powder",
+      "spell_id": 6510,
+      "icon_file": "133588.png"
+    },
+    {
+      "class": "Разбойник",
+      "name_ru": "Ответный удар",
+      "name_en": "Riposte",
+      "spell_id": 14251,
+      "icon_file": "132336.png"
+    },
+    {
+      "class": "Разбойник",
+      "name_ru": "Отвлечение",
+      "name_en": "Distract",
+      "spell_id": 1725,
+      "icon_file": "132289.png"
+    },
+    {
+      "class": "Разбойник",
+      "name_ru": "Ошеломление",
+      "name_en": "Sap",
+      "spell_id": 2070,
+      "icon_file": "132310.png"
+    },
+    {
+      "class": "Разбойник",
+      "name_ru": "Парализующий удар",
+      "name_en": "Gouge",
+      "spell_id": 1776,
+      "icon_file": "132155.png"
+    },
+    {
+      "class": "Разбойник",
+      "name_ru": "Пинок",
+      "name_en": "Kick",
+      "spell_id": 1766,
+      "icon_file": "132219.png"
+    },
+    {
+      "class": "Разбойник",
+      "name_ru": "Подготовка",
+      "name_en": "Preparation",
+      "spell_id": 14185,
+      "icon_file": "136121.png"
+    },
+    {
+      "class": "Разбойник",
+      "name_ru": "Подлый трюк",
+      "name_en": "Cheap Shot",
+      "spell_id": 1833,
+      "icon_file": "132092.png"
+    },
+    {
+      "class": "Разбойник",
+      "name_ru": "Подлый удар",
+      "name_en": "Shank",
+      "spell_id": 1329283,
+      "icon_file": "132323.png"
+    },
+    {
+      "class": "Разбойник",
+      "name_ru": "Потрошение",
+      "name_en": "Eviscerate",
+      "spell_id": 2098,
+      "icon_file": "132292.png"
+    },
+    {
+      "class": "Разбойник",
+      "name_ru": "Призрачный удар",
+      "name_en": "Ghostly Strike",
+      "spell_id": 14278,
+      "icon_file": "136136.png"
+    },
+    {
+      "class": "Разбойник",
+      "name_ru": "Расправа",
+      "name_en": "Mutilate",
+      "spell_id": 399956,
+      "icon_file": "236270.png"
+    },
+    {
+      "class": "Разбойник",
+      "name_ru": "Рваная рана",
+      "name_en": "Rupture",
+      "spell_id": 1943,
+      "icon_file": "132302.png"
+    },
+    {
+      "class": "Разбойник",
+      "name_ru": "Смертельный яд",
+      "name_en": "Deadly Poison",
+      "spell_id": 2835,
+      "icon_file": "132290.png"
+    },
+    {
+      "class": "Разбойник",
+      "name_ru": "Смертельный яд II",
+      "name_en": "Deadly Poison II",
+      "spell_id": 2837,
+      "icon_file": "132290.png"
+    },
+    {
+      "class": "Разбойник",
+      "name_ru": "Смертельный яд III",
+      "name_en": "Deadly Poison III",
+      "spell_id": 11357,
+      "icon_file": "132290.png"
+    },
+    {
+      "class": "Разбойник",
+      "name_ru": "Смертельный яд IV",
+      "name_en": "Deadly Poison IV",
+      "spell_id": 11358,
+      "icon_file": "132290.png"
+    },
+    {
+      "class": "Разбойник",
+      "name_ru": "Спринт",
+      "name_en": "Sprint",
+      "spell_id": 2983,
+      "icon_file": "132307.png"
+    },
+    {
+      "class": "Разбойник",
+      "name_ru": "Удар в спину",
+      "name_en": "Backstab",
+      "spell_id": 53,
+      "icon_file": "132090.png"
+    },
+    {
+      "class": "Разбойник",
+      "name_ru": "Удар по почкам",
+      "name_en": "Kidney Shot",
+      "spell_id": 408,
+      "icon_file": "132298.png"
+    },
+    {
+      "class": "Разбойник",
+      "name_ru": "Умысел",
+      "name_en": "Premeditation",
+      "spell_id": 14183,
+      "icon_file": "136183.png"
+    },
+    {
+      "class": "Разбойник",
+      "name_ru": "Ускользание",
+      "name_en": "Evasion",
+      "spell_id": 5277,
+      "icon_file": "136205.png"
+    },
+    {
+      "class": "Разбойник",
+      "name_ru": "Хладнокровие",
+      "name_en": "Cold Blood",
+      "spell_id": 14177,
+      "icon_file": "135988.png"
+    },
+    {
+      "class": "Разбойник",
+      "name_ru": "Шквал клинков",
+      "name_en": "Blade Flurry",
+      "spell_id": 13877,
+      "icon_file": "132350.png"
+    },
+    {
+      "class": "Разбойник",
+      "name_ru": "Яды",
+      "name_en": "Poisons",
+      "spell_id": 2842,
+      "icon_file": "136242.png"
+    },
+    {
+      "class": "Разбойник",
+      "name_ru": "Кровавое неистовство",
+      "name_en": "Blood Fury",
+      "spell_id": 20572,
+      "icon_file": "135726.png"
+    },
+    {
+      "class": "Разбойник",
+      "name_ru": "Разбивание проклятий",
+      "name_en": "Shatter Curse",
+      "spell_id": 1299026,
+      "icon_file": "136082.png"
+    },
+    {
+      "class": "Чернокнижник",
+      "name_ru": "Боевое исступление",
+      "name_en": "Berserking",
+      "spell_id": 20554,
+      "icon_file": "135727.png"
+    },
+    {
+      "class": "Чернокнижник",
+      "name_ru": "Быстрая регенерация",
+      "name_en": "Rapid Regeneration",
+      "spell_id": 1260270,
+      "icon_file": "1850550.png"
+    },
+    {
+      "class": "Чернокнижник",
+      "name_ru": "Воля Отрекшихся",
+      "name_en": "Will of the Forsaken",
+      "spell_id": 7744,
+      "icon_file": "136187.png"
+    },
+    {
+      "class": "Чернокнижник",
+      "name_ru": "Каннибализм",
+      "name_en": "Cannibalize",
+      "spell_id": 20577,
+      "icon_file": "132278.png"
+    },
+    {
+      "class": "Чернокнижник",
+      "name_ru": "Громовая поступь",
+      "name_en": "War Stomp",
+      "spell_id": 20549,
+      "icon_file": "132368.png"
+    },
+    {
+      "class": "Чернокнижник",
+      "name_ru": "Проращивание",
+      "name_en": "Cultivation",
+      "spell_id": 20552,
+      "icon_file": "133938.png"
+    },
+    {
+      "class": "Чернокнижник",
+      "name_ru": "Внимательность",
+      "name_en": "Perception",
+      "spell_id": 20600,
+      "icon_file": "136090.png"
+    },
+    {
+      "class": "Чернокнижник",
+      "name_ru": "Воля к жизни",
+      "name_en": "Will to Survive",
+      "spell_id": 1259718,
+      "icon_file": "136129.png"
+    },
+    {
+      "class": "Чернокнижник",
+      "name_ru": "Адское Пламя",
+      "name_en": "Hellfire",
+      "spell_id": 1949,
+      "icon_file": "135818.png"
+    },
+    {
+      "class": "Чернокнижник",
+      "name_ru": "Атака",
+      "name_en": "Attack",
+      "spell_id": 6603,
+      "icon_file": "135274.png"
+    },
+    {
+      "class": "Чернокнижник",
+      "name_ru": "Бич агонии",
+      "name_en": "Bane of Agony",
+      "spell_id": 980,
+      "icon_file": "136139.png"
+    },
+    {
+      "class": "Чернокнижник",
+      "name_ru": "Бич сокрушения",
+      "name_en": "Bane of Havoc",
+      "spell_id": 1225228,
+      "icon_file": "460695.png"
+    },
+    {
+      "class": "Чернокнижник",
+      "name_ru": "Бич судьбы",
+      "name_en": "Bane of Doom",
+      "spell_id": 603,
+      "icon_file": "136122.png"
+    },
+    {
+      "class": "Чернокнижник",
+      "name_ru": "Вой ужаса",
+      "name_en": "Howl of Terror",
+      "spell_id": 5484,
+      "icon_file": "136147.png"
+    },
+    {
+      "class": "Чернокнижник",
+      "name_ru": "Выстрел",
+      "name_en": "Shoot",
+      "spell_id": 5019,
+      "icon_file": "132317.png"
+    },
+    {
+      "class": "Чернокнижник",
+      "name_ru": "Вытягивание жизни",
+      "name_en": "Siphon Life",
+      "spell_id": 18265,
+      "icon_file": "136188.png"
+    },
+    {
+      "class": "Чернокнижник",
+      "name_ru": "Господство Скверны",
+      "name_en": "Fel Domination",
+      "spell_id": 18708,
+      "icon_file": "136082.png"
+    },
+    {
+      "class": "Чернокнижник",
+      "name_ru": "Демонический доспех",
+      "name_en": "Demon Armor",
+      "spell_id": 706,
+      "icon_file": "136185.png"
+    },
+    {
+      "class": "Чернокнижник",
+      "name_ru": "Демоническое жертвоприношение",
+      "name_en": "Demonic Sacrifice",
+      "spell_id": 18788,
+      "icon_file": "136184.png"
+    },
+    {
+      "class": "Чернокнижник",
+      "name_ru": "Жгучая боль",
+      "name_en": "Searing Pain",
+      "spell_id": 5676,
+      "icon_file": "135827.png"
+    },
+    {
+      "class": "Чернокнижник",
+      "name_ru": "Жертвенный огонь",
+      "name_en": "Immolate",
+      "spell_id": 348,
+      "icon_file": "135817.png"
+    },
+    {
+      "class": "Чернокнижник",
+      "name_ru": "Жизнеотвод",
+      "name_en": "Life Tap",
+      "spell_id": 1454,
+      "icon_file": "136126.png"
+    },
+    {
+      "class": "Чернокнижник",
+      "name_ru": "Защита от темной магии",
+      "name_en": "Shadow Ward",
+      "spell_id": 6229,
+      "icon_file": "136121.png"
+    },
+    {
+      "class": "Чернокнижник",
+      "name_ru": "Изгнание",
+      "name_en": "Banish",
+      "spell_id": 710,
+      "icon_file": "136135.png"
+    },
+    {
+      "class": "Чернокнижник",
+      "name_ru": "Инфернал",
+      "name_en": "Inferno",
+      "spell_id": 1122,
+      "icon_file": "136219.png"
+    },
+    {
+      "class": "Чернокнижник",
+      "name_ru": "Испепеление",
+      "name_en": "Incinerate",
+      "spell_id": 412758,
+      "icon_file": "135789.png"
+    },
+    {
+      "class": "Чернокнижник",
+      "name_ru": "Канал здоровья",
+      "name_en": "Health Funnel",
+      "spell_id": 755,
+      "icon_file": "136168.png"
+    },
+    {
+      "class": "Чернокнижник",
+      "name_ru": "Кровавое неистовство",
+      "name_en": "Blood Fury",
+      "spell_id": 20572,
+      "icon_file": "135726.png"
+    },
+    {
+      "class": "Чернокнижник",
+      "name_ru": "Лик смерти",
+      "name_en": "Death Coil",
+      "spell_id": 6789,
+      "icon_file": "136145.png"
+    },
+    {
+      "class": "Чернокнижник",
+      "name_ru": "Нескончаемое дыхание",
+      "name_en": "Unending Breath",
+      "spell_id": 5697,
+      "icon_file": "136148.png"
+    },
+    {
+      "class": "Чернокнижник",
+      "name_ru": "Обнаружение невидимости",
+      "name_en": "Detect Invisibility",
+      "spell_id": 132,
+      "icon_file": "136152.png"
+    },
+    {
+      "class": "Чернокнижник",
+      "name_ru": "Огненный ливень",
+      "name_en": "Rain of Fire",
+      "spell_id": 5740,
+      "icon_file": "136186.png"
+    },
+    {
+      "class": "Чернокнижник",
+      "name_ru": "Ожог души",
+      "name_en": "Soul Fire",
+      "spell_id": 6353,
+      "icon_file": "135808.png"
+    },
+    {
+      "class": "Чернокнижник",
+      "name_ru": "Ожог Тьмы",
+      "name_en": "Shadowburn",
+      "spell_id": 17877,
+      "icon_file": "136191.png"
+    },
+    {
+      "class": "Чернокнижник",
+      "name_ru": "Око Килрогга",
+      "name_en": "Eye of Kilrogg",
+      "spell_id": 126,
+      "icon_file": "136155.png"
+    },
+    {
+      "class": "Чернокнижник",
+      "name_ru": "Поджигание",
+      "name_en": "Conflagrate",
+      "spell_id": 1293817,
+      "icon_file": "135807.png"
+    },
+    {
+      "class": "Чернокнижник",
+      "name_ru": "Порабощение демона",
+      "name_en": "Subjugate Demon",
+      "spell_id": 1098,
+      "icon_file": "136154.png"
+    },
+    {
+      "class": "Чернокнижник",
+      "name_ru": "Порча",
+      "name_en": "Corruption",
+      "spell_id": 172,
+      "icon_file": "136118.png"
+    },
+    {
+      "class": "Чернокнижник",
+      "name_ru": "Похищение души",
+      "name_en": "Drain Soul",
+      "spell_id": 1120,
+      "icon_file": "136163.png"
+    },
+    {
+      "class": "Чернокнижник",
+      "name_ru": "Похищение жизни",
+      "name_en": "Drain Life",
+      "spell_id": 689,
+      "icon_file": "136169.png"
+    },
+    {
+      "class": "Чернокнижник",
+      "name_ru": "Похищение маны",
+      "name_en": "Drain Mana",
+      "spell_id": 5138,
+      "icon_file": "136208.png"
+    },
+    {
+      "class": "Чернокнижник",
+      "name_ru": "Призыв беса",
+      "name_en": "Summon Imp",
+      "spell_id": 688,
+      "icon_file": "136218.png"
+    },
+    {
+      "class": "Чернокнижник",
+      "name_ru": "Призыв демона Бездны",
+      "name_en": "Summon Voidwalker",
+      "spell_id": 697,
+      "icon_file": "136221.png"
+    },
+    {
+      "class": "Чернокнижник",
+      "name_ru": "Призыв инкуба",
+      "name_en": "Summon Incubus",
+      "spell_id": 713,
+      "icon_file": "4352492.png"
+    },
+    {
+      "class": "Чернокнижник",
+      "name_ru": "Призыв коня погибели",
+      "name_en": "Summon Dreadsteed",
+      "spell_id": 23161,
+      "icon_file": "132238.png"
+    },
+    {
+      "class": "Чернокнижник",
+      "name_ru": "Призыв охотника Скверны",
+      "name_en": "Summon Felhunter",
+      "spell_id": 691,
+      "icon_file": "136217.png"
+    },
+    {
+      "class": "Чернокнижник",
+      "name_ru": "Призыв суккуба",
+      "name_en": "Summon Succubus",
+      "spell_id": 712,
+      "icon_file": "136220.png"
+    },
+    {
+      "class": "Чернокнижник",
+      "name_ru": "Призывание коня Скверны",
+      "name_en": "Summon Felsteed",
+      "spell_id": 5784,
+      "icon_file": "136103.png"
+    },
+    {
+      "class": "Чернокнижник",
+      "name_ru": "Проклятие безрассудства",
+      "name_en": "Curse of Recklessness",
+      "spell_id": 704,
+      "icon_file": "136225.png"
+    },
+    {
+      "class": "Чернокнижник",
+      "name_ru": "Проклятие изнеможения",
+      "name_en": "Curse of Exhaustion",
+      "spell_id": 18223,
+      "icon_file": "136162.png"
+    },
+    {
+      "class": "Чернокнижник",
+      "name_ru": "Проклятие косноязычия",
+      "name_en": "Curse of Tongues",
+      "spell_id": 1714,
+      "icon_file": "136140.png"
+    },
+    {
+      "class": "Чернокнижник",
+      "name_ru": "Проклятие слабости",
+      "name_en": "Curse of Weakness",
+      "spell_id": 702,
+      "icon_file": "136138.png"
+    },
+    {
+      "class": "Чернокнижник",
+      "name_ru": "Проклятие стихий",
+      "name_en": "Curse of the Elements",
+      "spell_id": 440892,
+      "icon_file": "615099.png"
+    },
+    {
+      "class": "Чернокнижник",
+      "name_ru": "Разбивание проклятий",
+      "name_en": "Shatter Curse",
+      "spell_id": 1299026,
+      "icon_file": "136082.png"
+    },
+    {
+      "class": "Чернокнижник",
+      "name_ru": "Ритуал призывания",
+      "name_en": "Ritual of Summoning",
+      "spell_id": 698,
+      "icon_file": "136223.png"
+    },
+    {
+      "class": "Чернокнижник",
+      "name_ru": "Ритуал Рока",
+      "name_en": "Ritual of Doom",
+      "spell_id": 18540,
+      "icon_file": "136120.png"
+    },
+    {
+      "class": "Чернокнижник",
+      "name_ru": "Связка души",
+      "name_en": "Soul Link",
+      "spell_id": 19028,
+      "icon_file": "136160.png"
+    },
+    {
+      "class": "Чернокнижник",
+      "name_ru": "Создание камня души",
+      "name_en": "Create Soulstone",
+      "spell_id": 693,
+      "icon_file": "136210.png"
+    },
+    {
+      "class": "Чернокнижник",
+      "name_ru": "Создание камня здоровья",
+      "name_en": "Create Healthstone",
+      "spell_id": 5699,
+      "icon_file": "135230.png"
+    },
+    {
+      "class": "Чернокнижник",
+      "name_ru": "Создание камня огня",
+      "name_en": "Create Firestone",
+      "spell_id": 6366,
+      "icon_file": "134085.png"
+    },
+    {
+      "class": "Чернокнижник",
+      "name_ru": "Создание камня чар",
+      "name_en": "Create Spellstone",
+      "spell_id": 2362,
+      "icon_file": "134131.png"
+    },
+    {
+      "class": "Чернокнижник",
+      "name_ru": "Страх",
+      "name_en": "Fear",
+      "spell_id": 5782,
+      "icon_file": "136183.png"
+    },
+    {
+      "class": "Чернокнижник",
+      "name_ru": "Стрела Тьмы",
+      "name_en": "Shadow Bolt",
+      "spell_id": 686,
+      "icon_file": "136197.png"
+    },
+    {
+      "class": "Чернокнижник",
+      "name_ru": "Судороги",
+      "name_en": "Wrack",
+      "spell_id": 1316697,
+      "icon_file": "460687.png"
+    },
+    {
+      "class": "Чернокнижник",
+      "name_ru": "Усиление проклятия",
+      "name_en": "Amplify Curse",
+      "spell_id": 18288,
+      "icon_file": "136132.png"
+    },
+    {
+      "class": "Чернокнижник",
+      "name_ru": "Чутье на демонов",
+      "name_en": "Sense Demons",
+      "spell_id": 5500,
+      "icon_file": "136172.png"
+    },
+    {
+      "class": "Чернокнижник",
+      "name_ru": "Шкура демона",
+      "name_en": "Demon Skin",
+      "spell_id": 687,
+      "icon_file": "136185.png"
+    },
+    {
+      "class": "Шаман",
+      "name_ru": "Боевое исступление",
+      "name_en": "Berserking",
+      "spell_id": 20554,
+      "icon_file": "135727.png"
+    },
+    {
+      "class": "Шаман",
+      "name_ru": "Быстрая регенерация",
+      "name_en": "Rapid Regeneration",
+      "spell_id": 1260270,
+      "icon_file": "1850550.png"
+    },
+    {
+      "class": "Шаман",
+      "name_ru": "Воля Отрекшихся",
+      "name_en": "Will of the Forsaken",
+      "spell_id": 7744,
+      "icon_file": "136187.png"
+    },
+    {
+      "class": "Шаман",
+      "name_ru": "Каннибализм",
+      "name_en": "Cannibalize",
+      "spell_id": 20577,
+      "icon_file": "132278.png"
+    },
+    {
+      "class": "Шаман",
+      "name_ru": "Громовая поступь",
+      "name_en": "War Stomp",
+      "spell_id": 20549,
+      "icon_file": "132368.png"
+    },
+    {
+      "class": "Шаман",
+      "name_ru": "Проращивание",
+      "name_en": "Cultivation",
+      "spell_id": 20552,
+      "icon_file": "133938.png"
+    },
+    {
+      "class": "Шаман",
+      "name_ru": "Внимательность",
+      "name_en": "Perception",
+      "spell_id": 20600,
+      "icon_file": "136090.png"
+    },
+    {
+      "class": "Шаман",
+      "name_ru": "Воля к жизни",
+      "name_en": "Will to Survive",
+      "spell_id": 1259718,
+      "icon_file": "136129.png"
+    },
+    {
+      "class": "Шаман",
+      "name_ru": "Астральное возвращение",
+      "name_en": "Astral Recall",
+      "spell_id": 556,
+      "icon_file": "136010.png"
+    },
+    {
+      "class": "Шаман",
+      "name_ru": "Атака",
+      "name_en": "Attack",
+      "spell_id": 6603,
+      "icon_file": "135274.png"
+    },
+    {
+      "class": "Шаман",
+      "name_ru": "Быстрина",
+      "name_en": "Riptide",
+      "spell_id": 408521,
+      "icon_file": "252995.png"
+    },
+    {
+      "class": "Шаман",
+      "name_ru": "Власть над молнией",
+      "name_en": "Lightning Mastery",
+      "spell_id": 16166,
+      "icon_file": "136111.png"
+    },
+    {
+      "class": "Шаман",
+      "name_ru": "Водный щит",
+      "name_en": "Water Shield",
+      "spell_id": 408510,
+      "icon_file": "132315.png"
+    },
+    {
+      "class": "Шаман",
+      "name_ru": "Возвращение тотемов",
+      "name_en": "Totemic Recall",
+      "spell_id": 36936,
+      "icon_file": "310733.png"
+    },
+    {
+      "class": "Шаман",
+      "name_ru": "Волна исцеления",
+      "name_en": "Healing Wave",
+      "spell_id": 331,
+      "icon_file": "136052.png"
+    },
+    {
+      "class": "Шаман",
+      "name_ru": "Выведение яда",
+      "name_en": "Cure Poison",
+      "spell_id": 526,
+      "icon_file": "136067.png"
+    },
+    {
+      "class": "Шаман",
+      "name_ru": "Дальнее зрение",
+      "name_en": "Far Sight",
+      "spell_id": 6196,
+      "icon_file": "136034.png"
+    },
+    {
+      "class": "Шаман",
+      "name_ru": "Дух предков",
+      "name_en": "Ancestral Spirit",
+      "spell_id": 2008,
+      "icon_file": "136077.png"
+    },
+    {
+      "class": "Шаман",
+      "name_ru": "Земной шок",
+      "name_en": "Earth Shock",
+      "spell_id": 8042,
+      "icon_file": "136026.png"
+    },
+    {
+      "class": "Шаман",
+      "name_ru": "Зов Духов",
+      "name_en": "Call of the Spirits",
+      "spell_id": 66844,
+      "icon_file": "310732.png"
+    },
+    {
+      "class": "Шаман",
+      "name_ru": "Зов Предков",
+      "name_en": "Call of the Ancestors",
+      "spell_id": 66843,
+      "icon_file": "310731.png"
+    },
+    {
+      "class": "Шаман",
+      "name_ru": "Зов Стихий",
+      "name_en": "Call of the Elements",
+      "spell_id": 66842,
+      "icon_file": "310730.png"
+    },
+    {
+      "class": "Шаман",
+      "name_ru": "Зов тотемов",
+      "name_en": "Totemic Call",
+      "spell_id": 437009,
+      "icon_file": "538574.png"
+    },
+    {
+      "class": "Шаман",
+      "name_ru": "Излечение болезни",
+      "name_en": "Cure Disease",
+      "spell_id": 2870,
+      "icon_file": "136083.png"
+    },
+    {
+      "class": "Шаман",
+      "name_ru": "Кольцо огня",
+      "name_en": "Fire Nova",
+      "spell_id": 408341,
+      "icon_file": "135824.png"
+    },
+    {
+      "class": "Шаман",
+      "name_ru": "Ледяной шок",
+      "name_en": "Frost Shock",
+      "spell_id": 8056,
+      "icon_file": "135849.png"
+    },
+    {
+      "class": "Шаман",
+      "name_ru": "Малая волна исцеления",
+      "name_en": "Lesser Healing Wave",
+      "spell_id": 8004,
+      "icon_file": "136043.png"
+    },
+    {
+      "class": "Шаман",
+      "name_ru": "Молния",
+      "name_en": "Lightning Bolt",
+      "spell_id": 403,
+      "icon_file": "136048.png"
+    },
+    {
+      "class": "Шаман",
+      "name_ru": "Огненный шок",
+      "name_en": "Flame Shock",
+      "spell_id": 8050,
+      "icon_file": "135813.png"
+    },
+    {
+      "class": "Шаман",
+      "name_ru": "Опаляющий тотем",
+      "name_en": "Searing Totem",
+      "spell_id": 3599,
+      "icon_file": "135825.png"
+    },
+    {
+      "class": "Шаман",
+      "name_ru": "Оружие Камнедробителя",
+      "name_en": "Rockbiter Weapon",
+      "spell_id": 8017,
+      "icon_file": "136086.png"
+    },
+    {
+      "class": "Шаман",
+      "name_ru": "Оружие ледяного клейма",
+      "name_en": "Frostbrand Weapon",
+      "spell_id": 8033,
+      "icon_file": "135847.png"
+    },
+    {
+      "class": "Шаман",
+      "name_ru": "Оружие неистовства ветра",
+      "name_en": "Windfury Weapon",
+      "spell_id": 8232,
+      "icon_file": "136018.png"
+    },
+    {
+      "class": "Шаман",
+      "name_ru": "Оружие языка пламени",
+      "name_en": "Flametongue Weapon",
+      "spell_id": 8024,
+      "icon_file": "135814.png"
+    },
+    {
+      "class": "Шаман",
+      "name_ru": "Подводное дыхание",
+      "name_en": "Water Breathing",
+      "spell_id": 131,
+      "icon_file": "136148.png"
+    },
+    {
+      "class": "Шаман",
+      "name_ru": "Призрачный волк",
+      "name_en": "Ghost Wolf",
+      "spell_id": 2645,
+      "icon_file": "136095.png"
+    },
+    {
+      "class": "Шаман",
+      "name_ru": "Природная стремительность",
+      "name_en": "Nature's Swiftness",
+      "spell_id": 16188,
+      "icon_file": "136076.png"
+    },
+    {
+      "class": "Шаман",
+      "name_ru": "Развеяние магии",
+      "name_en": "Purge",
+      "spell_id": 370,
+      "icon_file": "136075.png"
+    },
+    {
+      "class": "Шаман",
+      "name_ru": "Сторожевой тотем",
+      "name_en": "Sentry Totem",
+      "spell_id": 6495,
+      "icon_file": "136082.png"
+    },
+    {
+      "class": "Шаман",
+      "name_ru": "Тотем заземления",
+      "name_en": "Grounding Totem",
+      "spell_id": 8177,
+      "icon_file": "136039.png"
+    },
+    {
+      "class": "Шаман",
+      "name_ru": "Тотем источника маны",
+      "name_en": "Mana Spring Totem",
+      "spell_id": 5675,
+      "icon_file": "136053.png"
+    },
+    {
+      "class": "Шаман",
+      "name_ru": "Тотем исцеляющего потока",
+      "name_en": "Healing Stream Totem",
+      "spell_id": 5394,
+      "icon_file": "135127.png"
+    },
+    {
+      "class": "Шаман",
+      "name_ru": "Тотем каменного когтя",
+      "name_en": "Stoneclaw Totem",
+      "spell_id": 5730,
+      "icon_file": "136097.png"
+    },
+    {
+      "class": "Шаман",
+      "name_ru": "Тотем каменной кожи",
+      "name_en": "Stoneskin Totem",
+      "spell_id": 8071,
+      "icon_file": "136098.png"
+    },
+    {
+      "class": "Шаман",
+      "name_ru": "Тотем легкости воздуха",
+      "name_en": "Grace of Air Totem",
+      "spell_id": 8835,
+      "icon_file": "136046.png"
+    },
+    {
+      "class": "Шаман",
+      "name_ru": "Тотем магмы",
+      "name_en": "Magma Totem",
+      "spell_id": 8190,
+      "icon_file": "135826.png"
+    },
+    {
+      "class": "Шаман",
+      "name_ru": "Тотем неистовства ветра",
+      "name_en": "Windfury Totem",
+      "spell_id": 8512,
+      "icon_file": "136114.png"
+    },
+    {
+      "class": "Шаман",
+      "name_ru": "Тотем оков земли",
+      "name_en": "Earthbind Totem",
+      "spell_id": 2484,
+      "icon_file": "136102.png"
+    },
+    {
+      "class": "Шаман",
+      "name_ru": "Тотем очищения от болезней",
+      "name_en": "Disease Cleansing Totem",
+      "spell_id": 8170,
+      "icon_file": "136019.png"
+    },
+    {
+      "class": "Шаман",
+      "name_ru": "Тотем прилива маны",
+      "name_en": "Mana Tide Totem",
+      "spell_id": 16190,
+      "icon_file": "135861.png"
+    },
+    {
+      "class": "Шаман",
+      "name_ru": "Тотем противоядия",
+      "name_en": "Poison Cleansing Totem",
+      "spell_id": 8166,
+      "icon_file": "136070.png"
+    },
+    {
+      "class": "Шаман",
+      "name_ru": "Тотем силы земли",
+      "name_en": "Strength of Earth Totem",
+      "spell_id": 8075,
+      "icon_file": "136023.png"
+    },
+    {
+      "class": "Шаман",
+      "name_ru": "Тотем сопротивления льду",
+      "name_en": "Frost Resistance Totem",
+      "spell_id": 8181,
+      "icon_file": "135866.png"
+    },
+    {
+      "class": "Шаман",
+      "name_ru": "Тотем сопротивления огню",
+      "name_en": "Fire Resistance Totem",
+      "spell_id": 8184,
+      "icon_file": "135832.png"
+    },
+    {
+      "class": "Шаман",
+      "name_ru": "Тотем сопротивления силам природы",
+      "name_en": "Nature Resistance Totem",
+      "spell_id": 10595,
+      "icon_file": "136061.png"
+    },
+    {
+      "class": "Шаман",
+      "name_ru": "Тотем стены ветра",
+      "name_en": "Windwall Totem",
+      "spell_id": 15107,
+      "icon_file": "136022.png"
+    },
+    {
+      "class": "Шаман",
+      "name_ru": "Тотем трепета",
+      "name_en": "Tremor Totem",
+      "spell_id": 8143,
+      "icon_file": "136108.png"
+    },
+    {
+      "class": "Шаман",
+      "name_ru": "Тотем языка пламени",
+      "name_en": "Flametongue Totem",
+      "spell_id": 8227,
+      "icon_file": "136040.png"
+    },
+    {
+      "class": "Шаман",
+      "name_ru": "Удар бури",
+      "name_en": "Stormstrike",
+      "spell_id": 17364,
+      "icon_file": "132314.png"
+    },
+    {
+      "class": "Шаман",
+      "name_ru": "Хождение по воде",
+      "name_en": "Water Walking",
+      "spell_id": 546,
+      "icon_file": "135863.png"
+    },
+    {
+      "class": "Шаман",
+      "name_ru": "Цепная молния",
+      "name_en": "Chain Lightning",
+      "spell_id": 421,
+      "icon_file": "136015.png"
+    },
+    {
+      "class": "Шаман",
+      "name_ru": "Цепное исцеление",
+      "name_en": "Chain Heal",
+      "spell_id": 1064,
+      "icon_file": "136042.png"
+    },
+    {
+      "class": "Шаман",
+      "name_ru": "Щит молний",
+      "name_en": "Lightning Shield",
+      "spell_id": 324,
+      "icon_file": "136051.png"
+    },
+    {
+      "class": "Шаман",
+      "name_ru": "Ярость предсказателя",
+      "name_en": "Rage of the Farseer",
+      "spell_id": 425336,
+      "icon_file": "136012.png"
+    },
+    {
+      "class": "Шаман",
+      "name_ru": "Кровавое неистовство",
+      "name_en": "Blood Fury",
+      "spell_id": 20572,
+      "icon_file": "135726.png"
+    },
+    {
+      "class": "Шаман",
+      "name_ru": "Разбивание проклятий",
+      "name_en": "Shatter Curse",
+      "spell_id": 1299026,
+      "icon_file": "136082.png"
+    }
+  ]
+}
