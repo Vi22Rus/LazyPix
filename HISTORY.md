@@ -604,3 +604,96 @@ LazyG 0.8.20 TEST — Healbot cooldown detection
 
 Проверить в WoW Forever при здоровье выше и ниже порога, когда предмет
 готов и когда находится на кулдауне; затем /lazyg status.
+
+### LazyPix_Addon/README_0.8.21.txt
+
+LazyG 0.8.21 TEST — cosmetic GCD frame progress
+
+- GCD frame visual uses a fixed 1.5-second timer, started by UNIT_SPELLCAST_SUCCEEDED for the player.
+- Red border fills clockwise; returns to green after 1.5 seconds.
+- Removed GCD 61304 polling, duration objects, and Blizzard cooldown overlay.
+- This is a visual approximation, not an accurate GCD measure. Off-GCD casts may also trigger it.
+- Existing ordinary cooldown, range, adapters, and health widget unchanged.
+- In editor mode GCD animation is disabled.
+
+
+### LazyPix_Addon/README_0.8.22.txt
+
+LazyG 0.8.22 TEST — Casting/Channeling dimming
+
+- Recommended ability icon dims while the player casts a non-instant spell or channels.
+- Uses player-only UNIT_SPELLCAST_START/STOP/FAILED/FAILED_QUIET/INTERRUPTED and CHANNEL_START/STOP events, no protected cast-time arithmetic.
+- Existing 1.5-second cosmetic red GCD perimeter, regular CD and range checks unchanged.
+- Setup/preview stays bright.
+- HealthWidget.lua unchanged.
+- Game test required: normal cast, interrupted cast, canceled cast, channeled spell, editor preview.
+
+
+### LazyPix_Addon/README_0.8.23.txt
+
+LazyG 0.8.23 TEST — Player spellbook editor
+
+- Editor spell list now comes from C_SpellBook (player bank) rather than Sonah, MaxDPS, or Hekili.
+- Includes active learned spells from general/class/spec pages (including racial actives).
+- Excludes passives, future spells, pet spells, profession pages, off-spec entries, and duplicate SpellIDs.
+- The editor can now open with no rotation addon active.
+- A saved editor index is shared across rotation sources; previous source-specific saved indices are left untouched.
+- Live recommendations still use the existing Sonah, MaxDPS and Hekili adapters.
+- Setup.lua is the only Lua file changed. HealthWidget.lua is unchanged.
+- Learned active spells inside flyout groups are included when the flyout APIs are available.
+- Requires in-game testing on WoW Forever.
+
+
+### LazyPix_Addon/README_0.8.24.txt
+
+LazyG 0.8.24 TEST — Sonah recommendation synchronization
+
+- Sonah is now included in the existing 0.2-second refresh of the current live recommendation, as MaxDPS and Hekili already were.
+- This reads Sonah.Engine:Current() only; it does not recalculate or change Sonah rotations.
+- Existing RECOMMENDATION listener remains unchanged.
+- Fix targets a stale icon in LazyG after changing a Sonah profile without /reload.
+- HealthWidget.lua, spellbook preview, visuals, minimap and other adapters were not modified.
+- Requires in-game verification.
+
+
+### LazyPix_Addon/README_0.8.25.txt
+
+LazyG 0.8.25 TEST — JustAC integration
+
+Added JustAC / JustAssistedCombat as a fourth rotation recommendation source.
+The adapter reads the actual displayed first action from JustAC.spellIcons[1]
+without invoking JustAC SpellQueue or recalculating rotations.
+
+Selection: /lazyg source justac
+Automatic selection: /lazyg source auto
+Priority (when multiple addons are active): Sonah, MaxDPS, Hekili, JustAC.
+
+JustAC support in this test uses its standard visible queue display.
+If its main queue is hidden or using another display mode, LazyG hides its
+recommendation; alternative nameplate-overlay-only display is not yet supported.
+WAIT placeholders are ignored. Macro images can be shown without a SpellID.
+
+The preview still reads active non-passive spells from the player spellbook.
+HealthWidget.lua and the other adapters are unchanged.
+
+Static source review only. Requires in-game validation on WoW Forever.
+
+
+### LazyPix_Addon/README_0.8.26.txt
+
+LazyG 0.8.26 TEST — RotationMaster adapter
+
+Added RotationMaster 2.1.1 as a fifth passive recommendation source.
+The adapter reads the first live recommendation from
+RotationMaster.nextWindow.icons[1], without evaluating its rotation.
+Requires Rotation Master's "Preview Spells" display to be enabled.
+Sample/empty recommendations are ignored. Item icons are forwarded, but
+item IDs are not treated as spell IDs for cooldown or range checks.
+Some gated overlay effects in RotationMaster may render separately from
+its base texture and are not replicated by this adapter.
+
+Commands: /lazyg source rotationmaster ; /lazyg source auto ; /lazyg help
+Automatic priority: Sonah > MaxDPS > Hekili > JustAC > RotationMaster.
+
+Editor still reads the player's spellbook; HealthWidget.lua unchanged.
+Static source verification only. Test in WoW Forever before approving.
