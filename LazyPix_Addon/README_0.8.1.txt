@@ -1,0 +1,2 @@
+LazyG 0.8.1: Health frame preview in Sonah setup mode.
+When setup mode starts via minimap launcher, the health frame shows a bright red border and full-color selected consumable. Right click on the health frame cycles forward through healthstones and health potions in bags; left click cycles backward. The number in the bottom shows the selected entry. Preview ends with setup mode or on combat start. Normal HP threshold, traffic light and secure item clicks remain unchanged.
