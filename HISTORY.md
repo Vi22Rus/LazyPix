@@ -697,3 +697,57 @@ Automatic priority: Sonah > MaxDPS > Hekili > JustAC > RotationMaster.
 
 Editor still reads the player's spellbook; HealthWidget.lua unchanged.
 Static source verification only. Test in WoW Forever before approving.
+
+### LazyPix_Addon/README_0.8.27.txt
+
+LazyG 0.8.27 TEST — один ранг способности в режиме настройки
+
+В режиме настройки чтение книги заклинаний группирует известные активные
+способности по локализованному названию и показывает только один ранг.
+При наличии subName выбирается ранг с наибольшим номером; если номер не
+определяется — используется последняя подходящая запись книги.
+Рекомендуемый ранг определяется исключительно при построении списка.
+Все источники рекомендаций, светофор, хилпот и GCD не изменены.
+
+Проверить: /lazyg on, перелистывание способностей, отсутствие повторов
+рангов (например, Укус змеи). В самой игре пока не проверено.
+
+
+### LazyPix_Addon/README_0.8.28.txt
+
+LazyG 0.8.28 TEST — MaxDPS/Hunter visual timing correction
+
+- Auto Shot (75), Shoot (5019) and Auto Attack (6603) do not restart the decorative 1.5-second rim animation.
+- Removed false cooldown dimming from isActive when start/duration are secret or unavailable; this cannot reliably distinguish the shared GCD from a longer ability cooldown.
+- Verified standard, readable long cooldowns, range and cast/channel dimming logic is unchanged.
+- Other adapters, spellbook preview, minimap, and HealthWidget.lua unchanged.
+
+Test in-game: Hunter MaxDPS Auto Shot over 5+ seconds, cast an ability, confirm one completed rim cycle and icon undims after genuine cooldowns/casts; test a long ordinary cooldown and out-of-range grey state.
+
+
+### LazyPix_Addon/README_0.8.29.txt
+
+LazyG 0.8.29 TEST
+
+Косметическая рамка отделена от логики доступности способностей.
+Красная рамка запускается от успешного применения заклинания персонажем на 1,5 секунды, Auto Shot/Shoot/Auto Attack исключены для предотвращения постоянного перезапуска.
+Она не влияет на затемнение, ротации, CD, range и каст.
+Таймер не сбрасывается при исчезновении рекомендации; при скрытом фрейме или предпросмотре эффекты не отображаются.
+Проверить отдельно в WoW Forever.
+
+
+### LazyPix_Addon/README_0.8.30.txt
+
+LazyG 0.8.30 TEST — независимое затемнение GCD
+
+Исправлено: после успешного применения способности игроком иконка
+затемняется на ориентировочные 1,5 секунды (кроме Auto Shot, Shoot, Auto Attack).
+
+Это отдельный таймер gcdDimUntil, не связанный с косметической
+анимацией рамки cosmeticStart. Рамка не влияет на затемнение,
+а затемнение не управляет рамкой.
+
+Условия обычного CD, дальности, каста и channeling не изменены.
+Важно: таймер приблизительный и не определяет реальный GCD по API.
+Изменения только Setup.lua, LazyG.toc и этот README.
+Версия не тестировалась в WoW Forever.
