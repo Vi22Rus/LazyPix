@@ -1,4 +1,4 @@
--- LazyPix 0.8.32-dev EXPERIMENT - rotation adapters removed for isolated Auto Connect development.
+-- LazyPix 0.8.33-dev EXPERIMENT - anonymous protocol strategies P01-P05.
 -- The recommendation is produced only by the source addon. LazyPix never casts spells.
 local controller = CreateFrame("Frame")
 local selected, editor, index = nil, false, 1
@@ -175,15 +175,14 @@ local function SpellbookSpells()
     return result
 end
 
--- EXPERIMENTAL BRANCH: No rotation-source adapters are installed.
--- Auto Connect will be developed and reviewed independently here.
--- This module currently has NO live rotation recommendation source.
--- Preserve our own UI/preview/health/traffic-light as the stable base.
+-- All rotation protocol signatures live in ProtocolDiscovery.lua.
+-- No names of external rotation addons are required in the bridge.
 local function ShowHelp()
     Msg("Команды LazyPix (эксперимент Auto Connect):")
     Msg("/lazypix help — показать справку")
     Msg("/lazypix on — предпросмотр изученных способностей; /lazypix off — выйти")
     Msg("/lazypix sources — показать зарегистрированные источники")
+    Msg("/lazypix protocols — проверка протоколов P01–P05")
     Msg("/lazypix source auto | <id> — выбрать источник")
     Msg("/lazypix status — состояние светофора и хилпота")
     Msg("/lazypix settings — настройки; /lazypix item next — следующий предмет")
@@ -476,7 +475,7 @@ local function ShowSources()
             (item.loaded and "loaded" or "not loaded") ..
             (item.active and " ACTIVE" or ""))
     end
-    if #sources == 0 then Msg("Нужен RegisterProvider, TOC X-LazyPix-Provider или RegisterAdapter.") end
+    if #sources == 0 then Msg("Протоколы не подтверждены; /lazypix protocols — диагностика.") end
 end
 local function StopEditor(silent)
     if not editor then return end
@@ -604,6 +603,14 @@ SlashCmdList.LAZYPIX = function(msg)
     elseif msg == "off" then StopEditor()
     elseif msg == "sources" then
         ShowSources()
+    elseif msg == "protocols" then
+        if auto then auto.Scan() end
+        local p = _G.LazyPixProtocolDiscovery
+        if p then
+            for _, result in ipairs(p.List()) do
+                Msg(result.id .. ": " .. result.status)
+            end
+        else Msg("Модуль протоколов не загружен.") end
     elseif msg == "source" then
         Msg("Использование: /lazypix source auto | <id>")
     elseif msg:match("^source%s+") then

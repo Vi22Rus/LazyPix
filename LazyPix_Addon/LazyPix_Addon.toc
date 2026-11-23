@@ -1,8 +1,9 @@
 ## Interface: 16001
 ## Title: LazyPix
-## Notes: Auto Connect: generic discovery, providers and minimal bridges
-## Version: 0.8.32-dev
+## Notes: Auto Connect with anonymous protocol discovery P01-P05
+## Version: 0.8.33-dev
 ## SavedVariablesPerCharacter: SonahRotationSetupDB
 AutoConnect.lua
+ProtocolDiscovery.lua
 Setup.lua
 HealthWidget.lua

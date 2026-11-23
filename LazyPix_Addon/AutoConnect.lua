@@ -130,6 +130,7 @@ function Auto.Scan()
             end
         end
     end
+    if _G.LazyPixProtocolDiscovery then _G.LazyPixProtocolDiscovery.Scan() end
     lastScan = GetTime and GetTime() or 0
     choose()
 end
