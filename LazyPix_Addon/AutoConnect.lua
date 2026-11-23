@@ -4,6 +4,7 @@ _G.LazyPixAutoConnect = Auto
 local providers, mappings, discovered = {}, {}, {}
 local active, preferred, onChange = nil, "auto", nil
 local lastScan = 0
+local scanPending = false
 local function public(v) return not (type(issecretvalue) == "function" and issecretvalue(v)) end
 local function typed(v, t) return public(v) and type(v) == t end
 local function valid(s)
@@ -101,7 +102,7 @@ local function getMetadata(addon)
     if ok and typed(endpoint, "string") then return endpoint end
 end
 -- Discover loaded addons and explicit TOC-advertised compatible endpoints.
-function Auto.Scan()
+function Auto.Scan(diagnostic)
     local countFn = (C_AddOns and C_AddOns.GetNumAddOns) or GetNumAddOns
     local infoFn = (C_AddOns and C_AddOns.GetAddOnInfo) or GetAddOnInfo
     if type(countFn) == "function" and type(infoFn) == "function" then
@@ -130,17 +131,22 @@ function Auto.Scan()
             end
         end
     end
-    if _G.LazyPixProtocolDiscovery then _G.LazyPixProtocolDiscovery.Scan() end
+    if _G.LazyPixProtocolDiscovery then _G.LazyPixProtocolDiscovery.Scan(diagnostic) end
     lastScan = GetTime and GetTime() or 0
+    scanPending = false
     choose()
 end
 function Auto.OnAddonLoaded(name)
-    if valid(name) and isLoaded(name) then discovered[name] = true end
-    Auto.Scan()
+    if valid(name) and isLoaded(name) then
+        discovered[name] = true
+        scanPending = true
+    end
 end
 function Auto.Tick()
+    -- Never repeat full global scans on an idle timer.
+    if not scanPending then return end
     local now = GetTime and GetTime() or 0
-    if now - lastScan >= 2 then Auto.Scan() end
+    if now - lastScan >= 2 then Auto.Scan(false) end
 end
 function Auto.SetPreferred(value)
     if not typed(value, "string") then return false end

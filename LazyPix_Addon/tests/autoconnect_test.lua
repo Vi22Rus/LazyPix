@@ -84,3 +84,23 @@ assert(debugTable:find("global entries=",1,true))
 _G.OpaqueSpec=nil
 _G.LazyPixProtocolDiscovery.Scan()
 print("protocol_diagnostic_test: PASS")
+
+-- LP-0017: no repeated full scans on idle frames.
+local actualScan=_G.LazyPixProtocolDiscovery.Scan
+local count=0
+_G.LazyPixProtocolDiscovery.Scan=function(...) count=count+1; return actualScan(...) end
+local now=10
+_G.GetTime=function() return now end
+a.Scan()
+local initial=count
+for n=1,500 do a.Tick() end
+assert(count==initial,"idle Tick must not repeat full discovery")
+a.OnAddonLoaded("Another")
+for n=1,50 do a.Tick() end
+assert(count==initial,"ADDON_LOADED scan should be deferred")
+now=13
+a.Tick()
+assert(count==initial+1,"pending ADDON_LOADED triggers exactly one scan")
+for n=1,200 do a.Tick() end
+assert(count==initial+1,"no periodic scan after pending load")
+print("scan_throttle_test: PASS")

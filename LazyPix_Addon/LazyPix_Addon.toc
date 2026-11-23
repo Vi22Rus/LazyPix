@@ -1,7 +1,7 @@
 ## Interface: 16001
 ## Title: LazyPix
 ## Notes: Auto Connect with anonymous protocol discovery P01-P05
-## Version: 0.8.34-dev
+## Version: 0.8.35-dev
 ## SavedVariablesPerCharacter: SonahRotationSetupDB
 AutoConnect.lua
 ProtocolDiscovery.lua

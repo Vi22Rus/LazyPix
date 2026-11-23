@@ -183,7 +183,7 @@ local function ShowHelp()
     Msg("/lazypix on — предпросмотр изученных способностей; /lazypix off — выйти")
     Msg("/lazypix sources — показать зарегистрированные источники")
     Msg("/lazypix protocols — результаты проверки P01–P05")
-    Msg("/lazypix protocol debug — подробные признаки по всем протоколам")
+    Msg("/lazypix protocol debug — ручная полная проверка (может вызвать паузу)")
     Msg("/lazypix source auto | <id> — выбрать источник")
     Msg("/lazypix status — состояние светофора и хилпота")
     Msg("/lazypix settings — настройки; /lazypix item next — следующий предмет")
@@ -534,7 +534,7 @@ controller:SetScript("OnEvent", function(_, event, ...)
             auto.SetPreferred(addonDB.autoConnectSource or "auto")
         end
         ReadCurrent()
-        Msg("Auto Connect 0.8.32-dev готов: /lazypix sources для диагностики.")
+        Msg("Auto Connect 0.8.35-dev готов: /lazypix sources для диагностики.")
     elseif event == "ADDON_LOADED" then
         if auto then auto.OnAddonLoaded(...) end
     elseif event == "UNIT_SPELLCAST_SUCCEEDED" then
@@ -605,7 +605,7 @@ SlashCmdList.LAZYPIX = function(msg)
     elseif msg == "sources" then
         ShowSources()
     elseif msg == "protocols" then
-        if auto then auto.Scan() end
+        -- Cached state only; no full scan during ordinary status checks.
         local p = _G.LazyPixProtocolDiscovery
         if p then
             for _, result in ipairs(p.List()) do
@@ -613,7 +613,7 @@ SlashCmdList.LAZYPIX = function(msg)
             end
         else Msg("Модуль протоколов не загружен.") end
     elseif msg == "protocol debug" then
-        if auto then auto.Scan() end
+        if auto then auto.Scan(true) end
         local p = _G.LazyPixProtocolDiscovery
         if p and p.Diagnostics then
             for _, line in ipairs(p.Diagnostics()) do Msg(line) end

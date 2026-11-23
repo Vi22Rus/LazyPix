@@ -255,11 +255,11 @@ local function report(id, candidates)
     end
     diagnostics[id] = {checks=lines, best=closest.score}
 end
-function Protocol.Scan()
+function Protocol.Scan(diagnostic)
     local candidates = enumerate()
     for _, id in ipairs(order) do
         local strategy = strategies[id]
-        report(id, candidates)
+        if diagnostic then report(id, candidates) end
         local matches, candidate = 0, nil
         for _, object in ipairs(candidates) do
             local ok, matched = pcall(strategy.match, object)
