@@ -967,3 +967,12 @@ LazyG 0.8.30 TEST — независимое затемнение GCD
 **Файлы:** CHANGELOG.md, HISTORY.md (только документы). Версия 0.8.35-dev, experimental/addon-auto-connect.
 **Статус:** CI PASS; реальный FPS/CPU и отсутствие timeout в WoW Forever НЕ ПРОВЕРЕНЫ.
 **Откат:** cc60599096ec2256e2cab1ed17b9232b4d442bdd.
+
+## LP-0020 — 2026-11-23 — убрано собственное GCD-затемнение, состояние от источника
+**Компонент:** Lua Addon 0.8.35-dev → 0.8.36-dev, experimental/addon-auto-connect, Windows/main не изменены.
+**Пользовательский тест:** подключение известных источников работает, однако LazyPix запускает свою GCD-затемнённость и на способностях без GCD. Просьба отключить локальную GCD-логику и брать доступность из материнского фрейма.
+**Диагностика:** Setup.lua устанавливал gcdDimUntil+1.5с при UNIT_SPELLCAST_SUCCEEDED и RefreshVisuals учитывал свои cooldown, range и playerCasting/Channeling. Изучен Sonah.zip/UI/Display.lua: основная иконка сереет по rec.waiting/rec.noPower и rec.outOfRange с showRangeTint. Другие источники не обязаны публиковать такое состояние единообразно.
+**Решение:** Source-controlled third boolean dimmed в API; отсутствие третьего состояния — нейтральное отображение, не выдумывать GCD. P01 по опубликованным полям, P04/P05 — уже применённая десатурация UI-текстуры. P02/P03 не добавляют непроверенное состояние. Собственный GCD и таймер декоративной рамки по CAST остановлены.
+**Файлы:** Setup.lua, AutoConnect.lua, ProtocolDiscovery.lua, LazyPix_Addon.toc, tests/autoconnect_test.lua, AUTOCONNECT.md, CHANGELOG.md, HISTORY.md. Остальная функциональность сохраняется.
+**Проверки:** GitHub Actions ожидается, Lua 5.1 mock; в WoW Forever и с Windows RGB НЕ ПРОВЕРЕНО. Риски: оттенок RGB изменён; P01 secret/unpublished состояния; источники P02/P03 не публикуют визуальную затемнённость.
+**Откат:** 2670cf5459b7ee1b346fcfc3e0862a3e62f462e0. DEV, не релиз.

@@ -7,6 +7,7 @@ local recommendationElapsed = 0
 local entries = {}
 local indicator, icon, sizePanel
 local currentSpellID, lastTexture = nil, nil
+local inheritedDimmed = nil
 local visualElapsed, dimElapsed = 0, 0
 local cosmeticStart, COSMETIC_SECONDS = nil, 1.5
 -- Separate estimated GCD dimming; never reads or controls cosmeticStart/rim.
@@ -224,31 +225,16 @@ local function SetDimmed(dim)
     icon:SetDesaturated(dim)
     icon:SetVertexColor(dim and 0.55 or 1, dim and 0.55 or 1, dim and 0.55 or 1, 1)
 end
+-- Availability is owned by the source recommendation, not a local GCD timer.
 local function RefreshVisuals()
     if not icon or not indicator or editor or not indicator:IsShown() then return end
-    local now = GetTime()
-    local onCD, outOfRange = false, false
-    if ValidSpellID(currentSpellID) then
-        local cd = SpellCooldown(currentSpellID)
-        if cd and Public(cd.startTime) and Public(cd.duration) and
-            type(cd.startTime) == "number" and type(cd.duration) == "number" then
-            -- Avoid mistaking a short shared cooldown for a long ability cooldown.
-            -- This is independent of the purely cosmetic rim timer.
-            onCD = cd.startTime > 0 and cd.duration > LONG_COOLDOWN_MIN_SECONDS
-                and cd.startTime + cd.duration > now
-        end
-        if C_Spell and C_Spell.IsSpellInRange then
-            local range = C_Spell.IsSpellInRange(currentSpellID)
-            if Public(range) and range == false then outOfRange = true end
-        end
-    end
-    -- Independent availability feedback: never use cosmetic rim progress/state.
-    SetDimmed(now < gcdDimUntil or onCD or outOfRange or playerCasting or playerChanneling)
+    SetDimmed(inheritedDimmed == true)
 end
-local function Draw(value, spellID)
+local function Draw(value, spellID, dimmed)
     if not icon or editor then return end
     -- A protected spellID cannot be inspected or passed to our Lua comparisons.
     currentSpellID = ValidSpellID(spellID) and spellID or nil
+    inheritedDimmed = Public(dimmed) and type(dimmed) == "boolean" and dimmed or nil
     -- Value may be a protected texture handle. Forward it directly.
     if issecretvalue and issecretvalue(value) then
         icon:SetTexture(value)
@@ -461,9 +447,9 @@ local function CreateIndicator()
 end
 local function ReadCurrent()
     if not auto then Draw(nil, nil) return end
-    local texture, spellID = auto.Read()
+    local texture, spellID, dimmed = auto.Read()
     selected = auto.GetActive()
-    Draw(texture, spellID)
+    Draw(texture, spellID, dimmed)
 end
 local function ShowSources()
     if not auto then Msg("Модуль Auto Connect не загружен.") return end
@@ -534,21 +520,11 @@ controller:SetScript("OnEvent", function(_, event, ...)
             auto.SetPreferred(addonDB.autoConnectSource or "auto")
         end
         ReadCurrent()
-        Msg("Auto Connect 0.8.35-dev готов: /lazypix sources для диагностики.")
+        Msg("Auto Connect 0.8.36-dev готов: /lazypix sources для диагностики.")
     elseif event == "ADDON_LOADED" then
         if auto then auto.OnAddonLoaded(...) end
     elseif event == "UNIT_SPELLCAST_SUCCEEDED" then
-        local unit, _, spellID = ...
-        if unit == "player" and not editor
-            and (not Public(spellID) or not NO_VISUAL_GCD_SPELLS[spellID]) then
-            local now = GetTime()
-            -- Two independent consumers of the cast event.  The cosmetic rim
-            -- is never consulted by dimming (and vice versa).
-            cosmeticStart = now
-            gcdDimUntil = now + GCD_DIM_SECONDS
-            UpdateCosmeticRim()
-            RefreshVisuals()
-        end
+        -- No synthetic GCD/rim: source display is authoritative.
     elseif event == "UNIT_SPELLCAST_START" or event == "UNIT_SPELLCAST_STOP"
         or event == "UNIT_SPELLCAST_FAILED" or event == "UNIT_SPELLCAST_FAILED_QUIET"
         or event == "UNIT_SPELLCAST_INTERRUPTED"

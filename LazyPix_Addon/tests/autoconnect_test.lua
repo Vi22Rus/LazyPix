@@ -62,7 +62,7 @@ print("protocol_discovery_test: PASS")
 
 -- Regression LP-0015: exported P01 structure exists with no product name.
 _G.OpaqueSpec = {
-    Engine={Current=function() return {icon="spell-icon",spellID=435} end},
+    Engine={Current=function() return {icon="spell-icon",spellID=435,waiting=true} end},
     Listen=function(self,event,fn) self.lastEvent=event; self.callback=fn end,
     Registry={ActiveSpec=function() return {key="x"} end},
 }
@@ -73,8 +73,8 @@ for _, item in ipairs(_G.LazyPixProtocolDiscovery.List()) do
 end
 assert(p01=="registered", "P01 must recognize exported Engine/Listen/Registry")
 assert(a.SetPreferred("P01"))
-local i, id01=a.Read()
-assert(i=="spell-icon" and id01==435)
+local i, id01, dim01=a.Read()
+assert(i=="spell-icon" and id01==435 and dim01==true)
 local debugTable = table.concat(_G.LazyPixProtocolDiscovery.Diagnostics(),"\\n")
 assert(debugTable:find("P01: registered",1,true))
 assert(debugTable:find("Registry.ActiveSpec=yes",1,true))
@@ -104,3 +104,10 @@ assert(count==initial+1,"pending ADDON_LOADED triggers exactly one scan")
 for n=1,200 do a.Tick() end
 assert(count==initial+1,"no periodic scan after pending load")
 print("scan_throttle_test: PASS")
+
+-- LP-0020: published shading is optional and never synthesized.
+assert(a.SetPreferred("P01"))
+-- A stale/changed P01 source is unavailable; no fabricated GCD state.
+local _, _, state=a.Read()
+assert(state==nil)
+print("source_visual_state_test: PASS")

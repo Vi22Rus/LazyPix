@@ -32,6 +32,26 @@ local function texture(tex)
     -- Protected textures must go straight to the display API.
     if ok then return value end
 end
+local function textureDim(tex)
+    if not tex or not public(tex) then return nil end
+    local ok, value = pcall(function() return tex:GetDesaturation() end)
+    if ok and public(value) and type(value) == "boolean" then return value end
+    return nil
+end
+local function recommendationDim(t, rec)
+    if not public(rec) then return nil end
+    local waiting, noPower, oor = field(rec,"waiting"),field(rec,"noPower"),field(rec,"outOfRange")
+    if (waiting ~= nil and type(waiting) ~= "boolean") or
+       (noPower ~= nil and type(noPower) ~= "boolean") or
+       (oor ~= nil and type(oor) ~= "boolean") then return nil end
+    local settings = tableField(t,"Settings")
+    local tintRange = false
+    if settings and func(settings,"Get") then
+        local ok, v = pcall(function() return settings:Get("showRangeTint") end)
+        if ok and public(v) and type(v) == "boolean" then tintRange = v end
+    end
+    return waiting == true or noPower == true or (tintRange and oor == true)
+end
 local function spell(id)
     if public(id) and type(id) == "number" and id > 0 then return id end
 end
@@ -59,7 +79,7 @@ local strategies = {
             local ok, rec = pcall(function() return e:Current() end)
             if not ok or not public(rec) then return nil end
             return field(rec,"icon"), spell(field(rec,"spellID") or
-                field(rec,"spellId") or field(rec,"id"))
+                field(rec,"spellId") or field(rec,"id")), recommendationDim(t,rec)
         end,
         connect = function(t)
             -- Subscribe only to the published event; polling remains a fallback.
@@ -69,6 +89,7 @@ local strategies = {
                     objects.P01.cachedTexture = field(rec,"icon")
                     objects.P01.cachedSpell = spell(field(rec,"spellID") or
                         field(rec,"spellId") or field(rec,"id"))
+                    objects.P01.cachedDimmed = recommendationDim(t,rec)
                 end)
             end)
         end,
@@ -137,7 +158,7 @@ local strategies = {
             if not b or not visible(b) or field(b,"isWaitingSpell") == true then return end
             local tex = field(b,"iconTexture")
             if not visible(tex) then return end
-            return texture(tex), spell(field(b,"spellID"))
+            return texture(tex), spell(field(b,"spellID")), textureDim(tex)
         end,
     },
     P05 = {
@@ -157,7 +178,7 @@ local strategies = {
             if not b or field(b,"sample") == true or field(b,"itemId") or
                 not visible(b) then return end
             local art = field(b,"texture")
-            return texture(art), spell(field(b,"spellId"))
+            return texture(art), spell(field(b,"spellId")), textureDim(art)
         end,
     },
 }
@@ -290,10 +311,11 @@ function Protocol.Scan(diagnostic)
                 end,
                 read=function()
                     if states[id] ~= "registered" then return nil end
-                    local okRead, tex, sid = pcall(strategy.read, source)
-                    if okRead and tex ~= nil then return tex, sid end
+                    local okRead, tex, sid, dim = pcall(strategy.read, source)
+                    if okRead and tex ~= nil then return tex, sid, dim end
                     if id == "P01" and objects[id] then
-                        return objects[id].cachedTexture, objects[id].cachedSpell
+                        return objects[id].cachedTexture, objects[id].cachedSpell,
+                            objects[id].cachedDimmed
                     end
                 end,
             })
