@@ -565,7 +565,7 @@ controller:SetScript("OnEvent", function(_, event, ...)
             auto.SetPreferred(addonDB.autoConnectSource or "auto")
         end
         ReadCurrent()
-        Msg("Auto Connect 0.8.40-dev готов: /lazypix sources для диагностики.")
+        Msg("Auto Connect 0.8.41-dev готов: /lazypix sources для диагностики.")
     elseif event == "ADDON_LOADED" then
         if auto then auto.OnAddonLoaded(...) end
     elseif event == "PLAYER_ENTERING_WORLD" or event == "UPDATE_BINDINGS" or
