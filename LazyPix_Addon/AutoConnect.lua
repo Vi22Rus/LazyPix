@@ -175,6 +175,23 @@ function Auto.SetPreferred(value)
 end
 function Auto.SetOnChange(fn) if type(fn) == "function" then onChange = fn end end
 function Auto.GetActive() return active end
+-- Anonymous public summary: only recognized compatible providers,
+-- not the number of installed WoW addons. No internal IDs are exposed.
+function Auto.ConnectionSummary()
+    choose()
+    local count = 0
+    for _, spec in pairs(providers) do
+        if isLoaded(spec.addon) then
+            local ready = true
+            if spec.ready then
+                local ok, value = pcall(spec.ready)
+                ready = ok and public(value) and value == true
+            end
+            if ready then count = count + 1 end
+        end
+    end
+    return count, active ~= nil
+end
 function Auto.List()
     local result = {}
     for id, spec in pairs(providers) do
