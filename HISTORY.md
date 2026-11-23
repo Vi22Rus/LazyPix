@@ -961,3 +961,9 @@ LazyG 0.8.30 TEST — независимое затемнение GCD
 **Исправление:** в тесте P01 вызвать Protocol.Scan(true), поскольку диагностика должна запрашиваться явно; не включать отчёты обратно в обычный цикл. Исходники аддона и Windows не изменяются; только test, CHANGELOG, HISTORY.
 **Статус:** 0.8.35-dev, experimental/addon-auto-connect; повторная проверка CI ожидается, WoW Forever НЕ ПРОВЕРЕНО.
 **Откат:** c3872a0c45d6aff8bbb3ded13e341b4f013b6062.
+
+## LP-0019 — 2026-11-23 — CI PASS после оптимизации 0.8.35-dev
+**Результат:** https://github.com/Vi22Rus/LazyPix/actions/runs/45101617271 SUCCESS для cc60599096ec2256e2cab1ed17b9232b4d442bdd, Lua 5.1 compile check и Auto Connect integration mock. В том числе тесты на отсутствие фонового сканирования и коалесцирование загрузок. Прошлый FAIL run 45101538694 сохранён в LP-0018.
+**Файлы:** CHANGELOG.md, HISTORY.md (только документы). Версия 0.8.35-dev, experimental/addon-auto-connect.
+**Статус:** CI PASS; реальный FPS/CPU и отсутствие timeout в WoW Forever НЕ ПРОВЕРЕНЫ.
+**Откат:** cc60599096ec2256e2cab1ed17b9232b4d442bdd.

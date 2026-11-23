@@ -1,3 +1,9 @@
+### 2026-11-23 — подтверждён PASS для 0.8.35-dev после устранения нагрузки (LP-0019)
+- **Что:** документирован успешный GitHub Actions [#45101617271](https://github.com/Vi22Rus/LazyPix/actions/runs/45101617271) для SHA `cc60599096ec2256e2cab1ed17b9232b4d442bdd`, job `lua-validation`: Lua 5.1 compile check и integration mock — SUCCESS, включая новый regression test на отсутствие повторных полных сканирований и сценарий отложенного ADDON_LOADED.
+- **Зачем:** предыдущий [#45101538694](https://github.com/Vi22Rus/LazyPix/actions/runs/45101538694) для `c3872a0c45d6aff8bbb3ded13e341b4f013b6062` FAILED из-за устаревшего ожидания теста; причина и правка описаны в LP-0018. Не скрывать прошлый FAIL.
+- **Где:** только `CHANGELOG.md`, `HISTORY.md`; LUA и Windows не изменялись, версия остаётся 0.8.35-dev.
+- **Границы:** CI PASS не означает отсутствие зависаний в WoW Forever; повторного пользовательского игрового теста ещё не было. **Ветка:** `experimental/addon-auto-connect`. **Откат:** `cc60599096ec2256e2cab1ed17b9232b4d442bdd`. **Связь:** LP-0019; SHA docs-only commit в GitHub.
+
 ### 2026-11-23 — 0.8.35-dev: исправление mock-теста после оптимизации диагностики (LP-0018)
 - **Причина:** GitHub Actions [#45101538694](https://github.com/Vi22Rus/LazyPix/actions/runs/45101538694), commit `c3872a0c45d6aff8bbb3ded13e341b4f013b6062`, FAILED на строке 80 `tests/autoconnect_test.lua` после успешного Lua 5.1 compile check. Старый тест ожидал `Registry.ActiveSpec=yes` после обычного `Protocol.Scan()`; с LP-0017 дорогостоящие счётчики правильно формируются только при `Scan(true)`.
 - **Что и где:** `LazyPix_Addon/tests/autoconnect_test.lua` — при проверке диагностических строк явно вызвать `Protocol.Scan(true)`; логика обычного сканирования и новый idle scan regression test сохраняются. `CHANGELOG.md` и `HISTORY.md` — документирована ошибка теста и её исправление. Lua-код продукта не изменён, версия остаётся 0.8.35-dev.
