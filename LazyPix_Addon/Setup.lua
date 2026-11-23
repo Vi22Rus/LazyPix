@@ -182,18 +182,38 @@ end
 
 -- All rotation protocol signatures live in ProtocolDiscovery.lua.
 -- No names of external rotation addons are required in the bridge.
+local function IsRussianLocale()
+    return type(GetLocale) == "function" and GetLocale() == "ruRU"
+end
+local function ConnectionMessage()
+    local count, connected = 0, false
+    if auto and auto.ConnectionSummary then
+        count, connected = auto.ConnectionSummary()
+    end
+    if IsRussianLocale() then
+        Msg("Обнаружено ротационных аддонов: " .. count ..
+            ". Подключено к ротационному аддону: " ..
+            (connected and "да" or "нет") .. ".")
+    else
+        Msg("Rotation addons detected: " .. count ..
+            ". Connected to a rotation addon: " ..
+            (connected and "yes" or "no") .. ".")
+    end
+end
 local function ShowHelp()
-    Msg("Команды LazyPix (эксперимент Auto Connect):")
-    Msg("/lazypix help — показать справку")
-    Msg("/lazypix on — предпросмотр изученных способностей; /lazypix off — выйти")
-    Msg("/lazypix sources — показать зарегистрированные источники")
-    Msg("/lazypix protocols — результаты проверки P01–P05")
-    Msg("/lazypix protocol debug — ручная полная проверка (может вызвать паузу)")
-    Msg("/lazypix source auto | <id> — выбрать источник")
-    Msg("/lazypix status — состояние светофора и хилпота")
-    Msg("/lazypix settings — настройки; /lazypix item next — следующий предмет")
-    Msg("/lazypix green | orange — переключить цвет светофора")
-    Msg("Фрейм: Shift+ЛКМ — переместить; Shift+ПКМ — размер (32–160)")
+    if IsRussianLocale() then
+        Msg("/lazypix on — предпросмотр; /lazypix off — выйти")
+        Msg("/lazypix settings — настройки; /lazypix item next — следующий предмет")
+        Msg("/lazypix status — состояние индикаторов")
+        Msg("/lazypix green | orange — цвет индикатора")
+        Msg("Фрейм: Shift+ЛКМ — переместить; Shift+ПКМ — размер")
+    else
+        Msg("/lazypix on — preview; /lazypix off — exit preview")
+        Msg("/lazypix settings — settings; /lazypix item next — next item")
+        Msg("/lazypix status — indicator status")
+        Msg("/lazypix green | orange — indicator color")
+        Msg("Frame: Shift+Left Click — move; Shift+Right Click — resize")
+    end
 end
 
 -- WoW Forever may mark combat-derived values as secret. Never branch, compare,
@@ -468,7 +488,7 @@ local function CreateIndicator()
     end)
     indicator:SetScript("OnEnter", function(self)
         GameTooltip:SetOwner(self, "ANCHOR_RIGHT")
-        GameTooltip:AddLine("LazyPix: " .. (selected or "no source"))
+        GameTooltip:AddLine("LazyPix")
         GameTooltip:AddLine("Shift + ЛКМ — переместить", 0.8, 0.8, 0.8)
         GameTooltip:AddLine("Shift + ПКМ — размер фрейма", 0.8, 0.8, 0.8)
         GameTooltip:Show()
@@ -483,19 +503,7 @@ local function ReadCurrent()
     selected = auto.GetActive()
     Draw(texture, spellID, dimmed, cooldown)
 end
-local function ShowSources()
-    if not auto then Msg("Модуль Auto Connect не загружен.") return end
-    auto.Scan()
-    local sources = auto.List()
-    Msg("Обнаружено загруженных аддонов: " .. #auto.Discovered() ..
-        ", зарегистрировано совместимых источников: " .. #sources)
-    for _, item in ipairs(sources) do
-        Msg(item.id .. " [" .. (item.adapter and "adapter" or "provider") .. "] " ..
-            (item.loaded and "loaded" or "not loaded") ..
-            (item.active and " ACTIVE" or ""))
-    end
-    if #sources == 0 then Msg("Протоколы не подтверждены; /lazypix protocols — диагностика.") end
-end
+
 local function StopEditor(silent)
     if not editor then return end
     editor = false
@@ -562,10 +570,11 @@ controller:SetScript("OnEvent", function(_, event, ...)
         if auto then
             auto.SetOnChange(function() if not editor then ReadCurrent() end end)
             auto.Scan()
-            auto.SetPreferred(addonDB.autoConnectSource or "auto")
+            -- Legacy manual selection is intentionally ignored; always auto-select.
+            auto.SetPreferred("auto")
         end
         ReadCurrent()
-        Msg("Auto Connect 0.8.42-dev готов: /lazypix sources для диагностики.")
+        ConnectionMessage()
     elseif event == "ADDON_LOADED" then
         if auto then auto.OnAddonLoaded(...) end
     elseif event == "PLAYER_ENTERING_WORLD" or event == "UPDATE_BINDINGS" or
@@ -628,37 +637,10 @@ SlashCmdList.LAZYPIX = function(msg)
     if msg == "help" or msg == "" then ShowHelp()
     elseif msg == "on" then StartEditor()
     elseif msg == "off" then StopEditor()
-    elseif msg == "sources" then
-        ShowSources()
-    elseif msg == "protocols" then
-        -- Cached state only; no full scan during ordinary status checks.
-        local p = _G.LazyPixProtocolDiscovery
-        if p then
-            for _, result in ipairs(p.List()) do
-                Msg(result.id .. ": " .. result.status)
-            end
-        else Msg("Модуль протоколов не загружен.") end
-    elseif msg == "protocol debug" then
-        if auto then auto.Scan(true) end
-        local p = _G.LazyPixProtocolDiscovery
-        if p and p.Diagnostics then
-            for _, line in ipairs(p.Diagnostics()) do Msg(line) end
-        else Msg("Диагностика протоколов недоступна.") end
-    elseif msg == "source" then
-        Msg("Использование: /lazypix source auto | <id>")
-    elseif msg:match("^source%s+") then
-        local name = msg:match("^source%s+(.+)$")
-        if auto and auto.SetPreferred(name) then
-            addonDB.autoConnectSource = name
-            if not editor then ReadCurrent() end
-            Msg("Auto Connect источник: " .. name)
-        else
-            Msg("Неизвестный источник: " .. tostring(name))
-        end
     elseif msg == "settings" or msg == "item next" or msg == "green" or msg == "orange" or msg == "status" then
         if LazyPixHealthWidget and LazyPixHealthWidget.Command then LazyPixHealthWidget.Command(msg) end
     else
-        Msg("Неизвестная команда. /lazypix help — список команд.")
+        Msg(IsRussianLocale() and "Неизвестная команда. /lazypix help — список команд." or "Unknown command. /lazypix help — command list.")
     end
 end
 
