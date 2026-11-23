@@ -237,7 +237,7 @@ local function RefreshVisuals()
 end
 local function SetKeybind(spellID)
     if not keybindText then return end
-    local key = keybinds and keybinds.Lookup and keybinds.Lookup(spellID) or nil
+    local key = keybinds and keybinds.Lookup and keybinds.Lookup(spellID, selected == "P02") or nil
     if type(key) ~= "string" then key = nil end
     if shownKeybind == key then return end
     shownKeybind = key
@@ -565,7 +565,7 @@ controller:SetScript("OnEvent", function(_, event, ...)
             auto.SetPreferred(addonDB.autoConnectSource or "auto")
         end
         ReadCurrent()
-        Msg("Auto Connect 0.8.41-dev готов: /lazypix sources для диагностики.")
+        Msg("Auto Connect 0.8.42-dev готов: /lazypix sources для диагностики.")
     elseif event == "ADDON_LOADED" then
         if auto then auto.OnAddonLoaded(...) end
     elseif event == "PLAYER_ENTERING_WORLD" or event == "UPDATE_BINDINGS" or
