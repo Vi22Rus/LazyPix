@@ -1,4 +1,12 @@
 
+### 2026-11-23 — документация CI: PASS для Auto Connect 0.8.32-dev (LP-0011)
+- **Что сделано:** зафиксирован реальный успешный GitHub Actions run, ранее отмеченный как «ожидается», и разграничены пройденные проверки от отсутствующего игрового теста.
+- **Где:** `CHANGELOG.md` (эта запись), `HISTORY.md` (LP-0011); исходники Lua и Windows не изменялись.
+- **Зачем:** выполнить обязательное правило истории каждого коммита и не потерять результат автоматической проверки.
+- **Проверки:** [GitHub Actions #45097646800](https://github.com/Vi22Rus/LazyPix/actions/runs/45097646800) — SUCCESS для исходного SHA `f8df11d6c98675115892f1e51f63022c872180a6`. В job `lua-validation` успешно выполнены установка Lua 5.1, `luac5.1 -p` для Setup/AutoConnect/HealthWidget/test и mock integration test.
+- **Границы:** тест в WoW Forever, совместимость сторонних реальных аддонов и Windows RGB НЕ ПРОВЕРЕНЫ. Версия остаётся DEV.
+- **Ветка:** `experimental/addon-auto-connect`; SHA этого docs-only коммита доступен в GitHub. **Откат:** `f8df11d6c98675115892f1e51f63022c872180a6`. **Связь:** LP-0011.
+
 ### 2026-11-23 — 0.8.32-dev: regression check and manual ID case handling (LP-0010)
 - **Что:** исправлен поиск зарегистрированного идентификатора при вводе команды `/lazypix source <id>`: ввод WoW приводится к нижнему регистру, а провайдер может зарегистрировать имя со смешанным регистром. Теперь ручное сопоставление без учёта регистра, при неоднозначности — отказ. Добавлен GitHub Actions для проверки Lua 5.1 и mock-теста Auto Connect.
 - **Где:** `LazyPix_Addon/AutoConnect.lua` (`Auto.SetPreferred`); `tests/autoconnect_test.lua` (lowercase case); `AUTOCONNECT.md` (правило); новый `.github/workflows/lazypix-addon-autoconnect-dev.yml`.

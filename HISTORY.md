@@ -891,3 +891,12 @@ LazyG 0.8.30 TEST — независимое затемнение GCD
 **Предыдущий коммит:** ef02e5c98fe7b28850d88ce33cac7637048a332f.
 **Откат:** main 0.8.30 TEST, для экспериментальных тестов — предыдущий SHA.
 **Следующий шаг:** проверить результаты Actions и живое подключение совместимого источника.
+
+
+## LP-0011 — 2026-11-23 — зафиксирован фактический PASS GitHub Actions Auto Connect
+**Компонент:** Lua Addon 0.8.32-dev, experimental/addon-auto-connect, документация.
+**Событие:** workflow https://github.com/Vi22Rus/LazyPix/actions/runs/45097646800 завершился SUCCESS для исходного SHA f8df11d6c98675115892f1e51f63022c872180a6.
+**Проверки:** все файлы AutoConnect.lua, Setup.lua, HealthWidget.lua и mock-тест проверены luac5.1; mock autoconnect_test.lua исполнен под Lua 5.1 (PASS). Наличие шага CI не доказывает корректную работу WoW protected/secret API.
+**Файлы:** CHANGELOG.md, HISTORY.md (docs-only). Цель — сохранить фактическое подтверждение CI с отчётливой оговоркой о границах.
+**Результат:** GitHub Actions PASS; WoW Forever — НЕ ПРОВЕРЕНО; Windows — не затронут.
+**Откат:** f8df11d6c98675115892f1e51f63022c872180a6. **Следующая задача:** проверить реального совместимого провайдера в WoW, с /lazypix sources и тестом смены target/rotation recommendation.
