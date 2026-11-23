@@ -1,3 +1,11 @@
+### 2026-11-23 — подтверждён CI PASS для 0.8.33-dev (LP-0014)
+- **Что:** зафиксирован фактический SUCCESS последней проверки нового анонимного Protocol Discovery, включая отдельный `luac5.1 -p ProtocolDiscovery.lua` и `autoconnect_test.lua` под Lua 5.1.
+- **Где:** `CHANGELOG.md`, `HISTORY.md` — только документация; код, TOC и workflow не изменялись.
+- **Почему:** по требованию пользователя сохранять полные результаты тестов и различать успешную проверку синтаксиса от неподтверждённой интеграции в WoW.
+- **Проверено:** [GitHub Actions #45099960062](https://github.com/Vi22Rus/LazyPix/actions/runs/45099960062), SHA `c0942c1732ecd340d8502dafbd3b489859b62dca`, job `lua-validation` — SUCCESS: установка Lua 5.1, compile check, mock integration PASS. Предыдущий [#45099908592](https://github.com/Vi22Rus/LazyPix/actions/runs/45099908592), SHA `c425c075af864b575a1aed6edca8d35258ef6653` — также SUCCESS, до добавления отдельной compile-команды.
+- **Непроверено:** реальная работа P01–P05 в WoW Forever, конфликт двух одновременно работающих источников, секретные значения и RGB-связка с Windows; DEV не релиз.
+- **Ветка:** `experimental/addon-auto-connect`; SHA docs-only коммита в GitHub. **Откат:** `c0942c1732ecd340d8502dafbd3b489859b62dca`. **Связь:** LP-0014.
+
 ### 2026-11-23 — Lua CI: отдельная проверка ProtocolDiscovery.lua (LP-0013)
 - **Что и почему:** добавлена обязательная синтаксическая проверка нового модуля P01–P05 в GitHub Actions; предыдущий workflow 0.8.32-dev проверял только старые файлы и тестовую загрузку нового модуля, но не делал явного `luac5.1 -p` для него.
 - **Где:** `.github/workflows/lazypix-addon-autoconnect-dev.yml`, job `lua-validation`, шаг `Lua 5.1 compile check`; `CHANGELOG.md`, `HISTORY.md`.

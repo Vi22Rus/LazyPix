@@ -919,3 +919,11 @@ LazyG 0.8.30 TEST — независимое затемнение GCD
 **Проверки:** GitHub Actions после push; фактический результат вне этого commit. Игровые интеграции не проверены.
 **Ветка:** experimental/addon-auto-connect, addon 0.8.33-dev; код Lua и Windows не изменён.
 **Rollback:** c425c075af864b575a1aed6edca8d35258ef6653.
+
+## LP-0014 — 2026-11-23 — зафиксирован успех CI 0.8.33-dev
+**Компонент:** Lua Addon, documentation-only, версия остаётся 0.8.33-dev.
+**Событие:** GitHub Actions #45099960062 для c0942c1732ecd340d8502dafbd3b489859b62dca завершился SUCCESS: luac5.1 -p AutoConnect, ProtocolDiscovery, Setup, HealthWidget, test; затем lua5.1 autoconnect_test.lua PASS. Предыдущий #45099908592 для c425c075af864b575a1aed6edca8d35258ef6653 тоже SUCCESS.
+**Причина/изменения:** зафиксировать достоверный результат в CHANGELOG.md и HISTORY.md, не приписывая Lua CI полноценный игровой тест. Исходники и CI workflow не менялись.
+**Границы:** интеграция с настоящими источниками WoW Forever, secret values и Windows RGB НЕ ПРОВЕРЕНА.
+**Ветка и откат:** experimental/addon-auto-connect; откат на c0942c1732ecd340d8502dafbd3b489859b62dca; main без изменений.
+**Дальше:** пользовательский /reload, /lazypix protocols, /lazypix sources и сравнение иконки в бою с источником.
