@@ -20,6 +20,7 @@ jobs:
       - name: Lua 5.1 compile check
         run: |
           luac5.1 -p LazyPix_Addon/AutoConnect.lua
+          luac5.1 -p LazyPix_Addon/ProtocolDiscovery.lua
           luac5.1 -p LazyPix_Addon/Setup.lua
           luac5.1 -p LazyPix_Addon/HealthWidget.lua
           luac5.1 -p LazyPix_Addon/tests/autoconnect_test.lua
