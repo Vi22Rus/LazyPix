@@ -954,3 +954,10 @@ LazyG 0.8.30 TEST — независимое затемнение GCD
 **Изменены:** AutoConnect.lua, ProtocolDiscovery.lua, Setup.lua, LazyPix_Addon.toc, tests/autoconnect_test.lua, AUTOCONNECT.md, CHANGELOG.md, HISTORY.md. HealthWidget.lua и Windows не менялись.
 **Проверки:** добавлен Lua 5.1 mock на отсутствие повторного idle scan, CI по push ожидается; реальный WoW-тест 0.8.35-dev НЕ ПРОВЕРЕН. Приоритет: загрузка без фриза, отсутствие фризов в течение нескольких минут, /lazypix protocols, рекомендация P01.
 **Rollback:** 797609222569e0a6ee9486cd82307f3d6f40a9aa только для Git-отката, не для игрового использования из-за фризов.
+
+## LP-0018 — 2026-11-23 — исправлен устаревший mock-тест тяжёлой диагностики
+**Отказ CI:** run #45101538694 (commit c3872a0c45d6aff8bbb3ded13e341b4f013b6062) — Lua 5.1 compile check PASS, integration mock FAIL, tests/autoconnect_test.lua:80 ожидал Registry.ActiveSpec=yes после обычного Scan().
+**Первопричина:** LP-0017 умышленно отключил вызов report() в обычном Scan() для снижения CPU, но проверка диагностического содержимого не была обновлена. Это ошибка теста, не доказанный дефект P01.
+**Исправление:** в тесте P01 вызвать Protocol.Scan(true), поскольку диагностика должна запрашиваться явно; не включать отчёты обратно в обычный цикл. Исходники аддона и Windows не изменяются; только test, CHANGELOG, HISTORY.
+**Статус:** 0.8.35-dev, experimental/addon-auto-connect; повторная проверка CI ожидается, WoW Forever НЕ ПРОВЕРЕНО.
+**Откат:** c3872a0c45d6aff8bbb3ded13e341b4f013b6062.

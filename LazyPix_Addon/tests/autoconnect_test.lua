@@ -66,7 +66,7 @@ _G.OpaqueSpec = {
     Listen=function(self,event,fn) self.lastEvent=event; self.callback=fn end,
     Registry={ActiveSpec=function() return {key="x"} end},
 }
-_G.LazyPixProtocolDiscovery.Scan()
+_G.LazyPixProtocolDiscovery.Scan(true)
 local p01
 for _, item in ipairs(_G.LazyPixProtocolDiscovery.List()) do
     if item.id=="P01" then p01=item.status end
