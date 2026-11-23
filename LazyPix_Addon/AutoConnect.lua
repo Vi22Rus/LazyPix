@@ -142,7 +142,19 @@ function Auto.Tick()
     if now - lastScan >= 2 then Auto.Scan() end
 end
 function Auto.SetPreferred(value)
-    if value ~= "auto" and not providers[value] then return false end
+    if not typed(value, "string") then return false end
+    -- WoW slash input is lowercased; retain the registered spelling internally.
+    if value ~= "auto" and not providers[value] then
+        local match
+        for id in pairs(providers) do
+            if id:lower() == value:lower() then
+                if match then return false end -- ambiguous IDs differing only by case
+                match = id
+            end
+        end
+        if not match then return false end
+        value = match
+    end
     preferred = value
     choose()
     return true

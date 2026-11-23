@@ -1,0 +1,27 @@
+name: LazyPix Addon Auto Connect DEV
+on:
+  push:
+    branches:
+      - experimental/addon-auto-connect
+    paths:
+      - 'LazyPix_Addon/**'
+      - '.github/workflows/lazypix-addon-autoconnect-dev.yml'
+  workflow_dispatch:
+
+jobs:
+  lua-validation:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install Lua 5.1
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y lua5.1
+      - name: Lua 5.1 compile check
+        run: |
+          luac5.1 -p LazyPix_Addon/AutoConnect.lua
+          luac5.1 -p LazyPix_Addon/Setup.lua
+          luac5.1 -p LazyPix_Addon/HealthWidget.lua
+          luac5.1 -p LazyPix_Addon/tests/autoconnect_test.lua
+      - name: Auto Connect integration mock
+        run: lua5.1 LazyPix_Addon/tests/autoconnect_test.lua
