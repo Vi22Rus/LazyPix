@@ -976,3 +976,9 @@ LazyG 0.8.30 TEST — независимое затемнение GCD
 **Файлы:** Setup.lua, AutoConnect.lua, ProtocolDiscovery.lua, LazyPix_Addon.toc, tests/autoconnect_test.lua, AUTOCONNECT.md, CHANGELOG.md, HISTORY.md. Остальная функциональность сохраняется.
 **Проверки:** GitHub Actions ожидается, Lua 5.1 mock; в WoW Forever и с Windows RGB НЕ ПРОВЕРЕНО. Риски: оттенок RGB изменён; P01 secret/unpublished состояния; источники P02/P03 не публикуют визуальную затемнённость.
 **Откат:** 2670cf5459b7ee1b346fcfc3e0862a3e62f462e0. DEV, не релиз.
+
+## LP-0021 — 2026-11-23 — CI PASS для изменения затемнения 0.8.36-dev
+**Причина:** завершилось тестирование коммита LP-0020.
+**Результат:** https://github.com/Vi22Rus/LazyPix/actions/runs/45102575958 — SUCCESS для 3e33da27fe017acd6ac3dc84f1ff87a7155f2a55. Lua 5.1 compile check и mock integration test PASS.
+**Файлы:** CHANGELOG.md, HISTORY.md; код не менялся. Аддон 0.8.36-dev, experimental/addon-auto-connect.
+**Границы:** в WoW Forever GCD/без-GCD, CPU, визуальное совпадение с родительской иконкой, Windows RGB НЕ ПРОВЕРЕНЫ. Откат: 3e33da27fe017acd6ac3dc84f1ff87a7155f2a55.
