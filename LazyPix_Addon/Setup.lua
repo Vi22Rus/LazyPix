@@ -562,8 +562,6 @@ controller:SetScript("OnUpdate", function(_, dt)
     end
 end)
 
-SLASH_LAZYPIX1end)
-
 SLASH_LAZYPIX1 = "/lazypix"
 SlashCmdList.LAZYPIX = function(msg)
     msg = (msg or ""):lower():match("^%s*(.-)%s*$")
