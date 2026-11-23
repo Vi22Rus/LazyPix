@@ -8,6 +8,8 @@ local entries = {}
 local indicator, icon, sizePanel
 local currentSpellID, lastTexture = nil, nil
 local inheritedDimmed = nil
+local inheritedCooldown = nil
+local greyOverlay = nil
 local visualElapsed, dimElapsed = 0, 0
 local cosmeticStart, COSMETIC_SECONDS = nil, 1.5
 -- Separate estimated GCD dimming; never reads or controls cosmeticStart/rim.
@@ -229,12 +231,14 @@ end
 local function RefreshVisuals()
     if not icon or not indicator or editor or not indicator:IsShown() then return end
     SetDimmed(inheritedDimmed == true)
+    if greyOverlay then greyOverlay:SetShown(inheritedCooldown == true) end
 end
-local function Draw(value, spellID, dimmed)
+local function Draw(value, spellID, dimmed, cooldown)
     if not icon or editor then return end
     -- A protected spellID cannot be inspected or passed to our Lua comparisons.
     currentSpellID = ValidSpellID(spellID) and spellID or nil
     inheritedDimmed = Public(dimmed) and type(dimmed) == "boolean" and dimmed or nil
+    inheritedCooldown = Public(cooldown) and type(cooldown) == "boolean" and cooldown or nil
     -- Value may be a protected texture handle. Forward it directly.
     if issecretvalue and issecretvalue(value) then
         icon:SetTexture(value)
@@ -245,6 +249,8 @@ local function Draw(value, spellID, dimmed)
         indicator:Show()
     else
         icon:SetTexture(nil)
+        inheritedCooldown = nil
+        if greyOverlay then greyOverlay:Hide() end
         indicator:Hide()
         SetDimmed(false)
     end
@@ -352,6 +358,11 @@ local function CreateIndicator()
     background:SetColorTexture(0, 0, 0, 0.75)
     icon = indicator:CreateTexture(nil, "ARTWORK")
     icon:SetAllPoints()
+    -- Parent-authored cooldown state: grey film above the icon, not a clock.
+    greyOverlay = indicator:CreateTexture(nil, "OVERLAY", nil, 1)
+    greyOverlay:SetAllPoints(icon)
+    greyOverlay:SetColorTexture(0.12, 0.12, 0.12, 0.53)
+    greyOverlay:Hide()
     local border = indicator:CreateTexture(nil, "OVERLAY")
     border:SetTexture("Interface\\Buttons\\UI-ActionButton-Border")
     border:SetBlendMode("ADD")
@@ -447,9 +458,9 @@ local function CreateIndicator()
 end
 local function ReadCurrent()
     if not auto then Draw(nil, nil) return end
-    local texture, spellID, dimmed = auto.Read()
+    local texture, spellID, dimmed, cooldown = auto.Read()
     selected = auto.GetActive()
-    Draw(texture, spellID, dimmed)
+    Draw(texture, spellID, dimmed, cooldown)
 end
 local function ShowSources()
     if not auto then Msg("Модуль Auto Connect не загружен.") return end
@@ -470,6 +481,7 @@ local function StopEditor(silent)
     entries = {}
     if indicator then indicator.previewBorder:Hide() end
     SetDimmed(false)
+    if greyOverlay then greyOverlay:Hide() end
     if LazyPixHealthWidget then LazyPixHealthWidget.SetPreview(false) end
     ReadCurrent()
     UpdateCosmeticRim()
@@ -488,6 +500,8 @@ local function StartEditor()
     -- Keep the decorative preview border hidden: it obscures ability icon pixels.
     indicator:Show() -- Preview is visible even without a live recommendation.
     currentSpellID = nil
+    inheritedCooldown = nil
+    if greyOverlay then greyOverlay:Hide() end
     SetDimmed(false)
     icon:SetTexture(entries[index].icon)
     UpdateCosmeticRim()

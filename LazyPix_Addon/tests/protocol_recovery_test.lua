@@ -56,7 +56,9 @@ assert(tex=="p03-texture" and spell==303, "P03 output not read")
 
 sourceFour.mainFrame = frame()
 sourceFour.spellIcons = {{iconTexture=art("p04-texture"),
-    spellID=404,IsShown=function() return true end}}
+    spellID=404,IsShown=function() return true end,
+    cooldown={IsShown=function() return true end,
+        GetCooldownTimes=function() return 1000, 9000 end}}}
 _G.SourceFive.nextWindow = {
     frame=frame(),active=true,count=1,
     icons={{texture=art("p05-texture"),spellId=505,
@@ -70,8 +72,14 @@ proto.RefreshLate()
 assert(status("P04")=="registered", "P04 AceAddon cached owner not activated")
 assert(status("P05")=="registered", "P05 late window not activated")
 assert(auto.SetPreferred("P04"))
-tex, spell = auto.Read()
-assert(tex=="p04-texture" and spell==404, "P04 icon not forwarded")
+local parentGrey
+tex, spell, _, parentGrey = auto.Read()
+assert(tex=="p04-texture" and spell==404 and parentGrey==true,
+    "P04 active parent cooldown must activate grey film")
+clock = 12
+tex, spell, _, parentGrey = auto.Read()
+assert(parentGrey==false, "P04 expired cooldown must clear grey film")
+clock = 4
 assert(auto.SetPreferred("P05"))
 tex, spell = auto.Read()
 assert(tex=="p05-texture" and spell==505, "P05 preview icon not forwarded")

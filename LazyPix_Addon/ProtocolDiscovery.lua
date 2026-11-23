@@ -39,6 +39,39 @@ local function textureDim(tex)
     if ok and public(value) and type(value) == "boolean" then return value end
     return nil
 end
+-- Read the already-rendered parent cooldown, never invent our own 1.5s GCD.
+-- GetCooldownTimes uses milliseconds on Blizzard cooldown frames.
+-- Unreadable/secret timing is unknown (nil), not falsely ready.
+local function parentCooldown(frame)
+    if not frame or not public(frame) then return nil end
+    local shown, isShown = pcall(function() return frame:IsShown() end)
+    if not shown or not public(isShown) then return nil end
+    if isShown ~= true then return false end
+    local ok, startMs, durationMs = pcall(function()
+        return frame:GetCooldownTimes()
+    end)
+    if not ok or not public(startMs) or not public(durationMs) or
+        type(startMs) ~= "number" or type(durationMs) ~= "number" then
+        return nil
+    end
+    if durationMs <= 0 or startMs <= 0 then return false end
+    local now = type(GetTime) == "function" and GetTime() or nil
+    if not public(now) or type(now) ~= "number" then return nil end
+    return startMs + durationMs > now * 1000
+end
+local function primaryFrameCooldown(t)
+    local ui = tableField(t,"UI")
+    local display = ui and tableField(ui,"Display")
+    if not display or not func(display,"Frames") then return nil end
+    local ok, frames = pcall(function() return display:Frames() end)
+    if not ok or not public(frames) then return nil end
+    local mainIcon = tableField(frames,"icon")
+    return parentCooldown(mainIcon and field(mainIcon,"cooldown"))
+end
+local function firstButtonCooldown(t)
+    local b = field(tableField(t,"spellIcons"),1)
+    return b and parentCooldown(field(b,"cooldown")) or nil
+end
 local function recommendationDim(t, rec)
     if not public(rec) then return nil end
     local waiting, noPower, oor = field(rec,"waiting"),field(rec,"noPower"),field(rec,"outOfRange")
@@ -79,8 +112,10 @@ local strategies = {
             local e = field(t,"Engine")
             local ok, rec = pcall(function() return e:Current() end)
             if not ok or not public(rec) then return nil end
+            local cd = primaryFrameCooldown(t)
+            if cd == nil and field(rec,"waiting") == true then cd = true end
             return field(rec,"icon"), spell(field(rec,"spellID") or
-                field(rec,"spellId") or field(rec,"id")), recommendationDim(t,rec)
+                field(rec,"spellId") or field(rec,"id")), recommendationDim(t,rec), cd
         end,
         connect = function(t)
             -- Subscribe only to the published event; polling remains a fallback.
@@ -91,6 +126,10 @@ local strategies = {
                     objects.P01.cachedSpell = spell(field(rec,"spellID") or
                         field(rec,"spellId") or field(rec,"id"))
                     objects.P01.cachedDimmed = recommendationDim(t,rec)
+                    objects.P01.cachedCooldown = primaryFrameCooldown(t)
+                    if objects.P01.cachedCooldown == nil and field(rec,"waiting") == true then
+                        objects.P01.cachedCooldown = true
+                    end
                 end)
             end)
         end,
@@ -158,7 +197,8 @@ local strategies = {
             if not b or not visible(b) or field(b,"isWaitingSpell") == true then return end
             local tex = field(b,"iconTexture")
             if not visible(tex) then return end
-            return texture(tex), spell(field(b,"spellID")), textureDim(tex)
+            return texture(tex), spell(field(b,"spellID")), textureDim(tex),
+                parentCooldown(field(b,"cooldown"))
         end,
     },
     P05 = {
@@ -324,8 +364,8 @@ function Protocol.RefreshLate()
                 end,
                 read=function()
                     if states[id] ~= "registered" then return nil end
-                    local okRead, tex, spellId, dim = pcall(strategy.read,candidate)
-                    if okRead then return tex,spellId,dim end
+                    local okRead, tex, spellId, dim, cooldown = pcall(strategy.read,candidate)
+                    if okRead then return tex,spellId,dim,cooldown end
                 end,
             })
             if ok then installed[id],states[id] = true,"registered" end
@@ -368,11 +408,12 @@ function Protocol.Scan(diagnostic)
                 end,
                 read=function()
                     if states[id] ~= "registered" then return nil end
-                    local okRead, tex, sid, dim = pcall(strategy.read, source)
-                    if okRead and tex ~= nil then return tex, sid, dim end
+                    local okRead, tex, sid, dim, cooldown = pcall(strategy.read, source)
+                    if okRead and tex ~= nil then return tex, sid, dim, cooldown end
                     if id == "P01" and objects[id] then
                         return objects[id].cachedTexture, objects[id].cachedSpell,
-                            objects[id].cachedDimmed
+                            objects[id].cachedDimmed,
+                            objects[id].cachedCooldown
                     end
                 end,
             })

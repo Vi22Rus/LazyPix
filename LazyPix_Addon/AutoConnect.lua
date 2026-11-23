@@ -194,10 +194,11 @@ function Auto.Read()
     choose()
     local spec = active and providers[active]
     if not spec then return nil, nil end
-    local ok, texture, id, dimmed = pcall(spec.read)
+    local ok, texture, id, dimmed, cooldown = pcall(spec.read)
     if not ok then return nil, nil end
     if not typed(id, "number") or id <= 0 then id = nil end
     -- Protected texture is never examined: the visual Blizzard API receives it directly.
     if not typed(dimmed, "boolean") then dimmed = nil end
-    return texture, id, dimmed
+    if not typed(cooldown, "boolean") then cooldown = nil end
+    return texture, id, dimmed, cooldown
 end
