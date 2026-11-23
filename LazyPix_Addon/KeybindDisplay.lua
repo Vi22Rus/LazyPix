@@ -71,7 +71,10 @@ function Keybind.Refresh()
             local button=field(_G,bar.name..i)
             if button then
                 local action=buttonActionSlot(button)
-                local actionType,actionID=action and safeCall(_G.GetActionInfo,action)
+                local actionType, actionID
+                if action then
+                    actionType, actionID = safeCall(_G.GetActionInfo,action)
+                end
                 if actionType=="spell" and type(actionID)=="number" and
                     public(actionID) and actionID>0 then
                     local key=bindingFor(button,bar.binding..i)
