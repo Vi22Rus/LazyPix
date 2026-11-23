@@ -1,12 +1,8 @@
--- LazyPix 0.8.30 TEST - separate GCD dimming from cosmetic perimeter animation.
+-- LazyPix 0.8.31-dev EXPERIMENT - rotation adapters removed for isolated Auto Connect development.
 -- The recommendation is produced only by the source addon. LazyPix never casts spells.
 local controller = CreateFrame("Frame")
-local adapters = {}
-local preference = "auto"
 local selected, editor, index = nil, false, 1
 local entries = {}
-local elapsed, detectElapsed = 0, 0
-local startupElapsed, startupAnnounced = 0, false
 local indicator, icon, sizePanel
 local currentSpellID, lastTexture = nil, nil
 local visualElapsed, dimElapsed = 0, 0
@@ -177,208 +173,19 @@ local function SpellbookSpells()
     return result
 end
 
--- Adapter contract: ready(), connect(callback), read() (optional).
--- Only LIVE recommendations come from rotation addons; editor spells do not.
-adapters.sonah = {
-    ready = function()
-        local s = _G.Sonah
-        return s and s.Engine and s.Engine.Current and s.Listen and s.Registry
-            and s.Registry.ActiveSpec and s.Registry.ActiveSpec()
-    end,
-    connect = function(push)
-        local s = _G.Sonah
-        if not s or not s.Listen then return false end
-        s:Listen("RECOMMENDATION", function(rec)
-            push("sonah", rec and rec.icon, rec and (rec.spellID or rec.spellId or rec.id))
-        end)
-        return true
-    end,
-    read = function()
-        local s = _G.Sonah
-        local rec = s and s.Engine and s.Engine.Current and s.Engine:Current()
-        return rec and rec.icon, rec and (rec.spellID or rec.spellId or rec.id)
-    end,
-}
-adapters.maxdps = {
-    ready = function()
-        local m = _G.MaxDps
-        return m and m.NextSpell and m.db and m.db.global and m.db.global.enabled ~= false
-    end,
-    read = function()
-        local m = _G.MaxDps
-        -- No other-addon event; read the last computed spell (no rotation evaluation).
-        return m and SpellTexture(m.Spell), m and m.Spell
-    end,
-}
--- Hekili can show the Primary or AOE display; each display has its own
--- published recommendation. Prefer the icon actually drawn by Hekili's UI
--- (including iconOverride) so our frame follows the player's visible rotation.
-local function HekiliIcon()
-    local h = _G.Hekili
-    if not h then return nil end
-    for _, name in ipairs({"Primary", "AOE"}) do
-        local frame = _G["HekiliDisplay" .. name]
-        if frame and frame.alpha and frame.alpha > 0 then
-            local button = frame.Buttons and frame.Buttons[1]
-            local texture = button and button.Texture
-            if button and button:IsShown() and texture and texture:IsShown() then
-                -- The returned texture may be a secret value: forward it as-is.
-                local output = h.Engine and h.Engine.Output
-                local stream = output and output[name]
-                local rec = stream and stream.recs and stream.recs[1]
-                return texture:GetTexture(), rec and rec.actionID
-            end
-        end
-    end
-    local output = h.Engine and h.Engine.Output
-    if not output then return nil end
-    -- If the display has not drawn yet, use the most recent published choice.
-    for _, name in ipairs({"Primary", "AOE"}) do
-        local stream = output[name]
-        local rec = stream and stream.count > 0 and stream.recs and stream.recs[1]
-        if rec then return rec.iconOverride or rec.texture, rec.actionID end
-    end
-end
-adapters.hekili = {
-    ready = function()
-        local h = _G.Hekili
-        return h and h.Engine and h.Engine.Subscribe and h.Engine.Output
-            and h.Engine.Output.Primary and h.Engine.settings and h.Engine.settings.enabled
-    end,
-    connect = function(push)
-        local engine = _G.Hekili and _G.Hekili.Engine
-        if not engine or not engine.Subscribe then return false end
-        -- Passive subscriptions: no extra Hekili rotation computations.
-        -- Polling below also covers a full subscriber list and late UI draws.
-        local function updated()
-            local texture, spellID = HekiliIcon()
-            push("hekili", texture, spellID)
-        end
-        local primary = engine.Subscribe("Primary", updated, true)
-        local aoe = engine.Subscribe("AOE", updated, true)
-        return primary or aoe
-    end,
-    read = HekiliIcon,
-}
-
-
--- JustAC (JustAssistedCombat) publishes its recommendation by rendering the
--- first button of its queue. Read only that completed UI result: calling
--- SpellQueue.GetCurrentSpellQueue() would evaluate its rotation a second time.
-local function JustACAddon()
-    if not LibStub then return nil end
-    local ace = LibStub("AceAddon-3.0", true)
-    return ace and ace.GetAddon and ace:GetAddon("JustAssistedCombat", true)
-end
-
-local function JustACIcon()
-    local a = JustACAddon()
-    if not a or a.isDisabledMode or not a.mainFrame or
-       not a.mainFrame:IsShown() then return nil end
-    local button = a.spellIcons and a.spellIcons[1]
-    local art = button and button.iconTexture
-    if not button or not button:IsShown() or
-       not art or not art:IsShown() then return nil end
-    -- JustAC's own WAIT placeholder is not a recommended ability.
-    if button.isWaitingSpell then return nil end
-    local id = button.spellID
-    if issecretvalue and issecretvalue(id) then id = nil end
-    -- Negative IDs represent items in JustAC, not spell cooldown IDs.
-    if type(id) ~= "number" or id <= 0 then id = nil end
-    -- The art is the actual rendered recommendation, including icon overrides.
-    return art:GetTexture(), id
-end
-
-adapters.justac = {
-    ready = function()
-        local a = JustACAddon()
-        return a and not a.isDisabledMode and a.mainFrame and a.spellIcons
-    end,
-    read = JustACIcon,
-}
-
-
--- Rotation Master: use its already-rendered first recommendation.
--- Never call its evaluator or force the addon to create a preview window.
--- Its Preview Spells setting must be enabled for a live icon to exist.
-local function RotationMasterIcon()
-    local a = _G.RotationMaster
-    local w = a and a.nextWindow
-    if not w or not w.active or not w.frame or not w.frame:IsShown()
-        or not w.icons or (w.count or 0) < 1 then return nil end
-    local button = w.icons[1]
-    local art = button and button.texture
-    if not button or button.sample or not button:IsShown()
-        or not art or not art:IsShown() then return nil end
-    local id = button.spellId
-    if issecretvalue and issecretvalue(id) then id = nil end
-    if type(id) ~= "number" or id <= 0 or button.itemId then id = nil end
-    return art:GetTexture(), id
-end
-
-adapters.rotationmaster = {
-    ready = function()
-        local a = _G.RotationMaster
-        return a and a.db and a.db.profile and a.nextWindow
-            and a.nextWindow.active and a.nextWindow.frame
-    end,
-    read = RotationMasterIcon,
-}
-
-local connected = {}
-local function ChooseSource()
-    if preference ~= "auto" then
-        local a = adapters[preference]
-        if a and a.ready() then return preference end
-        return nil
-    end
-    -- Predictable precedence when multiple engines are loaded; manual override available.
-    for _, name in ipairs({"sonah", "maxdps", "hekili", "justac", "rotationmaster"}) do
-        if adapters[name].ready() then return name end
-    end
-end
-local sourceOrder = {"sonah", "maxdps", "hekili", "justac", "rotationmaster"}
-local sourceNames = {sonah = "Sonah", maxdps = "MaxDPS", hekili = "Hekili", justac = "JustAC", rotationmaster = "RotationMaster"}
-local function AvailableSources()
-    local result = {}
-    for _, name in ipairs(sourceOrder) do
-        if adapters[name].ready() then result[#result + 1] = name end
-    end
-    return result
-end
-local function AnnounceSources()
-    local found = AvailableSources()
-    if #found == 0 then
-        Msg("Ротационные аддоны не обнаружены. Светофор и хилпот доступны.")
-        return
-    end
-    local names = {}
-    for _, name in ipairs(found) do names[#names + 1] = sourceNames[name] end
-    if #found > 1 then
-        Msg("Обнаружено несколько ротационных аддонов: " .. table.concat(names, ", ") .. ".")
-        if selected then
-            Msg("LazyPix использует: " .. sourceNames[selected] .. ". Для переключения: /lazypix source <sonah|maxdps|hekili|justac|rotationmaster>.")
-        else
-            Msg("Выбранный источник недоступен. /lazypix source auto или /lazypix source <sonah|maxdps|hekili|justac|rotationmaster>.")
-        end
-    else
-        if selected then
-            Msg("Обнаружен " .. names[1] .. ". LazyPix использует: " .. sourceNames[selected] .. ".")
-        else
-            Msg("Обнаружен " .. names[1] .. ", но выбранный источник недоступен. /lazypix source auto")
-        end
-    end
-end
+-- EXPERIMENTAL BRANCH: No rotation-source adapters are installed.
+-- Auto Connect will be developed and reviewed independently here.
+-- This module currently has NO live rotation recommendation source.
+-- Preserve our own UI/preview/health/traffic-light as the stable base.
 local function ShowHelp()
-    Msg("Команды LazyPix:")
-    Msg("/lazypix help — показать эту справку")
-    Msg("/lazypix on — включить настройку иконок; /lazypix off — выйти")
-    Msg("/lazypix source auto — автоматический выбор источника")
-    Msg("/lazypix source sonah|maxdps|hekili|justac|rotationmaster — выбрать источник вручную")
+    Msg("Команды LazyPix (эксперимент Auto Connect):")
+    Msg("/lazypix help — показать справку")
+    Msg("/lazypix on — предпросмотр изученных способностей; /lazypix off — выйти")
+    Msg("/lazypix source — подключение источников ещё не реализовано в этой ветке")
     Msg("/lazypix status — состояние светофора и хилпота")
     Msg("/lazypix settings — настройки; /lazypix item next — следующий предмет")
     Msg("/lazypix green | orange — переключить цвет светофора")
-    Msg("Фрейм ротации: Shift+ЛКМ — переместить; Shift+ПКМ — ширина и высота (32–160)")
+    Msg("Фрейм: Shift+ЛКМ — переместить; Shift+ПКМ — размер (32–160)")
 end
 
 -- WoW Forever may mark combat-derived values as secret. Never branch, compare,
@@ -455,16 +262,8 @@ local function Draw(value, spellID)
     RefreshVisuals()
     UpdateCosmeticRim()
 end
-local function Push(name, value, spellID)
-    if selected == name and not editor then Draw(value, spellID) end
-end
-local function Connect()
-    for name, a in pairs(adapters) do
-        if a.connect and not connected[name] and a.ready() then
-            connected[name] = a.connect(Push) and true or false
-        end
-    end
-end
+-- No source callback or adapter connections in this experiment.
+-- Future Auto Connect must only call Draw after it verifies a real recommendation.
 local function ClampSize(value)
     value = tonumber(value) or FRAME_DEFAULT
     if value ~= value then return FRAME_DEFAULT end
@@ -658,13 +457,8 @@ local function CreateIndicator()
     indicator:Hide() -- No recommendation at login: avoid an empty placeholder.
 end
 local function ReadCurrent()
-    local a = selected and adapters[selected]
-    if a and a.read then Draw(a.read()) else Draw(nil, nil) end
-end
-local function SetSource(name)
-    if selected == name then return end
-    selected = name
-    if not editor then ReadCurrent() end
+    -- No provider yet: hide live icon, but keep spellbook preview independent.
+    Draw(nil, nil)
 end
 local function StopEditor(silent)
     if not editor then return end
@@ -680,7 +474,6 @@ end
 local function StartEditor()
     if InCombat() then Msg("Настройка доступна только вне боя.") return end
     if editor then return end
-    SetSource(ChooseSource())
     local list = SpellbookSpells()
     if #list == 0 then
         Msg("В книге заклинаний не найдены изученные активные способности.")
@@ -699,7 +492,6 @@ local function StartEditor()
 end
 
 controller:RegisterEvent("PLAYER_LOGIN")
-controller:RegisterEvent("ADDON_LOADED")
 controller:RegisterEvent("PLAYER_REGEN_DISABLED")
 controller:RegisterEvent("UNIT_SPELLCAST_SUCCEEDED")
 controller:RegisterEvent("UNIT_SPELLCAST_START")
@@ -716,12 +508,9 @@ controller:SetScript("OnEvent", function(_, event, ...)
         if type(addonDB.minimapAngle) == "number" then minimapAngle = addonDB.minimapAngle end
         PlaceMinimapButton()
         addonDB.indices = addonDB.indices or {}
-        preference = addonDB.source or "auto"
-        if preference ~= "auto" and not adapters[preference] then preference = "auto" end
         CreateIndicator()
-        Connect()
-        SetSource(ChooseSource())
-        Msg("Фрейм готов. /lazypix help — список команд.")
+        ReadCurrent()
+        Msg("Auto Connect EXPERIMENT: фрейм/предпросмотр готовы; live-источник пока не подключён. /lazypix help")
     elseif event == "UNIT_SPELLCAST_SUCCEEDED" then
         local unit, _, spellID = ...
         if unit == "player" and not editor
@@ -754,23 +543,10 @@ controller:SetScript("OnEvent", function(_, event, ...)
     elseif event == "PLAYER_REGEN_DISABLED" then
         StopEditor(true)
         if sizePanel then sizePanel:Hide() end
-    elseif event == "ADDON_LOADED" and addonDB then
-        Connect()
     end
 end)
 controller:SetScript("OnUpdate", function(_, dt)
     if not addonDB then return end
-    -- Wait briefly until other rotation addons finish their own startup.
-    -- Announce once per login, not on every periodic source check.
-    if not startupAnnounced then
-        startupElapsed = startupElapsed + dt
-        if startupElapsed >= 2 then
-            startupAnnounced = true
-            Connect()
-            SetSource(ChooseSource())
-            AnnounceSources()
-        end
-    end
     -- Cosmetic progress has its own update path; it never controls dimming.
     visualElapsed = visualElapsed + dt
     if visualElapsed >= 0.05 then
@@ -784,19 +560,9 @@ controller:SetScript("OnUpdate", function(_, dt)
             RefreshVisuals()
         end
     end
-    detectElapsed = detectElapsed + dt
-    if detectElapsed >= 1 then
-        detectElapsed = 0
-        Connect()
-        if not editor then SetSource(ChooseSource()) end
-    end
-    if editor or not selected then return end
-    elapsed = elapsed + dt
-    if elapsed >= 0.2 then
-        elapsed = 0
-        ReadCurrent()
-    end
 end)
+
+SLASH_LAZYPIX1end)
 
 SLASH_LAZYPIX1 = "/lazypix"
 SlashCmdList.LAZYPIX = function(msg)
@@ -804,12 +570,8 @@ SlashCmdList.LAZYPIX = function(msg)
     if msg == "help" or msg == "" then ShowHelp()
     elseif msg == "on" then StartEditor()
     elseif msg == "off" then StopEditor()
-    elseif msg == "source auto" or msg == "source sonah" or msg == "source maxdps" or msg == "source hekili" or msg == "source justac" or msg == "source rotationmaster" then
-        StopEditor(true)
-        preference = msg:match("^source (.+)$")
-        addonDB.source = preference
-        SetSource(ChooseSource())
-        Msg("Источник: " .. (selected or "не доступен") .. " (режим " .. preference .. ")")
+    elseif msg == "source" or msg:match("^source%s+") then
+        Msg("Auto Connect пока не реализован; пять старых адаптеров удалены в этой ветке.")
     elseif msg == "settings" or msg == "item next" or msg == "green" or msg == "orange" or msg == "status" then
         if LazyPixHealthWidget and LazyPixHealthWidget.Command then LazyPixHealthWidget.Command(msg) end
     else

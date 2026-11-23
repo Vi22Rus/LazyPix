@@ -1,8 +1,7 @@
 ## Interface: 16001
 ## Title: LazyPix
-## Notes: LazyPix - universal rotation frame (Sonah / MaxDPS / Hekili)
-## Version: 0.8.30
-## OptionalDeps: Sonah, MaxDps, Hekili, JustAssistedCombat, RotationMaster
+## Notes: LazyPix experimental Auto Connect addon (no live rotation source yet)
+## Version: 0.8.31-dev
 ## SavedVariablesPerCharacter: SonahRotationSetupDB
 Setup.lua
 HealthWidget.lua
