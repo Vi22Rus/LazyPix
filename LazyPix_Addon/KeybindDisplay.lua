@@ -33,6 +33,16 @@ local function keyLabel(raw)
     text=text:gsub("META%-","Meta+")
     return text
 end
+local function actionInfo(slot)
+    -- Modern WoW API first; preserve compatibility with clients exposing
+    -- only the legacy global GetActionInfo.
+    local modern = _G.C_ActionBar and _G.C_ActionBar.GetActionInfo
+    if type(modern) == "function" then
+        local kind, id = safeCall(modern, slot)
+        if kind ~= nil then return kind, id end
+    end
+    return safeCall(_G.GetActionInfo, slot)
+end
 local function buttonActionSlot(button)
     -- Effective action slot follows paging, stances, and temporary bars.
     -- Do NOT assume the page from the fixed button number.
@@ -46,8 +56,19 @@ local function buttonActionSlot(button)
 end
 local function bindingFor(button, bindingCommand)
     local getter=_G.GetBindingKey
-    if type(getter)~="function" then return nil end
     local key=safeCall(getter,bindingCommand)
+    -- Some action-bar addons publish the displayed hotkey on the button.
+    -- Use it only if no binding command resolves; never infer a spell name.
+    if not key then
+        local hotkey=field(button,"HotKey") or field(button,"hotkey")
+        local getText=field(hotkey,"GetText")
+        if type(getText)=="function" then
+            local displayed=safeCall(getText,hotkey)
+            if type(displayed)=="string" and displayed~="" and displayed~="RANGE_INDICATOR" then
+                key=displayed
+            end
+        end
+    end
     if not key then
         local name=field(button,"GetName")
         if type(name)=="function" then
@@ -73,7 +94,7 @@ function Keybind.Refresh()
                 local action=buttonActionSlot(button)
                 local actionType, actionID
                 if action then
-                    actionType, actionID = safeCall(_G.GetActionInfo,action)
+                    actionType, actionID = actionInfo(action)
                 end
                 if actionType=="spell" and type(actionID)=="number" and
                     public(actionID) and actionID>0 then
