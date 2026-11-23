@@ -21,11 +21,14 @@ jobs:
         run: |
           luac5.1 -p LazyPix_Addon/AutoConnect.lua
           luac5.1 -p LazyPix_Addon/ProtocolDiscovery.lua
+          luac5.1 -p LazyPix_Addon/KeybindDisplay.lua
           luac5.1 -p LazyPix_Addon/Setup.lua
           luac5.1 -p LazyPix_Addon/HealthWidget.lua
           luac5.1 -p LazyPix_Addon/tests/autoconnect_test.lua
           luac5.1 -p LazyPix_Addon/tests/protocol_recovery_test.lua
+          luac5.1 -p LazyPix_Addon/tests/keybind_display_test.lua
       - name: Auto Connect integration mock
         run: |
           lua5.1 LazyPix_Addon/tests/autoconnect_test.lua
           lua5.1 LazyPix_Addon/tests/protocol_recovery_test.lua
+          lua5.1 LazyPix_Addon/tests/keybind_display_test.lua

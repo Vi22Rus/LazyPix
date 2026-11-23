@@ -3,9 +3,11 @@
 local controller = CreateFrame("Frame")
 local selected, editor, index = nil, false, 1
 local auto = _G.LazyPixAutoConnect
+local keybinds = _G.LazyPixKeybindDisplay
 local recommendationElapsed = 0
 local entries = {}
-local indicator, icon, sizePanel
+local indicator, icon, sizePanel, keybindText
+local shownKeybind = nil
 local currentSpellID, lastTexture = nil, nil
 local inheritedDimmed = nil
 local inheritedCooldown = nil
@@ -233,10 +235,19 @@ local function RefreshVisuals()
     SetDimmed(inheritedDimmed == true)
     if greyOverlay then greyOverlay:SetShown(inheritedCooldown == true) end
 end
+local function SetKeybind(spellID)
+    if not keybindText then return end
+    local key = keybinds and keybinds.Lookup and keybinds.Lookup(spellID) or nil
+    if type(key) ~= "string" then key = nil end
+    if shownKeybind == key then return end
+    shownKeybind = key
+    keybindText:SetText(key or "")
+end
 local function Draw(value, spellID, dimmed, cooldown)
     if not icon or editor then return end
     -- A protected spellID cannot be inspected or passed to our Lua comparisons.
     currentSpellID = ValidSpellID(spellID) and spellID or nil
+    SetKeybind(currentSpellID)
     inheritedDimmed = Public(dimmed) and type(dimmed) == "boolean" and dimmed or nil
     inheritedCooldown = Public(cooldown) and type(cooldown) == "boolean" and cooldown or nil
     -- Value may be a protected texture handle. Forward it directly.
@@ -270,6 +281,7 @@ local function SaveFrameSize(width, height)
     local w, h = ClampSize(width), ClampSize(height)
     addonDB.frameWidth, addonDB.frameHeight = w, h
     indicator:SetSize(w, h)
+    if keybindText then keybindText:SetWidth(w + 72) end
     if indicator.previewBorder then indicator.previewBorder:SetSize(w + 18, h + 18) end
 end
 
@@ -358,6 +370,15 @@ local function CreateIndicator()
     background:SetColorTexture(0, 0, 0, 0.75)
     icon = indicator:CreateTexture(nil, "ARTWORK")
     icon:SetAllPoints()
+    -- Text lives OUTSIDE the captured spell-icon pixels to protect Windows RGB.
+    keybindText = indicator:CreateFontString(nil, "OVERLAY", "GameFontNormalSmall")
+    keybindText:SetPoint("BOTTOMRIGHT", indicator, "TOPRIGHT", 0, 4)
+    keybindText:SetWidth(addonDB.frameWidth + 72)
+    keybindText:SetHeight(16)
+    keybindText:SetJustifyH("RIGHT")
+    keybindText:SetTextColor(1, 1, 1, 1)
+    keybindText:SetShadowOffset(1, -1)
+    keybindText:SetText("")
     -- Parent-authored cooldown state: grey film above the icon, not a clock.
     greyOverlay = indicator:CreateTexture(nil, "OVERLAY", nil, 1)
     greyOverlay:SetAllPoints(icon)
@@ -500,6 +521,7 @@ local function StartEditor()
     -- Keep the decorative preview border hidden: it obscures ability icon pixels.
     indicator:Show() -- Preview is visible even without a live recommendation.
     currentSpellID = nil
+    SetKeybind(nil)
     inheritedCooldown = nil
     if greyOverlay then greyOverlay:Hide() end
     SetDimmed(false)
@@ -510,6 +532,14 @@ local function StartEditor()
 end
 
 controller:RegisterEvent("PLAYER_LOGIN")
+controller:RegisterEvent("PLAYER_ENTERING_WORLD")
+controller:RegisterEvent("UPDATE_BINDINGS")
+controller:RegisterEvent("ACTIONBAR_SLOT_CHANGED")
+controller:RegisterEvent("ACTIONBAR_PAGE_CHANGED")
+controller:RegisterEvent("UPDATE_BONUS_ACTIONBAR")
+controller:RegisterEvent("UPDATE_OVERRIDE_ACTIONBAR")
+controller:RegisterEvent("UPDATE_VEHICLE_ACTIONBAR")
+controller:RegisterEvent("SPELLS_CHANGED")
 controller:RegisterEvent("ADDON_LOADED")
 controller:RegisterEvent("PLAYER_REGEN_DISABLED")
 controller:RegisterEvent("UNIT_SPELLCAST_SUCCEEDED")
@@ -521,6 +551,7 @@ controller:RegisterEvent("UNIT_SPELLCAST_INTERRUPTED")
 controller:RegisterEvent("UNIT_SPELLCAST_CHANNEL_START")
 controller:RegisterEvent("UNIT_SPELLCAST_CHANNEL_STOP")
 controller:SetScript("OnEvent", function(_, event, ...)
+    if keybinds and keybinds.OnEvent then keybinds.OnEvent(event) end
     if event == "PLAYER_LOGIN" then
         SonahRotationSetupDB = SonahRotationSetupDB or {}
         addonDB = SonahRotationSetupDB -- keep earlier saved-variable name for upgrades
@@ -534,9 +565,14 @@ controller:SetScript("OnEvent", function(_, event, ...)
             auto.SetPreferred(addonDB.autoConnectSource or "auto")
         end
         ReadCurrent()
-        Msg("Auto Connect 0.8.39-dev готов: /lazypix sources для диагностики.")
+        Msg("Auto Connect 0.8.40-dev готов: /lazypix sources для диагностики.")
     elseif event == "ADDON_LOADED" then
         if auto then auto.OnAddonLoaded(...) end
+    elseif event == "PLAYER_ENTERING_WORLD" or event == "UPDATE_BINDINGS" or
+        event == "ACTIONBAR_SLOT_CHANGED" or event == "ACTIONBAR_PAGE_CHANGED" or
+        event == "UPDATE_BONUS_ACTIONBAR" or event == "UPDATE_OVERRIDE_ACTIONBAR" or
+        event == "UPDATE_VEHICLE_ACTIONBAR" or event == "SPELLS_CHANGED" then
+        if addonDB and not editor then SetKeybind(currentSpellID) end
     elseif event == "UNIT_SPELLCAST_SUCCEEDED" then
         -- No synthetic GCD/rim: source display is authoritative.
     elseif event == "UNIT_SPELLCAST_START" or event == "UNIT_SPELLCAST_STOP"
