@@ -3,7 +3,7 @@
 local Keybind = {}
 _G.LazyPixKeybindDisplay = Keybind
 
-local dirty, bySpell = true, {}
+local dirty, bySpell, byName = true, {}, {}
 local bars = {
     {name="ActionButton", binding="ACTIONBUTTON"},
     {name="MultiBarBottomLeftButton", binding="MULTIACTIONBAR4BUTTON"},
@@ -42,6 +42,20 @@ local function actionInfo(slot)
         if kind ~= nil then return kind, id end
     end
     return safeCall(_G.GetActionInfo, slot)
+end
+local function spellName(id)
+    if not public(id) or type(id) ~= "number" or id <= 0 then return nil end
+    local modern = _G.C_Spell and _G.C_Spell.GetSpellName
+    local name = safeCall(modern, id)
+    if not name then name = safeCall(_G.GetSpellInfo, id) end
+    if public(name) and type(name) == "string" and name ~= "" then return name end
+end
+local function macroSpell(macroID)
+    if not public(macroID) or type(macroID) ~= "number" or macroID <= 0 then return nil end
+    local modern = _G.C_Macro and _G.C_Macro.GetMacroSpell
+    local id = safeCall(modern, macroID)
+    if id == nil then id = safeCall(_G.GetMacroSpell, macroID) end
+    if public(id) and type(id) == "number" and id > 0 then return id end
 end
 local function buttonActionSlot(button)
     -- Effective action slot follows paging, stances, and temporary bars.
@@ -86,7 +100,7 @@ end
 function Keybind.Refresh()
     -- At most 96 known action buttons on explicit UI/keybinding events.
     -- No _G traversal, no per-frame scanning, no macro condition evaluation.
-    local found={}
+    local found, names={},{}
     for _, bar in ipairs(bars) do
         for i=1,12 do
             local button=field(_G,bar.name..i)
@@ -96,21 +110,36 @@ function Keybind.Refresh()
                 if action then
                     actionType, actionID = actionInfo(action)
                 end
-                if actionType=="spell" and type(actionID)=="number" and
-                    public(actionID) and actionID>0 then
+                local resolved
+                if actionType=="spell" then
+                    resolved=actionID
+                elseif actionType=="macro" then
+                    -- Only macros exposing an unambiguous spell through WoW API.
+                    resolved=macroSpell(actionID)
+                end
+                if public(resolved) and type(resolved)=="number" and resolved>0 then
                     local key=bindingFor(button,bar.binding..i)
-                    if key and not found[actionID] then found[actionID]=key end
+                    if key then
+                        if not found[resolved] then found[resolved]=key end
+                        local name=spellName(resolved)
+                        if name and not names[name] then names[name]=key end
+                    end
                 end
             end
         end
     end
-    bySpell=found
+    bySpell,byName=found,names
     dirty=false
 end
-function Keybind.Lookup(spellID)
+function Keybind.Lookup(spellID, allowEquivalent)
     if not public(spellID) or type(spellID)~="number" or spellID <= 0 then return nil end
     if dirty then Keybind.Refresh() end
-    return bySpell[spellID]
+    local exact=bySpell[spellID]
+    if exact or not allowEquivalent then return exact end
+    -- Opt-in for providers that publish a different rank/override SpellID.
+    -- Never guess from textures or evaluate source rotation logic.
+    local name=spellName(spellID)
+    return name and byName[name] or nil
 end
 function Keybind.OnEvent(event)
     if event=="UPDATE_BINDINGS" or event=="ACTIONBAR_SLOT_CHANGED" or
