@@ -4,6 +4,7 @@ local Auto = _G.LazyPixAutoConnect
 local Protocol = {}
 _G.LazyPixProtocolDiscovery = Protocol
 local installed, states, objects, diagnostics = {}, {}, {}, {}
+local lateCandidates = {P04={},P05={}}
 local scanStats = {scanned=0, total=0, truncated=false}
 local order = {"P01","P02","P03","P04","P05"}
 
@@ -115,7 +116,7 @@ local strategies = {
             local e = tableField(t,"Engine")
             local output = e and tableField(e,"Output")
             return e and func(e,"Subscribe") and output
-                and tableField(output,"Primary") and tableField(t,"settings")
+                and tableField(output,"Primary") and tableField(e,"settings")
         end,
         read = function(t)
             local e = tableField(t,"Engine")
@@ -130,8 +131,8 @@ local strategies = {
             end
         end,
         ready = function(t)
-            local settings = tableField(t,"settings")
-            return settings and field(settings,"enabled") ~= false
+            local settings = tableField(tableField(t,"Engine"),"settings")
+            return settings and field(settings,"enabled") == true
         end,
         connect = function(t)
             local e = field(t,"Engine")
@@ -145,9 +146,8 @@ local strategies = {
         match = function(t)
             local icons = tableField(t,"spellIcons")
             local frame = field(t,"mainFrame")
-            local b = first(icons)
-            return frame and icons and b and field(b,"iconTexture")
-                and type(field(frame,"IsShown")) == "function"
+            return frame and icons and func(t,"GetProfile") and
+                func(t,"UpdateFrameSize") and func(frame,"IsShown")
         end,
         ready = function(t)
             return field(t,"isDisabledMode") ~= true
@@ -164,9 +164,9 @@ local strategies = {
     P05 = {
         match = function(t)
             local w = tableField(t,"nextWindow")
-            local b = w and first(tableField(w,"icons"))
-            return w and field(w,"frame") and b and field(b,"texture")
-                and field(w,"count") ~= nil
+            return w and field(w,"frame") and tableField(w,"icons") and
+                func(w,"AddRecommendation") and func(w,"ReleaseChildren") and
+                func(w,"Valid")
         end,
         ready = function(t)
             local w = tableField(t,"nextWindow")
@@ -200,7 +200,7 @@ local function enumerate()
     end
     scanStats.total = n
     -- AceAddon registry uses an addon ID as a key, but it is not used in detection.
-    if type(LibStub) == "function" then
+    if type(LibStub) == "function" or type(LibStub) == "table" then
         local ok, ace = pcall(LibStub,"AceAddon-3.0",true)
         local registry = ok and ace and tableField(ace,"addons")
         if registry then
@@ -228,25 +228,23 @@ local probes = {
         {"Engine.Output.Primary", function(t)
             return tableField(tableField(tableField(t,"Engine"),"Output"),"Primary") ~= nil
         end},
-        {"settings", function(t) return tableField(t,"settings") ~= nil end},
+        {"Engine.settings", function(t) return tableField(tableField(t,"Engine"),"settings") ~= nil end},
     },
     P04 = {
         {"mainFrame", function(t) return field(t,"mainFrame") ~= nil end},
-        {"spellIcons[1]", function(t) return first(tableField(t,"spellIcons")) ~= nil end},
-        {"iconTexture", function(t)
-            local b = first(tableField(t,"spellIcons"))
-            return b ~= nil and field(b,"iconTexture") ~= nil
-        end},
+        {"spellIcons", function(t) return tableField(t,"spellIcons") ~= nil end},
+        {"GetProfile/UpdateFrameSize", function(t) return func(t,"GetProfile") and func(t,"UpdateFrameSize") end},
     },
     P05 = {
         {"nextWindow.frame", function(t)
             return field(tableField(t,"nextWindow"),"frame") ~= nil
         end},
-        {"nextWindow.icons[1]", function(t)
-            return first(tableField(tableField(t,"nextWindow"),"icons")) ~= nil
+        {"nextWindow.icons", function(t)
+            return tableField(tableField(t,"nextWindow"),"icons") ~= nil
         end},
-        {"nextWindow.count", function(t)
-            return field(tableField(t,"nextWindow"),"count") ~= nil
+        {"window methods", function(t)
+            local w = tableField(t,"nextWindow")
+            return func(w,"AddRecommendation") and func(w,"ReleaseChildren") and func(w,"Valid")
         end},
     },
 }
@@ -276,8 +274,67 @@ local function report(id, candidates)
     end
     diagnostics[id] = {checks=lines, best=closest.score}
 end
+-- Cache only plausible late-UI owners from the ONE full scan.
+-- No repeated traversal of _G; RefreshLate checks this short, bounded list.
+local function prepareLate(candidates)
+    lateCandidates.P04, lateCandidates.P05 = {}, {}
+    for _, obj in ipairs(candidates) do
+        if func(obj,"GetProfile") and func(obj,"UpdateFrameSize") then
+            lateCandidates.P04[#lateCandidates.P04+1] = obj
+        end
+        local db = tableField(obj,"db")
+        local profile = db and tableField(db,"profile")
+        if (db and func(obj,"GetPreviewArtChoices")) or tableField(obj,"nextWindow") then
+            lateCandidates.P05[#lateCandidates.P05+1] = obj
+        end
+    end
+end
+local function refreshLateOne(id)
+    if states[id] == "registered" or states[id] == "ambiguous" or
+       states[id] == "changed-source" then return end
+    local matches, source = 0, nil
+    for _, obj in ipairs(lateCandidates[id]) do
+        local ok, matched = pcall(strategies[id].match,obj)
+        if ok and matched then
+            matches, source = matches + 1, obj
+            if matches > 1 then break end
+        end
+    end
+    if matches == 1 and not installed[id] then
+        -- The small late-candidate scan can be finalized without touching _G.
+        return source
+    end
+end
+function Protocol.RefreshLate()
+    -- AutoConnect may call this on a slow cadence; never enumerate global tables.
+    for _, id in ipairs({"P04","P05"}) do
+        local candidate = refreshLateOne(id)
+        if candidate and not installed[id] then
+            local strategy = strategies[id]
+            objects[id] = {source=candidate}
+            local ok = Auto.RegisterProvider(id,{
+                priority=10-tonumber(id:sub(2)),
+                ready=function()
+                    if states[id] ~= "registered" then return false end
+                    if strategy.ready then
+                        local safe, ready = pcall(strategy.ready,candidate)
+                        return safe and ready == true
+                    end
+                    return true
+                end,
+                read=function()
+                    if states[id] ~= "registered" then return nil end
+                    local okRead, tex, spellId, dim = pcall(strategy.read,candidate)
+                    if okRead then return tex,spellId,dim end
+                end,
+            })
+            if ok then installed[id],states[id] = true,"registered" end
+        end
+    end
+end
 function Protocol.Scan(diagnostic)
     local candidates = enumerate()
+    prepareLate(candidates)
     for _, id in ipairs(order) do
         local strategy = strategies[id]
         if diagnostic then report(id, candidates) end

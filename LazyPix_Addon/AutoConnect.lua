@@ -5,6 +5,7 @@ local providers, mappings, discovered = {}, {}, {}
 local active, preferred, onChange = nil, "auto", nil
 local lastScan = 0
 local scanPending = false
+local lastLateCheck = 0
 local function public(v) return not (type(issecretvalue) == "function" and issecretvalue(v)) end
 local function typed(v, t) return public(v) and type(v) == t end
 local function valid(s)
@@ -143,10 +144,16 @@ function Auto.OnAddonLoaded(name)
     end
 end
 function Auto.Tick()
-    -- Never repeat full global scans on an idle timer.
-    if not scanPending then return end
     local now = GetTime and GetTime() or 0
-    if now - lastScan >= 2 then Auto.Scan(false) end
+    -- Full global discovery remains strictly event-triggered.
+    if scanPending and now - lastScan >= 2 then Auto.Scan(false) end
+    -- Lightweight late-UI check: only previously cached candidate owners.
+    -- Never enumerate _G or do diagnostic probes in this path.
+    if now - lastLateCheck >= 3 then
+        lastLateCheck = now
+        local discovery = _G.LazyPixProtocolDiscovery
+        if discovery and discovery.RefreshLate then discovery.RefreshLate() end
+    end
 end
 function Auto.SetPreferred(value)
     if not typed(value, "string") then return false end

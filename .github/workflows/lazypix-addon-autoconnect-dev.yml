@@ -24,5 +24,8 @@ jobs:
           luac5.1 -p LazyPix_Addon/Setup.lua
           luac5.1 -p LazyPix_Addon/HealthWidget.lua
           luac5.1 -p LazyPix_Addon/tests/autoconnect_test.lua
+          luac5.1 -p LazyPix_Addon/tests/protocol_recovery_test.lua
       - name: Auto Connect integration mock
-        run: lua5.1 LazyPix_Addon/tests/autoconnect_test.lua
+        run: |
+          lua5.1 LazyPix_Addon/tests/autoconnect_test.lua
+          lua5.1 LazyPix_Addon/tests/protocol_recovery_test.lua
