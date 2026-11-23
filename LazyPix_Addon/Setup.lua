@@ -182,7 +182,8 @@ local function ShowHelp()
     Msg("/lazypix help — показать справку")
     Msg("/lazypix on — предпросмотр изученных способностей; /lazypix off — выйти")
     Msg("/lazypix sources — показать зарегистрированные источники")
-    Msg("/lazypix protocols — проверка протоколов P01–P05")
+    Msg("/lazypix protocols — результаты проверки P01–P05")
+    Msg("/lazypix protocol debug — подробные признаки по всем протоколам")
     Msg("/lazypix source auto | <id> — выбрать источник")
     Msg("/lazypix status — состояние светофора и хилпота")
     Msg("/lazypix settings — настройки; /lazypix item next — следующий предмет")
@@ -611,6 +612,12 @@ SlashCmdList.LAZYPIX = function(msg)
                 Msg(result.id .. ": " .. result.status)
             end
         else Msg("Модуль протоколов не загружен.") end
+    elseif msg == "protocol debug" then
+        if auto then auto.Scan() end
+        local p = _G.LazyPixProtocolDiscovery
+        if p and p.Diagnostics then
+            for _, line in ipairs(p.Diagnostics()) do Msg(line) end
+        else Msg("Диагностика протоколов недоступна.") end
     elseif msg == "source" then
         Msg("Использование: /lazypix source auto | <id>")
     elseif msg:match("^source%s+") then

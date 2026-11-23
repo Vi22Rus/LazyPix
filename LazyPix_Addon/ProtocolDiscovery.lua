@@ -3,14 +3,15 @@
 local Auto = _G.LazyPixAutoConnect
 local Protocol = {}
 _G.LazyPixProtocolDiscovery = Protocol
-local installed, states, objects = {}, {}, {}
+local installed, states, objects, diagnostics = {}, {}, {}, {}
+local scanStats = {scanned=0, total=0, truncated=false}
 local order = {"P01","P02","P03","P04","P05"}
 
 local function public(v)
     return not (type(issecretvalue) == "function" and issecretvalue(v))
 end
 local function field(t, k)
-    if not public(t) or type(t) ~= "table" then return nil end
+    if not public(t) or (type(t) ~= "table" and type(t) ~= "userdata") then return nil end
     local ok, v = pcall(function() return t[k] end)
     if ok and public(v) then return v end
 end
@@ -19,6 +20,7 @@ local function tableField(t,k)
     return type(v) == "table" and v or nil
 end
 local function func(t,k) return type(field(t,k)) == "function" end
+local function truth(v) return public(v) and v == true end
 local function visible(frame)
     if not frame or not public(frame) then return false end
     local ok, shown = pcall(function() return frame:IsShown() end)
@@ -169,11 +171,13 @@ local function enumerate()
     end
     -- Scan top-level exported tables, not the whole UI tree or secret game state.
     local n = 0
+    -- Never truncate at a magic iteration count: pairs(_G) is unordered,
+    -- so a loaded and matching source may occur after the cutoff.
     for _, v in pairs(_G) do
         n = n + 1
-        if n > 12000 then break end
         add(v)
     end
+    scanStats.total = n
     -- AceAddon registry uses an addon ID as a key, but it is not used in detection.
     if type(LibStub) == "function" then
         local ok, ace = pcall(LibStub,"AceAddon-3.0",true)
@@ -182,12 +186,80 @@ local function enumerate()
             for _, v in pairs(registry) do add(v) end
         end
     end
+    scanStats.scanned = #result
     return result
+end
+-- Report individual structural checks, without logging external addon names.
+local probes = {
+    P01 = {
+        {"Engine", function(t) return tableField(t,"Engine") ~= nil end},
+        {"Engine.Current", function(t) return func(tableField(t,"Engine"),"Current") end},
+        {"Listen", function(t) return func(t,"Listen") end},
+        {"Registry.ActiveSpec", function(t) return func(tableField(t,"Registry"),"ActiveSpec") end},
+    },
+    P02 = {
+        {"db.global", function(t) return tableField(tableField(t,"db"),"global") ~= nil end},
+        {"NextSpell", function(t) return field(t,"NextSpell") ~= nil end},
+        {"UpdateSpellFrame", function(t) return func(t,"UpdateSpellFrame") end},
+    },
+    P03 = {
+        {"Engine.Subscribe", function(t) return func(tableField(t,"Engine"),"Subscribe") end},
+        {"Engine.Output.Primary", function(t)
+            return tableField(tableField(tableField(t,"Engine"),"Output"),"Primary") ~= nil
+        end},
+        {"settings", function(t) return tableField(t,"settings") ~= nil end},
+    },
+    P04 = {
+        {"mainFrame", function(t) return field(t,"mainFrame") ~= nil end},
+        {"spellIcons[1]", function(t) return first(tableField(t,"spellIcons")) ~= nil end},
+        {"iconTexture", function(t)
+            local b = first(tableField(t,"spellIcons"))
+            return b ~= nil and field(b,"iconTexture") ~= nil
+        end},
+    },
+    P05 = {
+        {"nextWindow.frame", function(t)
+            return field(tableField(t,"nextWindow"),"frame") ~= nil
+        end},
+        {"nextWindow.icons[1]", function(t)
+            return first(tableField(tableField(t,"nextWindow"),"icons")) ~= nil
+        end},
+        {"nextWindow.count", function(t)
+            return field(tableField(t,"nextWindow"),"count") ~= nil
+        end},
+    },
+}
+local function report(id, candidates)
+    local checks = probes[id]
+    local counts = {}
+    local closest = {score=-1, passed={}}
+    for i=1,#checks do counts[i]=0 end
+    for _, obj in ipairs(candidates) do
+        local score, passed = 0, {}
+        for i, check in ipairs(checks) do
+            local ok, yes = pcall(check[2],obj)
+            if ok and yes then
+                counts[i] = counts[i] + 1
+                score = score + 1
+                passed[i] = true
+            end
+        end
+        -- A score of 1 is too weak to show as a probable connector,
+        -- but raw counts still help diagnose missing exports.
+        if score > closest.score then closest = {score=score,passed=passed} end
+    end
+    local lines = {}
+    for i, check in ipairs(checks) do
+        lines[#lines+1] = check[1] .. "=" .. (closest.passed[i] and "yes" or "no") ..
+            " (seen " .. counts[i] .. ")"
+    end
+    diagnostics[id] = {checks=lines, best=closest.score}
 end
 function Protocol.Scan()
     local candidates = enumerate()
     for _, id in ipairs(order) do
         local strategy = strategies[id]
+        report(id, candidates)
         local matches, candidate = 0, nil
         for _, object in ipairs(candidates) do
             local ok, matched = pcall(strategy.match, object)
@@ -234,6 +306,18 @@ function Protocol.Scan()
             end
         end
     end
+end
+function Protocol.Diagnostics()
+    local lines = {"global entries=" .. scanStats.total ..
+        ", exported tables=" .. scanStats.scanned}
+    for _, id in ipairs(order) do
+        local d = diagnostics[id]
+        lines[#lines+1] = id .. ": " .. (states[id] or "not-scanned")
+        if d then
+            for _, check in ipairs(d.checks) do lines[#lines+1] = "  " .. check end
+        end
+    end
+    return lines
 end
 function Protocol.List()
     local out = {}

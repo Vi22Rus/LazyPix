@@ -59,3 +59,28 @@ _G.OtherRuntime = nil
 _G.LazyPixProtocolDiscovery.Scan()
 assert(a.Read() ~= nil or a.GetActive() == "P02")
 print("protocol_discovery_test: PASS")
+
+-- Regression LP-0015: exported P01 structure exists with no product name.
+_G.OpaqueSpec = {
+    Engine={Current=function() return {icon="spell-icon",spellID=435} end},
+    Listen=function(self,event,fn) self.lastEvent=event; self.callback=fn end,
+    Registry={ActiveSpec=function() return {key="x"} end},
+}
+_G.LazyPixProtocolDiscovery.Scan()
+local p01
+for _, item in ipairs(_G.LazyPixProtocolDiscovery.List()) do
+    if item.id=="P01" then p01=item.status end
+end
+assert(p01=="registered", "P01 must recognize exported Engine/Listen/Registry")
+assert(a.SetPreferred("P01"))
+local i, id01=a.Read()
+assert(i=="spell-icon" and id01==435)
+local debugTable = table.concat(_G.LazyPixProtocolDiscovery.Diagnostics(),"\\n")
+assert(debugTable:find("P01: registered",1,true))
+assert(debugTable:find("Registry.ActiveSpec=yes",1,true))
+assert(debugTable:find("global entries=",1,true))
+-- The closest candidate diagnostic must preserve same-object evidence;
+-- arbitrary partial structures must never be promoted into a provider.
+_G.OpaqueSpec=nil
+_G.LazyPixProtocolDiscovery.Scan()
+print("protocol_diagnostic_test: PASS")
