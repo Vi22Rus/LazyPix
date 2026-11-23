@@ -1,7 +1,9 @@
--- LazyPix 0.8.31-dev EXPERIMENT - rotation adapters removed for isolated Auto Connect development.
+-- LazyPix 0.8.32-dev EXPERIMENT - rotation adapters removed for isolated Auto Connect development.
 -- The recommendation is produced only by the source addon. LazyPix never casts spells.
 local controller = CreateFrame("Frame")
 local selected, editor, index = nil, false, 1
+local auto = _G.LazyPixAutoConnect
+local recommendationElapsed = 0
 local entries = {}
 local indicator, icon, sizePanel
 local currentSpellID, lastTexture = nil, nil
@@ -181,7 +183,8 @@ local function ShowHelp()
     Msg("Команды LazyPix (эксперимент Auto Connect):")
     Msg("/lazypix help — показать справку")
     Msg("/lazypix on — предпросмотр изученных способностей; /lazypix off — выйти")
-    Msg("/lazypix source — подключение источников ещё не реализовано в этой ветке")
+    Msg("/lazypix sources — показать зарегистрированные источники")
+    Msg("/lazypix source auto | <id> — выбрать источник")
     Msg("/lazypix status — состояние светофора и хилпота")
     Msg("/lazypix settings — настройки; /lazypix item next — следующий предмет")
     Msg("/lazypix green | orange — переключить цвет светофора")
@@ -457,8 +460,23 @@ local function CreateIndicator()
     indicator:Hide() -- No recommendation at login: avoid an empty placeholder.
 end
 local function ReadCurrent()
-    -- No provider yet: hide live icon, but keep spellbook preview independent.
-    Draw(nil, nil)
+    if not auto then Draw(nil, nil) return end
+    local texture, spellID = auto.Read()
+    selected = auto.GetActive()
+    Draw(texture, spellID)
+end
+local function ShowSources()
+    if not auto then Msg("Модуль Auto Connect не загружен.") return end
+    auto.Scan()
+    local sources = auto.List()
+    Msg("Обнаружено загруженных аддонов: " .. #auto.Discovered() ..
+        ", зарегистрировано совместимых источников: " .. #sources)
+    for _, item in ipairs(sources) do
+        Msg(item.id .. " [" .. (item.adapter and "adapter" or "provider") .. "] " ..
+            (item.loaded and "loaded" or "not loaded") ..
+            (item.active and " ACTIVE" or ""))
+    end
+    if #sources == 0 then Msg("Нужен RegisterProvider, TOC X-LazyPix-Provider или RegisterAdapter.") end
 end
 local function StopEditor(silent)
     if not editor then return end
@@ -492,6 +510,7 @@ local function StartEditor()
 end
 
 controller:RegisterEvent("PLAYER_LOGIN")
+controller:RegisterEvent("ADDON_LOADED")
 controller:RegisterEvent("PLAYER_REGEN_DISABLED")
 controller:RegisterEvent("UNIT_SPELLCAST_SUCCEEDED")
 controller:RegisterEvent("UNIT_SPELLCAST_START")
@@ -509,8 +528,15 @@ controller:SetScript("OnEvent", function(_, event, ...)
         PlaceMinimapButton()
         addonDB.indices = addonDB.indices or {}
         CreateIndicator()
+        if auto then
+            auto.SetOnChange(function() if not editor then ReadCurrent() end end)
+            auto.Scan()
+            auto.SetPreferred(addonDB.autoConnectSource or "auto")
+        end
         ReadCurrent()
-        Msg("Auto Connect EXPERIMENT: фрейм/предпросмотр готовы; live-источник пока не подключён. /lazypix help")
+        Msg("Auto Connect 0.8.32-dev готов: /lazypix sources для диагностики.")
+    elseif event == "ADDON_LOADED" then
+        if auto then auto.OnAddonLoaded(...) end
     elseif event == "UNIT_SPELLCAST_SUCCEEDED" then
         local unit, _, spellID = ...
         if unit == "player" and not editor
@@ -553,6 +579,14 @@ controller:SetScript("OnUpdate", function(_, dt)
         visualElapsed = 0
         UpdateCosmeticRim()
     end
+    if auto then auto.Tick() end
+    if not editor then
+        recommendationElapsed = recommendationElapsed + dt
+        if recommendationElapsed >= 0.2 then
+            recommendationElapsed = 0
+            ReadCurrent()
+        end
+    end
     if not editor and indicator and indicator:IsShown() then
         dimElapsed = dimElapsed + dt
         if dimElapsed >= 0.10 then
@@ -568,8 +602,19 @@ SlashCmdList.LAZYPIX = function(msg)
     if msg == "help" or msg == "" then ShowHelp()
     elseif msg == "on" then StartEditor()
     elseif msg == "off" then StopEditor()
-    elseif msg == "source" or msg:match("^source%s+") then
-        Msg("Auto Connect пока не реализован; пять старых адаптеров удалены в этой ветке.")
+    elseif msg == "sources" then
+        ShowSources()
+    elseif msg == "source" then
+        Msg("Использование: /lazypix source auto | <id>")
+    elseif msg:match("^source%s+") then
+        local name = msg:match("^source%s+(.+)$")
+        if auto and auto.SetPreferred(name) then
+            addonDB.autoConnectSource = name
+            if not editor then ReadCurrent() end
+            Msg("Auto Connect источник: " .. name)
+        else
+            Msg("Неизвестный источник: " .. tostring(name))
+        end
     elseif msg == "settings" or msg == "item next" or msg == "green" or msg == "orange" or msg == "status" then
         if LazyPixHealthWidget and LazyPixHealthWidget.Command then LazyPixHealthWidget.Command(msg) end
     else

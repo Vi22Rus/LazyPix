@@ -1,7 +1,8 @@
 ## Interface: 16001
 ## Title: LazyPix
-## Notes: LazyPix experimental Auto Connect addon (no live rotation source yet)
-## Version: 0.8.31-dev
+## Notes: Auto Connect: generic discovery, providers and minimal bridges
+## Version: 0.8.32-dev
 ## SavedVariablesPerCharacter: SonahRotationSetupDB
+AutoConnect.lua
 Setup.lua
 HealthWidget.lua
