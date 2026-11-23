@@ -54,4 +54,27 @@ _G.ActionButton1.action="SECRET"
 k.OnEvent("UPDATE_BINDINGS")
 assert(k.Lookup(106)==nil,"secret action must not be compared")
 assert(k.Lookup("SECRET")==nil,"secret recommendation must be discarded")
+-- Modern namespaced API works even when the legacy API is unavailable.
+_G.GetActionInfo=nil
+_G.C_ActionBar={GetActionInfo=function(slot)
+    local v=actions[slot]
+    if v then return v[1],v[2] end
+end}
+_G.ActionButton1.action=1
+actions[1]={"spell",107}
+k.OnEvent("ACTIONBAR_SLOT_CHANGED")
+assert(k.Lookup(107)=="Ctrl+Shift+4","C_ActionBar.GetActionInfo must resolve")
+-- If modern API is unavailable, the global legacy API remains supported.
+_G.C_ActionBar=nil
+_G.GetActionInfo=function(slot)
+    local v=actions[slot]
+    if v then return v[1],v[2] end
+end
+k.OnEvent("ACTIONBAR_SLOT_CHANGED")
+assert(k.Lookup(107)=="Ctrl+Shift+4","legacy GetActionInfo fallback must resolve")
+-- Parent action button may already publish a visual hotkey.
+bindings.ACTIONBUTTON1=nil
+_G.ActionButton1.HotKey={GetText=function() return "F8" end}
+k.OnEvent("UPDATE_BINDINGS")
+assert(k.Lookup(107)=="F8","displayed button hotkey fallback must resolve")
 print("keybind_display_test: PASS")
