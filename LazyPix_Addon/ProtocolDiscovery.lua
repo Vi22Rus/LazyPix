@@ -164,8 +164,11 @@ local strategies = {
                 local stream = output and tableField(output,name)
                 local rec = stream and first(tableField(stream,"recs"))
                 if rec then
-                    return field(rec,"iconOverride") or field(rec,"texture"),
-                        spell(field(rec,"actionID"))
+                    local id = spell(field(rec,"actionID"))
+                    local art = field(rec,"iconOverride") or field(rec,"texture")
+                    -- The producer may publish an action but not draw a frame.
+                    if art == nil then art = spellTexture(id) end
+                    return art, id
                 end
             end
         end,
@@ -189,36 +192,90 @@ local strategies = {
                 func(t,"UpdateFrameSize") and func(frame,"IsShown")
         end,
         ready = function(t)
+            -- Hidden presentation is NOT a disabled rotation.
             return field(t,"isDisabledMode") ~= true
-                and visible(field(t,"mainFrame"))
         end,
         read = function(t)
             local b = first(tableField(t,"spellIcons"))
-            if not b or not visible(b) or field(b,"isWaitingSpell") == true then return end
-            local tex = field(b,"iconTexture")
-            if not visible(tex) then return end
-            return texture(tex), spell(field(b,"spellID")), textureDim(tex),
-                parentCooldown(field(b,"cooldown"))
+            if b and visible(b) and field(b,"isWaitingSpell") ~= true then
+                local tex = field(b,"iconTexture")
+                if visible(tex) then
+                    local art, sid = texture(tex), spell(field(b,"spellID"))
+                    if art then return art, sid, textureDim(tex),
+                        parentCooldown(field(b,"cooldown")) end
+                end
+            end
+            -- Observe the producer's LAST published queue, not its evaluator.
+            local result = objects.P04
+            local id = result and result.publishedSpell
+            if id then return spellTexture(id), id end
+        end,
+        connect = function(t)
+            -- A passive, single hook on an existing render handoff. Do not
+            -- call queue builders; they may be very expensive or protected.
+            if type(hooksecurefunc) ~= "function" then return end
+            local lib = _G.LibStub
+            if type(lib) ~= "table" and type(lib) ~= "function" then return end
+            local ok, registry = pcall(function() return lib.libs end)
+            if not ok or type(registry) ~= "table" then return end
+            local renderer, matches
+            matches = 0
+            for _, candidate in pairs(registry) do
+                if type(candidate) == "table" and
+                    func(candidate,"RenderSpellQueue") and
+                    func(candidate,"RenderQueueIcon") and
+                    func(candidate,"ResolveGlowMode") then
+                    renderer = candidate
+                    matches = matches + 1
+                    if matches > 1 then break end
+                end
+            end
+            if matches ~= 1 then return end
+            pcall(function()
+                hooksecurefunc(renderer,"RenderSpellQueue",function(owner, ids)
+                    if owner ~= t or type(ids) ~= "table" then return end
+                    local candidate = spell(field(ids,1))
+                    local state = objects.P04
+                    if not state or state.source ~= t then return end
+                    -- Empty/sentinel queues clear stale recommendations.
+                    state.publishedSpell = candidate
+                end)
+            end)
         end,
     },
     P05 = {
         match = function(t)
             local w = tableField(t,"nextWindow")
-            return w and field(w,"frame") and tableField(w,"icons") and
-                func(w,"AddRecommendation") and func(w,"ReleaseChildren") and
-                func(w,"Valid")
+            local windowSignature = w and field(w,"frame") and
+                tableField(w,"icons") and func(w,"AddRecommendation") and
+                func(w,"ReleaseChildren") and func(w,"Valid")
+            local db = tableField(t,"db")
+            -- Owner signature also matches when the preview is disabled
+            -- and nextWindow is nil. No requirement for an active UI.
+            local ownerSignature = db and tableField(db,"profile") and
+                func(t,"GetPreviewArtChoices") and func(t,"GlowClear") and
+                func(t,"ButtonFetch")
+            return windowSignature or ownerSignature
         end,
         ready = function(t)
-            local w = tableField(t,"nextWindow")
-            return w and field(w,"active") == true and visible(field(w,"frame"))
+            return tableField(tableField(t,"db"),"profile") ~= nil
         end,
         read = function(t)
-            local w = tableField(t,"nextWindow")
-            local b = w and first(tableField(w,"icons"))
-            if not b or field(b,"sample") == true or field(b,"itemId") or
-                not visible(b) then return end
-            local art = field(b,"texture")
-            return texture(art), spell(field(b,"spellId")), textureDim(art)
+            -- Published current recommendation drives action-button glow even
+            -- if no preview window was created.
+            local id = spell(field(t,"currentSpell"))
+            if id then
+                local w = tableField(t,"nextWindow")
+                local b = w and first(tableField(w,"icons"))
+                if b and field(b,"sample") ~= true and not field(b,"itemId")
+                    and spell(field(b,"spellId")) == id and visible(b) then
+                    local tex = field(b,"texture")
+                    local art = texture(tex)
+                    if art then return art, id, textureDim(tex) end
+                end
+                return spellTexture(id), id
+            end
+            -- No published recommendation: never reuse a stale preview.
         end,
     },
 }
@@ -276,15 +333,21 @@ local probes = {
         {"GetProfile/UpdateFrameSize", function(t) return func(t,"GetProfile") and func(t,"UpdateFrameSize") end},
     },
     P05 = {
-        {"nextWindow.frame", function(t)
-            return field(tableField(t,"nextWindow"),"frame") ~= nil
+        {"preview owner", function(t)
+            return func(t,"GetPreviewArtChoices") and func(t,"GlowClear")
+                and func(t,"ButtonFetch")
         end},
-        {"nextWindow.icons", function(t)
-            return tableField(tableField(t,"nextWindow"),"icons") ~= nil
-        end},
-        {"window methods", function(t)
+        {"preview or owner data", function(t)
             local w = tableField(t,"nextWindow")
-            return func(w,"AddRecommendation") and func(w,"ReleaseChildren") and func(w,"Valid")
+            local db = tableField(t,"db")
+            return tableField(w,"icons") ~= nil or
+                tableField(db,"profile") ~= nil
+        end},
+        {"preview/owner methods", function(t)
+            local w = tableField(t,"nextWindow")
+            return (func(w,"AddRecommendation") and func(w,"ReleaseChildren")
+                and func(w,"Valid")) or (func(t,"GetPreviewArtChoices")
+                and func(t,"GlowClear") and func(t,"ButtonFetch"))
         end},
     },
 }
@@ -368,7 +431,10 @@ function Protocol.RefreshLate()
                     if okRead then return tex,spellId,dim,cooldown end
                 end,
             })
-            if ok then installed[id],states[id] = true,"registered" end
+            if ok then
+                installed[id],states[id] = true,"registered"
+                if strategy.connect then pcall(strategy.connect,candidate) end
+            end
         end
     end
 end

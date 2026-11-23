@@ -9,7 +9,21 @@ _G.C_AddOns = {
 }
 -- Callable TABLE form of the embedded library resolver, not a function.
 local ace = {addons={}}
-_G.LibStub = setmetatable({}, {
+local renderer = {
+    RenderSpellQueue=function(owner,ids) return #ids end,
+    RenderQueueIcon=function() end,
+    ResolveGlowMode=function() end,
+}
+_G.hooksecurefunc=function(owner,method,callback)
+    local original=owner[method]
+    owner[method]=function(...)
+        local result=original(...)
+        callback(...)
+        return result
+    end
+end
+_G.C_Spell={GetSpellTexture=function(id) return "spell-"..id end}
+_G.LibStub = setmetatable({libs={["opaque-renderer"]=renderer}}, {
     __call=function(_, key) if key=="AceAddon-3.0" then return ace end end,
 })
 local function frame()
@@ -39,8 +53,10 @@ local sourceFour = {
 ace.addons.opaque = sourceFour
 -- Preview provider may export an owner before its preview window exists.
 _G.SourceFive = {
-    db={profile={preview_spells=true}},
+    db={profile={preview_spells=false}},
     GetPreviewArtChoices=function() return {} end,
+    GlowClear=function() end,
+    ButtonFetch=function() end,
 }
 
 auto.Scan()
@@ -49,7 +65,7 @@ local function status(id)
 end
 assert(status("P03")=="registered", "P03 Engine.settings discovery failed")
 assert(status("P04")=="not-found", "P04 must wait for its UI")
-assert(status("P05")=="not-found", "P05 must wait for preview window")
+assert(status("P05")=="registered", "P05 must register without a preview window")
 assert(auto.SetPreferred("P03"))
 local tex, spell = auto.Read()
 assert(tex=="p03-texture" and spell==303, "P03 output not read")
@@ -67,10 +83,11 @@ _G.SourceFive.nextWindow = {
     ReleaseChildren=function() end,
     Valid=function() return true end,
 }
+_G.SourceFive.currentSpell=505
 -- A cheap retry checks cached owners only, not the global registry.
 proto.RefreshLate()
 assert(status("P04")=="registered", "P04 AceAddon cached owner not activated")
-assert(status("P05")=="registered", "P05 late window not activated")
+assert(status("P05")=="registered", "P05 owner lost after preview appears")
 assert(auto.SetPreferred("P04"))
 local parentGrey
 tex, spell, _, parentGrey = auto.Read()
@@ -83,6 +100,26 @@ clock = 4
 assert(auto.SetPreferred("P05"))
 tex, spell = auto.Read()
 assert(tex=="p05-texture" and spell==505, "P05 preview icon not forwarded")
+
+-- Hidden frame: producers still publish their recommendations.
+sourceFour.mainFrame.IsShown=function() return false end
+sourceFour.spellIcons[1].IsShown=function() return false end
+renderer.RenderSpellQueue(sourceFour,{407,408})
+assert(auto.SetPreferred("P04"))
+tex,spell=auto.Read()
+assert(tex=="spell-407" and spell==407,
+    "P04 must read the passive queue when the source frame is hidden")
+renderer.RenderSpellQueue(sourceFour,{})
+tex,spell=auto.Read()
+assert(tex==nil and spell==nil,"P04 must not replay a stale highlighted spell")
+_G.SourceFive.nextWindow=nil
+assert(auto.SetPreferred("P05"))
+tex,spell=auto.Read()
+assert(tex=="spell-505" and spell==505,
+    "P05 must read currentSpell without any preview window")
+_G.SourceFive.currentSpell=nil
+tex,spell=auto.Read()
+assert(tex==nil and spell==nil,"P05 must clear a cancelled recommendation")
 
 -- The frame-driven late retry must never cause a full _G rescan.
 local calls=0
