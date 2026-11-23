@@ -77,4 +77,24 @@ bindings.ACTIONBUTTON1=nil
 _G.ActionButton1.HotKey={GetText=function() return "F8" end}
 k.OnEvent("UPDATE_BINDINGS")
 assert(k.Lookup(107)=="F8","displayed button hotkey fallback must resolve")
+-- P02 may publish a different rank or override spell ID with the same
+-- localized spell name. Other providers retain exact-match behavior.
+_G.C_Spell={GetSpellName=function(id)
+    if id==107 or id==207 then return "Same Spell" end
+    if id==108 then return "Macro Spell" end
+    return "Other "..tostring(id)
+end}
+k.OnEvent("SPELLS_CHANGED")
+assert(k.Lookup(207)==nil,"other providers must stay exact-match")
+assert(k.Lookup(207,true)=="F8","P02 fallback by spell name must work")
+-- Resolve only macros whose spell can be read safely from the game API.
+_G.GetMacroSpell=function(macroID)
+    if macroID==25 then return 108 end
+end
+bindings.MULTIACTIONBAR4BUTTON2="ALT-8"
+k.OnEvent("ACTIONBAR_SLOT_CHANGED")
+assert(k.Lookup(108)=="Alt+8","macro spell mapping must work")
+_G.GetMacroSpell=function() return "SECRET" end
+k.OnEvent("ACTIONBAR_SLOT_CHANGED")
+assert(k.Lookup(108)==nil,"secret macro mapping must be rejected")
 print("keybind_display_test: PASS")
